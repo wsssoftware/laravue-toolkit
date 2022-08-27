@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravue\LaravueToolkit;
+namespace Laravue;
 
-use Laravue\LaravueToolkit\Commands\LaravueToolkitCommand;
+use Laravue\Commands\LaravueToolkitCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

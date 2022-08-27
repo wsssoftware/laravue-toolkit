@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravue\LaravueToolkit\Tests;
+namespace Laravue\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Laravue\LaravueToolkit\LaravueToolkitServiceProvider;
+use Laravue\LaravueToolkitServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Laravue\\LaravueToolkit\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Laravue\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

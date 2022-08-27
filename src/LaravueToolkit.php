@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravue\LaravueToolkit;
+namespace Laravue;
 
 class LaravueToolkit
 {

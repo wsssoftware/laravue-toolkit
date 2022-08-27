@@ -1,5 +1,5 @@
 <?php
 
-use Laravue\LaravueToolkit\Tests\TestCase;
+use Laravue\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

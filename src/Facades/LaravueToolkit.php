@@ -1,16 +1,16 @@
 <?php
 
-namespace Laravue\LaravueToolkit\Facades;
+namespace Laravue\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Laravue\LaravueToolkit\LaravueToolkit
+ * @see \Laravue\LaravueToolkit
  */
 class LaravueToolkit extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Laravue\LaravueToolkit\LaravueToolkit::class;
+        return \Laravue\LaravueToolkit::class;
     }
 }

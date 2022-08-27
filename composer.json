@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravue\\LaravueToolkit\\": "src",
-            "Laravue\\LaravueToolkit\\Database\\Factories\\": "database/factories"
+            "Laravue\\": "src",
+            "Laravue\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravue\\LaravueToolkit\\Tests\\": "tests"
+            "Laravue\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -51,10 +51,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Laravue\\LaravueToolkit\\LaravueToolkitServiceProvider"
+                "Laravue\\LaravueToolkitServiceProvider"
             ],
             "aliases": {
-                "LaravueToolkit": "Laravue\\LaravueToolkit\\Facades\\LaravueToolkit"
+                "LaravueToolkit": "Laravue\\Facades\\LaravueToolkit"
             }
         }
     },

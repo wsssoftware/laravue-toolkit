@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravue\LaravueToolkit\Commands;
+namespace Laravue\Commands;
 
 use Illuminate\Console\Command;
 
