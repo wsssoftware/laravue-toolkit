@@ -1,13 +1,21 @@
 <?php
 
-namespace Laravue;
+namespace Laravue\Providers;
 
+use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
+use Laravue\Enums\CurrencyFormat;
+use Laravue\Utility\Number;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
+
+    /**
+     * @param  \Spatie\LaravelPackageTools\Package  $package
+     * @return void
+     */
     public function configurePackage(Package $package): void
     {
         /*
@@ -21,5 +29,26 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_laravue-toolkit_table')
             ->hasCommand(LaravueToolkitCommand::class);
+    }
+
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register(): void
+    {
+        $this->app->bind('utility.number', function (Application $app) {
+            return new Number($app->currentLocale(), CurrencyFormat::DEFAULT, 'BRL');
+        });
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot(): void
+    {
     }
 }

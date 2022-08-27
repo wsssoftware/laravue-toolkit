@@ -51,10 +51,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Laravue\\LaravueToolkitServiceProvider"
+                "Laravue\\Providers\\LaravueToolkitServiceProvider"
             ],
             "aliases": {
-                "LaravueToolkit": "Laravue\\Facades\\LaravueToolkit"
+                "LaravueToolkit": "Laravue\\Facades\\LaravueToolkit",
+                "Number": "Laravue\\Facades\\Number"
             }
         }
     },
