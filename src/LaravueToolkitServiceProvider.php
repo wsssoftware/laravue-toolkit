@@ -2,9 +2,9 @@
 
 namespace Laravue\LaravueToolkit;
 
+use Laravue\LaravueToolkit\Commands\LaravueToolkitCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Laravue\LaravueToolkit\Commands\LaravueToolkitCommand;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
