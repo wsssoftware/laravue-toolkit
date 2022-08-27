@@ -2,8 +2,6 @@
 
 namespace Laravue\Database\Eloquent;
 
-
-
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
