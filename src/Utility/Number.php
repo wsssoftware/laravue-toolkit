@@ -102,7 +102,7 @@ class Number
             $items[] = trans_choice(':value segundo|:value segundos', $seconds, ['value' => $this->format($seconds, ['precision' => 0])]);
         }
 
-        return \AppCore\Facades\Text::toList($items);
+        return \Laravue\Facades\Text::toList($items);
     }
 
     /**

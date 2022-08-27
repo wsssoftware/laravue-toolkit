@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
 use Laravue\Utility\Number;
+use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -39,6 +40,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
     {
         $this->app->bind('utility.number', function (Application $app) {
             return new Number($app->currentLocale(), CurrencyFormat::DEFAULT, 'BRL');
+        });
+        $this->app->bind('utility.text', function (Application $app) {
+            return new Text();
         });
     }
 

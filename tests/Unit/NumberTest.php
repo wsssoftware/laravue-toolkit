@@ -3,16 +3,17 @@
 namespace Laravue\Tests\Unit;
 
 use Laravue\Enums\CurrencyFormat;
-use PHPUnit\Framework\TestCase;
+use Laravue\Tests\BaseTest;
+use Laravue\Utility\Number;
 
-class NumberTest extends TestCase
+class NumberTest extends BaseTest
 {
     /**
      * @return void
      */
     public function test_precision_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('12,212', $number->precision(12.2122, 3));
         $this->assertEquals('12,213', $number->precision(12.2127, 3));
         $this->assertEquals('0,0', $number->precision(0.03, 1));
@@ -24,7 +25,7 @@ class NumberTest extends TestCase
      */
     public function test_to_percentage_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('20,3%', $number->toPercentage(20.33, 1));
         $this->assertEquals('20,4%', $number->toPercentage(20.37, 1));
         $this->assertEquals('10,300%', $number->toPercentage(10.3, 3));
@@ -38,7 +39,7 @@ class NumberTest extends TestCase
      */
     public function test_format_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('20,33', $number->format(20.33, ['places' => 2, 'precision' => 2]));
         $this->assertEquals('10', $number->format(10.000));
         $this->assertEquals('10abc', $number->format(10.000, ['after' => 'abc']));
@@ -50,7 +51,7 @@ class NumberTest extends TestCase
      */
     public function test_format_delta_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('+20', $number->formatDelta(20));
         $this->assertEquals('-20', $number->formatDelta(-20));
     }
@@ -60,7 +61,7 @@ class NumberTest extends TestCase
      */
     public function test_currency_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('R$20,00', $number->currency(20));
         $this->assertEquals('-R$20,00', $number->currency(-20));
 
@@ -87,7 +88,7 @@ class NumberTest extends TestCase
      */
     public function test_ordinal_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('1º', $number->ordinal(1));
         $this->assertEquals('2º', $number->ordinal(2));
         $this->assertEquals('3º', $number->ordinal(3));
@@ -98,7 +99,7 @@ class NumberTest extends TestCase
      */
     public function test_patern_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals('32 kg', $number->format(32, ['pattern' => '#0.# kg']));
     }
 
@@ -107,7 +108,7 @@ class NumberTest extends TestCase
      */
     public function test_parse_float_check()
     {
-        $number = new \Laravue\Utility\Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
+        $number = new Number('pt_BR', CurrencyFormat::DEFAULT, 'BRL');
         $this->assertEquals(20.21, $number->parseFloat('20,21'));
     }
 }
