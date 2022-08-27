@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Laravue\LaravueToolkit\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravueToolkitCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravue-toolkit';
 
     public $description = 'My command';
 
