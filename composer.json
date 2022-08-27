@@ -23,9 +23,6 @@
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^6.0",
-        "orchestra/testbench": "^7.0",
-        "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-laravel": "^1.1",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
@@ -41,8 +38,8 @@
     },
     "scripts": {
         "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {

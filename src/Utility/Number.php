@@ -24,7 +24,7 @@ class Number
     /**
      * Default currency format used by Number::currency()
      *
-     * @var \AppCore\Enums\CurrencyFormat
+     * @var \Laravue\Enums\CurrencyFormat
      */
     protected CurrencyFormat $_defaultCurrencyFormat;
 
@@ -35,7 +35,7 @@ class Number
 
     /**
      * @param  string  $locale
-     * @param  \AppCore\Enums\CurrencyFormat  $currencyFormat
+     * @param  \Laravue\Enums\CurrencyFormat  $currencyFormat
      * @param  string  $defaultCurrency
      */
     public function __construct(string $locale, CurrencyFormat $currencyFormat, string $defaultCurrency)
@@ -311,7 +311,7 @@ class Number
     /**
      * Setter for default currency format
      *
-     * @param  \AppCore\Enums\CurrencyFormat  $currencyFormat  Default currency format to be used by currency()
+     * @param  \Laravue\Enums\CurrencyFormat  $currencyFormat  Default currency format to be used by currency()
      * if $currencyFormat argument is not provided. If null is passed, it will clear the
      * currently stored value
      * @return void

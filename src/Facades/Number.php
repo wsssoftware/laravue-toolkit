@@ -24,7 +24,7 @@ use NumberFormatter;
  * @method static string ordinal(float|int $value, array $options = [])
  * @method static string onlyNumbers(string $value)
  *
- * @see \AppCore\Utility\Number
+ * @see \Laravue\Utility\Number
  */
 class Number extends Facade
 {
