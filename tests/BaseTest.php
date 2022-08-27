@@ -2,7 +2,7 @@
 
 namespace Laravue\Tests;
 
-require_once 'functions.php';
+include 'functions.php';
 
 use PHPUnit\Framework\TestCase;
 
