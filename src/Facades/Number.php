@@ -2,8 +2,8 @@
 
 namespace Laravue\Facades;
 
-use Laravue\Enums\CurrencyFormat;
 use Illuminate\Support\Facades\Facade;
+use Laravue\Enums\CurrencyFormat;
 use NumberFormatter;
 
 /**

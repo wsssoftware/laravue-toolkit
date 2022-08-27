@@ -11,7 +11,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
-
     /**
      * @param  \Spatie\LaravelPackageTools\Package  $package
      * @return void
