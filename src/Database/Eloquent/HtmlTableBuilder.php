@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 /**
  * Class TableBuilder
@@ -32,13 +33,17 @@ class HtmlTableBuilder extends Builder
     /**
      * @param  string  $column
      * @param  string|null  $label
+     * @param  bool  $searchable
+     * @param  bool  $orderable
      * @return $this
      */
-    public function setHtmlColumn(string $column, string $label = null): self
+    public function setHtmlColumn(string $column, string $label = null, bool $searchable = true, bool $orderable = true): self
     {
         $this->htmlColumns[$column] = [
             'name' => $column,
             'label' => $label ?? Str::headline($column),
+            'searchable' => $label ?? Str::headline($column),
+            'orderable' => $label ?? Str::headline($column),
         ];
 
         return $this;
@@ -86,6 +91,11 @@ class HtmlTableBuilder extends Builder
         return $this;
     }
 
+    public function setInertia(string $key): void
+    {
+        Inertia::share($key, fn() => $this->get());
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -101,20 +111,22 @@ class HtmlTableBuilder extends Builder
             }
         }
 
-        $tableItems = parent::get($columns)->toArray();
-        foreach ($tableItems as $index => $tableItem) {
-            foreach ($tableItem as $column => $value) {
-                if (isset($this->valuesCallback[$column])) {
-                    $tableItems[$index][$column] = call_user_func($this->valuesCallback[$column], $value);
-                }
-            }
-            $tableItems[$index]['primary_key'] = $tableItem[$this->model->getKeyName()];
-        }
+
 
         return [
             'casts' => $casts,
             'columns' => $htmlColumns,
-            'rows' => $tableItems,
+            'rows' => Inertia::lazy(function () use ($columns) {
+                $tableItems = parent::get($columns)->toArray();
+                foreach ($tableItems as $index => $tableItem) {
+                    foreach ($tableItem as $column => $value) {
+                        if (isset($this->valuesCallback[$column])) {
+                            $tableItems[$index][$column] = call_user_func($this->valuesCallback[$column], $value);
+                        }
+                    }
+                    $tableItems[$index]['primary_key'] = $tableItem[$this->model->getKeyName()];
+                }
+            }),
         ];
     }
 }
