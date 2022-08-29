@@ -10,6 +10,8 @@ use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
+use const DIRECTORY_SEPARATOR;
+
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
     /**
@@ -53,5 +55,11 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function boot(): void
     {
+        $langPath = dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'lang';
+        $this->loadTranslationsFrom($langPath, 'laravue');
+
+        $this->publishes([
+            $langPath => $this->app->langPath('vendor/laravue'),
+        ], 'laravue-toolkit-lang');
     }
 }
