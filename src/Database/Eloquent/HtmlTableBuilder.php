@@ -4,7 +4,6 @@ namespace Laravue\Database\Eloquent;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -126,8 +125,9 @@ class HtmlTableBuilder extends Builder
     {
         $columns = [];
         foreach ($htmlColumns as $htmlColumn) {
-         $columns[] = $htmlColumn['name'];
+            $columns[] = $htmlColumn['name'];
         }
+
         return $columns;
     }
 
@@ -142,7 +142,7 @@ class HtmlTableBuilder extends Builder
                 $columns = DB::getSchemaBuilder()->getColumnListing($this->model->getTable());
                 $hidden = $this->model->getHidden();
                 $columns = Arr::where($columns, function ($value) use ($hidden) {
-                    return !in_array($value, $hidden);
+                    return ! in_array($value, $hidden);
                 });
             }
             foreach ($columns as $column) {
@@ -154,9 +154,10 @@ class HtmlTableBuilder extends Builder
             $columns[] = $htmlColumn['name'];
         }
         $primaryKey = $this->model->getKeyName();
-        if (!in_array($primaryKey, $columns)) {
+        if (! in_array($primaryKey, $columns)) {
             $columns[] = $primaryKey;
         }
+
         return $this->htmlColumns;
     }
 
@@ -204,6 +205,7 @@ class HtmlTableBuilder extends Builder
      * @param  int[]  $pageSizeOptions
      * @param  int  $default
      * @return $this
+     *
      * @throws \Exception
      */
     public function setPageSizeOptions(array $pageSizeOptions, int $default): self
@@ -217,18 +219,20 @@ class HtmlTableBuilder extends Builder
         $pageSizeOptions = array_unique($pageSizeOptions);
         sort($pageSizeOptions);
         foreach ($pageSizeOptions as $index => $pageSizeOption) {
-            if (!is_integer($pageSizeOption) || $pageSizeOption < 1) {
+            if (! is_int($pageSizeOption) || $pageSizeOption < 1) {
                 throw new Exception('The page size options must be an array of integers greater than zero.');
             }
             $this->pageSizeOptions[$pageSizeOption] = $pageSizeOption === $default;
         }
         $this->defaultPageSize = $default;
+
         return $this;
     }
 
     /**
      * @param  string  $key
      * @return array
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -244,15 +248,15 @@ class HtmlTableBuilder extends Builder
         if (Arr::exists($data, 'search')) {
             $this->wasATableSearch = true;
         }
-        if (!empty($this->tableSort) && !empty($this->htmlColumns[$this->tableSort['column']])) {
+        if (! empty($this->tableSort) && ! empty($this->htmlColumns[$this->tableSort['column']])) {
             $this->htmlColumns[$this->tableSort['column']]['current_sort'] = $this->tableSort['direction'];
         }
 
         return [
-            "$key.options" => fn() => $this->getOptions(),
-            "$key.trans" =>  fn() => $this->getTrans(),
-            "$key.columns" => fn() => $this->getHtmlColumns(),
-            "$key.data" => Inertia::lazy(fn() => $this->getPageData()),
+            "$key.options" => fn () => $this->getOptions(),
+            "$key.trans" => fn () => $this->getTrans(),
+            "$key.columns" => fn () => $this->getHtmlColumns(),
+            "$key.data" => Inertia::lazy(fn () => $this->getPageData()),
         ];
     }
 
@@ -285,7 +289,7 @@ class HtmlTableBuilder extends Builder
 
         $this->doSearch($htmlColumns);
 
-        if (!empty($this->tableSort)) {
+        if (! empty($this->tableSort)) {
             $this->orderBy($this->tableSort['column'], $this->tableSort['direction']);
         }
 
@@ -303,6 +307,7 @@ class HtmlTableBuilder extends Builder
         }
         $from = ($page->currentPage() * $page->perPage()) - $page->perPage() + 1;
         $to = $from + $page->perPage() - 1;
+
         return [
             'info' => [
                 'from' => $page->total() === 0 ? 0 : $from,
