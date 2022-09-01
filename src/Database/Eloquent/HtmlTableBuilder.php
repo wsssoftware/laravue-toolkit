@@ -95,11 +95,14 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
+     * Add a new column for a html table
+     *
      * @param  string  $column
      * @param  string|null  $label
      * @param  bool  $searchable
      * @param  bool  $orderable
      * @param  bool  $database
+     * @param  array  $customAttributes
      * @return $this
      */
     public function setHtmlColumn(
@@ -108,6 +111,7 @@ class HtmlTableBuilder extends Builder
         bool $searchable = true,
         bool $orderable = true,
         bool $database = true,
+        array $customAttributes = []
     ): self {
         $cast = $this->model->getCasts()[$column] ?? null;
         $this->htmlColumns[$column] = [
@@ -118,9 +122,23 @@ class HtmlTableBuilder extends Builder
             'database' => $database,
             'current_sort' => null,
             'cast' => $cast,
+            'custom_attributes' => $customAttributes,
         ];
 
         return $this;
+    }
+
+    /**
+     * Add a new non-database column for a html table
+     *
+     * @param  string  $column
+     * @param  string|null  $label
+     * @param  array  $customAttributes
+     * @return $this
+     */
+    public function setNonDatabaseHtmlColumn(string $column, string $label = null, array $customAttributes = []): self
+    {
+        return $this->setHtmlColumn($column, $label, false, false, false, $customAttributes);
     }
 
     /**
