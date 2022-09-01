@@ -29,7 +29,12 @@
         </tr>
         <tr v-else v-for="row in payload.data.rows" :key="row.primary_key">
             <td v-for="column in payload.columns" :key="column.name">
-                {{ this.cast(row[column.name], column, row) }}
+                <template v-if="customComponents[column.name]">
+                    <component v-bind:row="row" v-bind:column="column" v-bind:value="row[column.name]"  :is="getCustomComponent(column.name)"/>
+                </template>
+                <template v-else>
+                    {{ this.cast(row[column.name], column, row) }}
+                </template>
             </td>
         </tr>
         </tbody>
@@ -39,6 +44,7 @@
 <script>
 import FaIcon from "../FontAwesomeIcon.vue";
 import Formatter from "../../Formatter";
+import {defineAsyncComponent, markRaw} from "vue";
 
 export default {
     name: "TableStructure",
@@ -53,10 +59,19 @@ export default {
         customCasts: {
             type: Object,
             required: true,
-        }
+        },
+        customComponents: {
+            type: Object,
+            required: true,
+        },
     },
     emits: ['sorted'],
     methods: {
+        getCustomComponent(columnName) {
+            return markRaw(
+                defineAsyncComponent(() => this.customComponents[columnName])
+            );
+        },
         sort(column) {
             let columnData = this.payload.columns[column];
             let nextSort;

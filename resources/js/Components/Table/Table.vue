@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="table-responsive mb-2">
-        <TableStructure :custom-casts="customCasts" :payload="payload" @sorted="setSort"/>
+        <TableStructure :custom-components="customComponents" :custom-casts="customCasts" :payload="payload" @sorted="setSort"/>
     </div>
     <template v-if="payload.data !== undefined">
         <div class="w-100 text-center">
@@ -58,7 +58,11 @@ export default {
         customCasts: {
             type: Object,
             default: {}
-        }
+        },
+        customComponents: {
+            type: Object,
+            default: {}
+        },
     },
 
     computed: {
