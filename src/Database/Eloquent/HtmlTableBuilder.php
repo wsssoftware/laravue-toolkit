@@ -83,7 +83,7 @@ class HtmlTableBuilder extends Builder
                 $columns = DB::getSchemaBuilder()->getColumnListing($this->model->getTable());
                 $hidden = $this->model->getHidden();
                 $columns = Arr::where($columns, function ($value) use ($hidden) {
-                    return !in_array($value, $hidden);
+                    return ! in_array($value, $hidden);
                 });
             }
             foreach ($columns as $column) {
@@ -155,7 +155,7 @@ class HtmlTableBuilder extends Builder
         $pageSizeOptions = array_unique($pageSizeOptions);
         sort($pageSizeOptions);
         foreach ($pageSizeOptions as $index => $pageSizeOption) {
-            if (!is_int($pageSizeOption) || $pageSizeOption < 1) {
+            if (! is_int($pageSizeOption) || $pageSizeOption < 1) {
                 throw new Exception('The page size options must be an array of integers greater than zero.');
             }
             $this->pageSizeOptions[$pageSizeOption] = $pageSizeOption === $default;
@@ -191,15 +191,15 @@ class HtmlTableBuilder extends Builder
         if (Arr::exists($data, 'search')) {
             $this->wasATableSearch = true;
         }
-        if (!empty($this->tableSort) && !empty($this->htmlColumns[$this->tableSort['column']])) {
+        if (! empty($this->tableSort) && ! empty($this->htmlColumns[$this->tableSort['column']])) {
             $this->htmlColumns[$this->tableSort['column']]['current_sort'] = $this->tableSort['direction'];
         }
 
         return [
-            "$key.options" => fn() => $this->getOptions(),
-            "$key.trans" => fn() => $this->getTrans(),
-            "$key.columns" => fn() => $this->getHtmlColumns(),
-            "$key.data" => Inertia::lazy(fn() => $this->getPageData()),
+            "$key.options" => fn () => $this->getOptions(),
+            "$key.trans" => fn () => $this->getTrans(),
+            "$key.columns" => fn () => $this->getHtmlColumns(),
+            "$key.data" => Inertia::lazy(fn () => $this->getPageData()),
         ];
     }
 
@@ -223,7 +223,7 @@ class HtmlTableBuilder extends Builder
                             $query->where(DB::raw("CONVERT($relationshipColumn ,char)"), 'LIKE',
                                 "%{$this->tableSearch}%");
                         });
-                    } elseif (!$this->model->isRelation($columnName)) {
+                    } elseif (! $this->model->isRelation($columnName)) {
                         $query->orWhere(DB::raw("CONVERT($columnName ,char)"), 'LIKE', "%{$this->tableSearch}%");
                     }
                 }
@@ -236,7 +236,7 @@ class HtmlTableBuilder extends Builder
      */
     protected function doOrder(): void
     {
-        if (!empty($this->tableSort)) {
+        if (! empty($this->tableSort)) {
             $column = $this->tableSort['column'];
             if (Str::contains($column, '.')) {
                 $relationshipName = Str::before($column, '.');
@@ -252,7 +252,7 @@ class HtmlTableBuilder extends Builder
                     $idsList = implode(',', $ids);
                     $this->orderByRaw(DB::raw("FIELD({$relationship->getForeignKeyName()}, $idsList)"));
                 }
-            } elseif (!$this->model->isRelation($column)) {
+            } elseif (! $this->model->isRelation($column)) {
                 $this->orderBy($this->tableSort['column'], $this->tableSort['direction']);
             }
         }
@@ -352,7 +352,7 @@ class HtmlTableBuilder extends Builder
             if ($htmlColumn['database'] === false) {
                 continue;
             }
-            if (!Str::contains($columnName, '.') && !$this->model->isRelation($columnName)) {
+            if (! Str::contains($columnName, '.') && ! $this->model->isRelation($columnName)) {
                 $columns[$columnName] = $columnName;
             } elseif ($this->model->isRelation($columnName)) {
                 $relationships[$columnName] = ['*'];
@@ -365,7 +365,7 @@ class HtmlTableBuilder extends Builder
                 $relationships[$relationship][$columnName] = $columnName;
             }
         }
-        if (!in_array($this->model->getKeyName(), $columns)) {
+        if (! in_array($this->model->getKeyName(), $columns)) {
             $columns[$this->model->getKeyName()] = $this->model->getKeyName();
         }
 
@@ -379,13 +379,13 @@ class HtmlTableBuilder extends Builder
             if ($relationshipColumns === ['*']) {
                 $this->with($relationshipName);
             } else {
-                if (!empty($ownerKey)) {
+                if (! empty($ownerKey)) {
                     $relationshipColumns[$ownerKey] = $ownerKey;
                 }
                 $this->with([
                     $relationshipName => function ($query) use ($relationshipColumns) {
                         return $query->select($relationshipColumns);
-                    }
+                    },
                 ]);
             }
         }
