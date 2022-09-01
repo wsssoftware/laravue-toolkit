@@ -29,7 +29,7 @@
         </tr>
         <tr v-else v-for="row in payload.data.rows" :key="row.primary_key">
             <td v-for="column in payload.columns" :key="column.name">
-                {{ row[column.name] }}
+                {{ this.cast(row[column.name], column, row) }}
             </td>
         </tr>
         </tbody>
@@ -38,6 +38,7 @@
 
 <script>
 import FaIcon from "../FontAwesomeIcon.vue";
+import Formatter from "../../Formatter";
 
 export default {
     name: "TableStructure",
@@ -49,6 +50,10 @@ export default {
             type: [Array, Object],
             required: true
         },
+        customCasts: {
+            type: Object,
+            required: true,
+        }
     },
     emits: ['sorted'],
     methods: {
@@ -63,6 +68,24 @@ export default {
                 nextSort = null;
             }
             this.$emit('sorted', column, nextSort);
+        },
+        cast(value, column, row) {
+            if (typeof this.customCasts[column.name] === 'function') {
+                return this.customCasts[column.name](value, row);
+            }
+            if (column.cast === 'datetime') {
+                return Formatter.datetime(value);
+            }
+            if (column.cast === 'date') {
+                return Formatter.date(value);
+            }
+            if (column.cast === 'integer' || column.cast === 'int') {
+                return Formatter.integer(value);
+            }
+            if (column.cast === 'float') {
+                return Formatter.float(value);
+            }
+            return value;
         }
     }
 }

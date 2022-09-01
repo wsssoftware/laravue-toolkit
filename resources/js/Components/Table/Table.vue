@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="table-responsive mb-2">
-        <TableStructure :payload="payload" @sorted="setSort"/>
+        <TableStructure :custom-casts="customCasts" :payload="payload" @sorted="setSort"/>
     </div>
     <template v-if="payload.data !== undefined">
         <div class="w-100 text-center">
@@ -54,6 +54,10 @@ export default {
         dataKey: {
             type: String,
             required: true
+        },
+        customCasts: {
+            type: Object,
+            default: {}
         }
     },
 

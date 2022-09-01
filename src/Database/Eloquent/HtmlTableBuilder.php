@@ -99,13 +99,15 @@ class HtmlTableBuilder extends Builder
      * @param  string|null  $label
      * @param  bool  $searchable
      * @param  bool  $orderable
+     * @param  bool  $database
      * @return $this
      */
     public function setHtmlColumn(
         string $column,
         string $label = null,
         bool $searchable = true,
-        bool $orderable = true
+        bool $orderable = true,
+        bool $database = true,
     ): self {
         $cast = $this->model->getCasts()[$column] ?? null;
         $this->htmlColumns[$column] = [
@@ -113,6 +115,7 @@ class HtmlTableBuilder extends Builder
             'label' => $label ?? Str::headline($column),
             'searchable' => $searchable,
             'orderable' => $orderable,
+            'database' => $database,
             'current_sort' => null,
             'cast' => $cast,
         ];
@@ -177,6 +180,13 @@ class HtmlTableBuilder extends Builder
         $this->tableSort = Arr::get($data, 'sort', $this->tableSort);
         $this->currentPageSize = intval(Arr::get($data, 'page_size', $this->defaultPageSize));
         $this->tablePage = intval(Arr::get($data, 'page', $this->tablePage));
+
+        foreach ($this->valuesCallbackNewCast as $column => $cast) {
+            if (empty($cast)) {
+                continue;
+            }
+            $this->htmlColumns[$column]['cast'] = $cast;
+        }
 
         if (Arr::exists($data, 'search')) {
             $this->wasATableSearch = true;
@@ -339,6 +349,9 @@ class HtmlTableBuilder extends Builder
         $columns = [];
         foreach ($htmlColumns as $htmlColumn) {
             $columnName = $htmlColumn['name'];
+            if ($htmlColumn['database'] === false) {
+                continue;
+            }
             if (!Str::contains($columnName, '.') && !$this->model->isRelation($columnName)) {
                 $columns[$columnName] = $columnName;
             } elseif ($this->model->isRelation($columnName)) {
@@ -395,7 +408,7 @@ class HtmlTableBuilder extends Builder
                     $tableRow[$column] = $value;
                 }
                 if (isset($this->valuesCallback[$column])) {
-                    $tableRows[$index][$column] = call_user_func($this->valuesCallback[$column], $value);
+                    $tableRow[$column] = call_user_func($this->valuesCallback[$column], $value, $tableRow);
                 }
             }
             $tableRow['primary_key'] = $tableRow[$this->model->getKeyName()];
