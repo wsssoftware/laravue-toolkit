@@ -56,6 +56,7 @@ export default {
             required: true
         }
     },
+
     computed: {
         id() {
             return 'table-' + this.dataKey;
@@ -79,13 +80,12 @@ export default {
     },
     data() {
         return {
-            sort: null,
+            sort: this.payload.options.sort,
             search: this.payload.options.search,
             was_a_search: this.payload.options.was_a_search,
             default_page_size: this.payload.options.default_page_size,
             page_size: this.payload.options.current_page_size,
             page: this.payload.options.page,
-            test: false,
         }
     },
     mounted() {
