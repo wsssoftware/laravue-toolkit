@@ -27,8 +27,8 @@
                 {{ payload.trans.not_found }}
             </td>
         </tr>
-        <tr v-else v-for="row in payload.data.rows" :key="row.primary_key">
-            <td class="table-content-row" v-for="column in payload.columns" :key="column.name">
+        <tr v-else v-for="row in payload.data.rows" :key="row.primary_key" class="table-content-row">
+            <td v-for="column in payload.columns" :key="column.name">
                 <template v-if="customComponents[column.name]">
                     <component v-bind:row="row" v-bind:column="column" v-bind:value="row[column.name]"  :is="getCustomComponent(column.name)"/>
                 </template>
@@ -68,9 +68,12 @@ export default {
     emits: ['sorted'],
     methods: {
         setLoading() {
-            this.$el.querySelectorAll('.table-content-row').forEach((el) => {
-                let col = Math.floor(Math.random() * (10 - 3) + 3);
-                el.innerHTML = `<p class="card-text placeholder-glow"><span class="placeholder col-${col}"></span></p>`;
+            this.$el.querySelectorAll('.table-content-row').forEach((row) => {
+                row.style.height = row.clientHeight + 'px';
+                row.childNodes.forEach((cell) => {
+                    let col = Math.floor(Math.random() * (10 - 3) + 3);
+                    cell.innerHTML = `<p class="card-text placeholder-glow"><span class="placeholder col-${col}"></span></p>`;
+                });
             });
         },
         getCustomComponent(columnName) {
