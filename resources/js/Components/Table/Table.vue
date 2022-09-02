@@ -12,16 +12,33 @@
                 </select>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-            <div class="mb-2">
-                <label :for="'search-input-'+id" class="form-label">{{ payload.trans.header.search_label }}</label>
-                <input ref="searchInput" type="search" v-model="search" class="form-control" :id="'search-input-'+id"
+        <div class="col-12 col-sm-6 col-md-5 col-lg-5 col-xl-4 align-self-end">
+            <div class="input-group mb-2">
+                <template v-if="filters.length > 0">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <FontAwesomeIcon icon="filter"/> {{ payload.trans.filters }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li v-for="filterItem in filters">
+                            <button
+                                :class="[
+                                    'dropdown-item',
+                                    {'active': filterItem.key === filter},
+                                ]"
+                                @click="setFilter(filterItem.key)"
+                                role="button">
+                                {{ filterItem.label }}
+                            </button>
+                        </li>
+                    </ul>
+                </template>
+                <input ref="searchInput" type="search" @keyup="onSearchKeyUp" v-model="search" class="form-control" :id="'search-input-'+id"
                        :placeholder="payload.trans.header.search_placeholder">
             </div>
         </div>
     </div>
     <div class="table-responsive mb-2">
-        <TableStructure :custom-components="customComponents" :custom-casts="customCasts" :payload="payload" @sorted="setSort"/>
+        <TableStructure ref="tableStructure" :custom-components="customComponents" :custom-casts="customCasts" :payload="payload" @sorted="setSort"/>
     </div>
     <template v-if="payload.data !== undefined">
         <div class="w-100 text-center">
@@ -39,10 +56,12 @@
 import TableStructure from "./TableStructure.vue";
 import Paginator from "./Paginator.vue";
 import {Inertia} from "@inertiajs/inertia";
+import FontAwesomeIcon from "../FontAwesomeIcon.vue";
 
 export default {
     name: "Table",
     components: {
+        FontAwesomeIcon,
         TableStructure,
         Paginator
     },
@@ -88,9 +107,11 @@ export default {
     },
     data() {
         return {
+            filters: this.payload.options.filters,
+            filter: this.payload.options.filter,
             sort: this.payload.options.sort,
             search: this.payload.options.search,
-            was_a_search: this.payload.options.was_a_search,
+            search_focus: this.payload.options.search_focus,
             default_page_size: this.payload.options.default_page_size,
             page_size: this.payload.options.current_page_size,
             page: this.payload.options.page,
@@ -100,12 +121,14 @@ export default {
         if (this.payload.data === undefined) {
             this.updateTable();
         }
-        if (this.was_a_search) {
+        if (this.search_focus) {
             this.$refs.searchInput.focus();
+            this.search_focus = null;
         }
     },
     methods: {
         updateTable() {
+            this.$refs.tableStructure.setLoading();
             let params = route().params;
             delete params[this.id];
             Inertia.get(
@@ -131,8 +154,14 @@ export default {
             if (this.sort !== null) {
                 data.sort = this.sort;
             }
+            if (this.filter !== 'none') {
+                data.filter = this.filter;
+            }
             if (this.search !== null && this.search !== '') {
                 data.search = this.search;
+            }
+            if (this.search_focus === true) {
+                data.search_focus = this.search_focus;
             }
             let tableData = {};
             tableData[this.id] = data;
@@ -151,14 +180,20 @@ export default {
             }
             this.page = 1;
             this.updateTable();
+        },
+        setFilter(filterKey) {
+            this.filter = filterKey;
+            this.page = 1;
+            this.updateTable();
+        },
+        onSearchKeyUp() {
+            this.search_focus = true;
+            this.page = 1;
+            this.updateTable();
         }
     },
     watch: {
         page_size() {
-            this.page = 1;
-            this.updateTable();
-        },
-        search() {
             this.page = 1;
             this.updateTable();
         },

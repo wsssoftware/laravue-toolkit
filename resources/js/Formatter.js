@@ -1,9 +1,15 @@
 
 export default {
     datetime: function (datetime) {
+        if (datetime === null || datetime === undefined) {
+            return '';
+        }
         return new Date(datetime).toLocaleString();
     },
     date: function (date) {
+        if (date === null || date === undefined) {
+            return '';
+        }
         return new Date(date).toLocaleDateString();
     },
     integer: function (integer) {

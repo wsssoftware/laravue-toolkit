@@ -28,7 +28,7 @@
             </td>
         </tr>
         <tr v-else v-for="row in payload.data.rows" :key="row.primary_key">
-            <td v-for="column in payload.columns" :key="column.name">
+            <td class="table-content-row" v-for="column in payload.columns" :key="column.name">
                 <template v-if="customComponents[column.name]">
                     <component v-bind:row="row" v-bind:column="column" v-bind:value="row[column.name]"  :is="getCustomComponent(column.name)"/>
                 </template>
@@ -67,6 +67,12 @@ export default {
     },
     emits: ['sorted'],
     methods: {
+        setLoading() {
+            this.$el.querySelectorAll('.table-content-row').forEach((el) => {
+                let col = Math.floor(Math.random() * (10 - 3) + 3);
+                el.innerHTML = `<p class="card-text placeholder-glow"><span class="placeholder col-${col}"></span></p>`;
+            });
+        },
         getCustomComponent(columnName) {
             return markRaw(
                 defineAsyncComponent(() => this.customComponents[columnName])
