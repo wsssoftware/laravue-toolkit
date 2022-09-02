@@ -116,5 +116,12 @@ export default {
                 }
             }
         }
+        tbody {
+            tr {
+                td {
+                    vertical-align: middle;
+                }
+            }
+        }
     }
 </style>

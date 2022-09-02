@@ -63,6 +63,11 @@ class HtmlTableBuilder extends Builder
     protected ?array $tableSort = null;
 
     /**
+     * @var array|null
+     */
+    protected ?array $defaultTableSort = null;
+
+    /**
      * @var int
      */
     protected int $tablePage = 1;
@@ -100,7 +105,7 @@ class HtmlTableBuilder extends Builder
      * @param  string  $column
      * @param  string|null  $label
      * @param  bool  $searchable
-     * @param  bool  $orderable
+     * @param  bool|string  $orderable
      * @param  bool  $database
      * @param  array  $customAttributes
      * @return $this
@@ -109,21 +114,28 @@ class HtmlTableBuilder extends Builder
         string $column,
         string $label = null,
         bool $searchable = true,
-        bool $orderable = true,
+        bool|string $orderable = true,
         bool $database = true,
         array $customAttributes = []
     ): self {
         $cast = $this->model->getCasts()[$column] ?? null;
+
         $this->htmlColumns[$column] = [
             'name' => $column,
             'label' => $label ?? Str::headline($column),
             'searchable' => $searchable,
-            'orderable' => $orderable,
+            'orderable' => !empty($orderable),
             'database' => $database,
             'current_sort' => null,
             'cast' => $cast,
             'custom_attributes' => $customAttributes,
         ];
+        if (is_string($orderable) && in_array($orderable, ['asc', 'desc'])) {
+            $this->defaultTableSort = [
+                'column' => $column,
+                'direction' => $orderable,
+            ];
+        }
 
         return $this;
     }
@@ -210,6 +222,9 @@ class HtmlTableBuilder extends Builder
             $this->wasATableSearch = true;
         }
         if (! empty($this->tableSort) && ! empty($this->htmlColumns[$this->tableSort['column']])) {
+            foreach ($this->htmlColumns as $htmlColumn) {
+                $this->htmlColumns[$htmlColumn['name']]['current_sort'] = null;
+            }
             $this->htmlColumns[$this->tableSort['column']]['current_sort'] = $this->tableSort['direction'];
         }
 
@@ -255,6 +270,7 @@ class HtmlTableBuilder extends Builder
     protected function doOrder(): void
     {
         if (! empty($this->tableSort)) {
+            $this->query->orders = null;
             $column = $this->tableSort['column'];
             if (Str::contains($column, '.')) {
                 $relationshipName = Str::before($column, '.');
