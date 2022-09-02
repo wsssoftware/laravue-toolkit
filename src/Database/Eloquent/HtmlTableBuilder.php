@@ -21,6 +21,11 @@ class HtmlTableBuilder extends Builder
     /**
      * @var array
      */
+    protected array $additionalColumns = [];
+
+    /**
+     * @var array
+     */
     protected array $htmlColumns = [];
 
     /**
@@ -124,6 +129,17 @@ class HtmlTableBuilder extends Builder
             "$key.columns" => fn () => $this->getHtmlColumns(),
             "$key.data" => Inertia::lazy(fn () => $this->getPageData()),
         ];
+    }
+
+    /**
+     * @param  string  $column
+     * @return $this
+     */
+    public function setAdditionalColumn(string $column): self
+    {
+        $this->additionalColumns[] = $column;
+
+        return $this;
     }
 
     /**
@@ -301,9 +317,9 @@ class HtmlTableBuilder extends Builder
     {
         $relationships = [];
         $columns = [];
-        foreach ($htmlColumns as $htmlColumn) {
-            $columnName = $htmlColumn['name'];
-            if ($htmlColumn['database'] === false) {
+        $columnNames = array_unique(array_merge(array_keys($htmlColumns), $this->additionalColumns));
+        foreach ($columnNames as $columnName) {
+            if (isset($htmlColumns[$columnName]) && $htmlColumns[$columnName]['database'] === false) {
                 continue;
             }
             if (! Str::contains($columnName, '.') && ! $this->model->isRelation($columnName)) {
