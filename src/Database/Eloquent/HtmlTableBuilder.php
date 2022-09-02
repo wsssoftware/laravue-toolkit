@@ -17,7 +17,6 @@ use Inertia\Inertia;
  */
 class HtmlTableBuilder extends Builder
 {
-
     /**
      * @var array
      */
@@ -209,6 +208,7 @@ class HtmlTableBuilder extends Builder
      * @param  string  $label
      * @param  callable  $callback
      * @return $this
+     *
      * @throws \Exception
      */
     public function setTableFilter(string $key, string $label, callable $callback): self
@@ -388,7 +388,6 @@ class HtmlTableBuilder extends Builder
         return $tableRows;
     }
 
-
     /**
      * @return array
      */
@@ -419,17 +418,18 @@ class HtmlTableBuilder extends Builder
     protected function getOptions(): array
     {
         $filters = [];
-        if (!empty($this->tableFilters)) {
+        if (! empty($this->tableFilters)) {
             $filters = [
-                ['key' => 'none', 'label' => __('laravue::table.filter_none')]
+                ['key' => 'none', 'label' => __('laravue::table.filter_none')],
             ];
             foreach ($this->tableFilters as $tableFilter) {
                 $filters[] = [
                     'key' => $tableFilter['key'],
-                    'label' => $tableFilter['label']
+                    'label' => $tableFilter['label'],
                 ];
             }
         }
+
         return [
             'filters' => $filters,
             'filter' => $this->tableFilter,
@@ -445,6 +445,7 @@ class HtmlTableBuilder extends Builder
 
     /**
      * @return array
+     *
      * @throws \Exception
      */
     protected function getPageData(): array
@@ -455,7 +456,6 @@ class HtmlTableBuilder extends Builder
             }
             $this->tableFilters[$this->tableFilter]['callback']($this);
         }
-
 
         $htmlColumns = $this->getHtmlColumns();
 
