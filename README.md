@@ -4,7 +4,8 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wsssoftware/laravue-toolkit.svg?style=flat-square)](https://packagist.org/packages/wsssoftware/laravue-toolkit)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wsssoftware/laravue-toolkit/run-tests?label=tests)](https://github.com/wsssoftware/laravue-toolkit/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/wsssoftware/laravue-toolkit/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/wsssoftware/laravue-toolkit/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/wsssoftware/laravue-toolkit.svg?style=flat-square)](https://packagist.org/packages/wsssoftware/laravue-toolkit)
+![npm](https://img.shields.io/npm/dt/laravue-toolkit?label=npm%20downloads)
+![Packagist Downloads](https://img.shields.io/packagist/dt/wsssoftware/laravue-toolkit?label=packagist%20downloads)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
