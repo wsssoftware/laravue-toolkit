@@ -106,7 +106,7 @@ class HtmlTableBuilder extends Builder
         $this->tablePage = intval(Arr::get($data, 'page', $this->tablePage));
 
         foreach ($this->valuesCallbackNewCast as $column => $cast) {
-            if (empty($cast)) {
+            if (empty($cast) || isset($this->additionalColumns[$column])) {
                 continue;
             }
             $this->htmlColumns[$column]['cast'] = $cast;
@@ -136,7 +136,7 @@ class HtmlTableBuilder extends Builder
      */
     public function setAdditionalColumn(string $column): self
     {
-        $this->additionalColumns[] = $column;
+        $this->additionalColumns[$column] = $column;
 
         return $this;
     }
@@ -381,6 +381,12 @@ class HtmlTableBuilder extends Builder
                     $tableRow[$column] = call_user_func($this->valuesCallback[$column], $value, $tableRow);
                 }
             }
+            foreach ($this->additionalColumns as $additionalColumn) {
+                if (isset($tableRow[$additionalColumn]) && isset($this->valuesCallback[$additionalColumn])) {
+                    $tableRow[$additionalColumn] = call_user_func($this->valuesCallback[$additionalColumn], $tableRow[$additionalColumn], $tableRow);
+                }
+            }
+
             $tableRow['primary_key'] = $tableRow[$this->model->getKeyName()];
             $tableRows[$index] = $tableRow;
         }
