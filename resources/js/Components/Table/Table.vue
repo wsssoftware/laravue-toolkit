@@ -55,7 +55,7 @@
 <script>
 import TableStructure from "./TableStructure.vue";
 import Paginator from "./Paginator.vue";
-import Inertia from "@inertiajs/inertia";
+import {Inertia} from "@inertiajs/inertia";
 import FontAwesomeIcon from "../FontAwesomeIcon.vue";
 
 export default {
