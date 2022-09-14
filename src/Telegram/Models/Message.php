@@ -616,6 +616,7 @@ class Message
         if (empty($commands)) {
             return false;
         }
+
         return in_array($command, $commands);
     }
 
