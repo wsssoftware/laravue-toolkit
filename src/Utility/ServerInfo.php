@@ -9,7 +9,6 @@ namespace Laravue\Utility;
  */
 class ServerInfo
 {
-
     public function cpuLoad()
     {
         $load = sys_getloadavg();
