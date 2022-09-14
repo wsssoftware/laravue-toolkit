@@ -2,12 +2,12 @@
 
 namespace Laravue\Providers;
 
-use Laravue\Utility\ServerInfo;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
 use Laravue\Utility\Number;
+use Laravue\Utility\ServerInfo;
 use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
