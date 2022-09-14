@@ -15,7 +15,6 @@ use Laravue\Telegram\Enum\MessageEntityType;
  */
 class Message
 {
-
     /**
      * Unique message identifier inside this chat
      *
@@ -560,7 +559,7 @@ class Message
             'video_chat_participants_invited') ? new VideoChatParticipantsInvited($payload['video_chat_participants_invited']) : null;
         $this->web_app_data = Arr::exists($payload, 'web_app_data') ? new WebAppData($payload['web_app_data']) : null;
 
-        if (!empty(Arr::get($payload, 'reply_markup'))) {
+        if (! empty(Arr::get($payload, 'reply_markup'))) {
             $this->setReplyMarkup($payload['reply_markup']);
         }
     }
@@ -586,15 +585,16 @@ class Message
      */
     protected function extractInlineKeyboard(array $payload, array &$items): void
     {
-        if (!empty($payload['text'])) {
+        if (! empty($payload['text'])) {
             $items[] = $payload;
+
             return;
         }
         foreach ($payload as $item) {
-            if (!empty($item['text'])) {
+            if (! empty($item['text'])) {
                 $items[] = $item;
             } elseif (is_array($item)) {
-                $this->extractInlineKeyboard($item,$items);
+                $this->extractInlineKeyboard($item, $items);
             }
         }
     }
@@ -1091,5 +1091,4 @@ class Message
     {
         return $this->reply_markup;
     }
-
 }

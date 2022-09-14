@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\MessageEntityType;
  */
 class MessageEntity
 {
-
     /**
      * Type of the entity. Currently, can be “mention” (@username), “hashtag” (#hashtag), “cashtag” ($USD),
      * “bot_command” (/start@jobs_bot), “url” (https://telegram.org), “email” (do-not-reply@telegram.org),

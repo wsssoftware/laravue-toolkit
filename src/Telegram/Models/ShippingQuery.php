@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class ShippingQuery
 {
-
     /**
      * Unique query identifier
      *

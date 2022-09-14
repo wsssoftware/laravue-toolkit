@@ -14,7 +14,6 @@ use Illuminate\Support\Arr;
  */
 class ChatInviteLink
 {
-
     /**
      * The invite link. If the link was created by another chat administrator, then the second part of the link will be
      * replaced with “…”.

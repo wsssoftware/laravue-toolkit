@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\ChatType;
  */
 class InlineQuery
 {
-
     /**
      * Unique identifier for this query
      *

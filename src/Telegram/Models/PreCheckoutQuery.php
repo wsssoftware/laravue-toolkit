@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class PreCheckoutQuery
 {
-
     /**
      * Unique query identifier
      *

@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class InlineKeyboardMarkup
 {
-
     /**
      * Label text on the button
      *

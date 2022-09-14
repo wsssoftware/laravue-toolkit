@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class File
 {
-
     /**
      * Identifier for this file, which can be used to download or reuse the file
      *

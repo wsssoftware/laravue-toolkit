@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class PollOption
 {
-
     /**
      * Option text, 1-100 characters
      *

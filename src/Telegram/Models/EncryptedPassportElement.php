@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class EncryptedPassportElement
 {
-
     /**
      * Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”,
      * “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”,

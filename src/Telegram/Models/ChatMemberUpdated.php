@@ -14,7 +14,6 @@ use Illuminate\Support\Arr;
  */
 class ChatMemberUpdated
 {
-
     /**
      * Chat the user belongs to
      *

@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class PollAnswer
 {
-
     /**
      * Unique poll identifier
      *

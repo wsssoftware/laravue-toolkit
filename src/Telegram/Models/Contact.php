@@ -58,7 +58,7 @@ class Contact
         $this->phone_number = Arr::get($payload, 'phone_number');
         $this->first_name = Arr::get($payload, 'first_name');
         $this->last_name = Arr::get($payload, 'last_name');
-        $this->user_id = !empty(Arr::get($payload, 'user_id')) ? (int) Arr::get($payload, 'user_id') : null;
+        $this->user_id = ! empty(Arr::get($payload, 'user_id')) ? (int) Arr::get($payload, 'user_id') : null;
         $this->vcard = Arr::get($payload, 'vcard');
     }
 
@@ -101,5 +101,4 @@ class Contact
     {
         return $this->vcard;
     }
-
 }

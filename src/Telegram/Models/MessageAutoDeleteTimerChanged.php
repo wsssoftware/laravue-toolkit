@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class MessageAutoDeleteTimerChanged
 {
-
     /**
      * New auto-delete time for messages in the chat; in seconds
      *
@@ -36,5 +35,4 @@ class MessageAutoDeleteTimerChanged
     {
         return $this->message_auto_delete_time;
     }
-
 }

@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class CallbackQuery
 {
-
     /**
      * Unique identifier for this query
      *

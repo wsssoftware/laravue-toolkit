@@ -15,7 +15,6 @@ use Laravue\Telegram\Enum\PollType;
  */
 class Poll
 {
-
     /**
      * Unique poll identifier
      *
