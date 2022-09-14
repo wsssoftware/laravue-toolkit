@@ -2,6 +2,7 @@
 
 namespace Laravue\Providers;
 
+use Laravue\Utility\ServerStatus;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
@@ -41,6 +42,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
     {
         $this->app->bind('utility.number', function (Application $app) {
             return new Number($app->currentLocale(), CurrencyFormat::DEFAULT, 'BRL');
+        });
+        $this->app->bind('utility.server_status', function (Application $app) {
+            return new ServerStatus();
         });
         $this->app->bind('utility.text', function (Application $app) {
             return new Text();
