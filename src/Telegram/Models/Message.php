@@ -445,9 +445,9 @@ class Message
     /**
      * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
      *
-     * @var InlineKeyboardMarkup|null
+     * @var InlineKeyboardMarkup[]|null
      */
-    protected ?InlineKeyboardMarkup $reply_markup;
+    protected ?array $reply_markup;
 
     /**
      * @param  array  $payload
@@ -460,7 +460,8 @@ class Message
         $this->date = Carbon::createFromTimestamp(Arr::get($payload, 'date'));
         $this->chat = new Chat(Arr::get($payload, 'chat', []));
         $this->forward_from = Arr::exists($payload, 'forward_from') ? new User($payload['forward_from']) : null;
-        $this->forward_from_chat = Arr::exists($payload, 'forward_from_chat') ? new Chat($payload['forward_from_chat']) : null;
+        $this->forward_from_chat = Arr::exists($payload,
+            'forward_from_chat') ? new Chat($payload['forward_from_chat']) : null;
         $this->forward_from_message_id = Arr::exists($payload, 'forward_from_message_id') ?
             intval(Arr::get($payload, 'forward_from_message_id')) : null;
         $this->forward_signature = Arr::get($payload, 'forward_signature');
@@ -469,7 +470,8 @@ class Message
             Carbon::createFromTimestamp(Arr::get($payload, 'forward_date')) : null;
         $this->is_automatic_forward = Arr::exists($payload, 'is_automatic_forward') ?
             boolval(Arr::get($payload, 'is_automatic_forward')) : null;
-        $this->reply_to_message = Arr::exists($payload, 'reply_to_message') ? new Message($payload['reply_to_message']) : null;
+        $this->reply_to_message = Arr::exists($payload,
+            'reply_to_message') ? new Message($payload['reply_to_message']) : null;
         $this->via_bot = Arr::exists($payload, 'via_bot') ? new User($payload['via_bot']) : null;
         $this->edit_date = Arr::exists($payload, 'edit_date') ?
             Carbon::createFromTimestamp(Arr::get($payload, 'edit_date')) : null;
@@ -515,7 +517,8 @@ class Message
                 $this->new_chat_members[] = new User($user);
             }
         }
-        $this->left_chat_member = Arr::exists($payload, 'left_chat_member') ? new User($payload['left_chat_member']) : null;
+        $this->left_chat_member = Arr::exists($payload,
+            'left_chat_member') ? new User($payload['left_chat_member']) : null;
         $this->new_chat_title = Arr::get($payload, 'new_chat_title');
         if (Arr::exists($payload, 'new_chat_photo')) {
             $this->new_chat_photo = [];
@@ -531,24 +534,69 @@ class Message
             boolval(Arr::get($payload, 'supergroup_chat_created')) : null;
         $this->channel_chat_created = Arr::exists($payload, 'channel_chat_created') ?
             boolval(Arr::get($payload, 'channel_chat_created')) : null;
-        $this->message_auto_delete_timer_changed = Arr::exists($payload, 'message_auto_delete_timer_changed') ? new MessageAutoDeleteTimerChanged($payload['message_auto_delete_timer_changed']) : null;
+        $this->message_auto_delete_timer_changed = Arr::exists($payload,
+            'message_auto_delete_timer_changed') ? new MessageAutoDeleteTimerChanged($payload['message_auto_delete_timer_changed']) : null;
         $this->migrate_to_chat_id = Arr::exists($payload, 'migrate_to_chat_id') ?
             intval(Arr::get($payload, 'migrate_to_chat_id')) : null;
         $this->migrate_from_chat_id = Arr::exists($payload, 'migrate_from_chat_id') ?
             intval(Arr::get($payload, 'migrate_from_chat_id')) : null;
-        $this->pinned_message = Arr::exists($payload, 'pinned_message') ? new Message($payload['pinned_message']) : null;
+        $this->pinned_message = Arr::exists($payload,
+            'pinned_message') ? new Message($payload['pinned_message']) : null;
         $this->invoice = Arr::exists($payload, 'invoice') ? new Invoice($payload['invoice']) : null;
-        $this->successful_payment = Arr::exists($payload, 'successful_payment') ? new SuccessfulPayment($payload['successful_payment']) : null;
+        $this->successful_payment = Arr::exists($payload,
+            'successful_payment') ? new SuccessfulPayment($payload['successful_payment']) : null;
         $this->connected_website = Arr::get($payload, 'connected_website');
-        $this->passport_data = Arr::exists($payload, 'passport_data') ? new SuccessfulPayment($payload['passport_data']) : null;
-        $this->proximity_alert_triggered = Arr::exists($payload, 'proximity_alert_triggered') ? new ProximityAlertTriggered($payload['proximity_alert_triggered']) : null;
-        $this->video_chat_scheduled = Arr::exists($payload, 'video_chat_scheduled') ? new VideoChatScheduled($payload['video_chat_scheduled']) : null;
-        $this->video_chat_started = Arr::exists($payload, 'video_chat_started') ? new VideoChatStarted($payload['video_chat_started']) : null;
-        $this->video_chat_ended = Arr::exists($payload, 'video_chat_ended') ? new VideoChatEnded($payload['video_chat_ended']) : null;
-        $this->video_chat_participants_invited = Arr::exists($payload, 'video_chat_participants_invited') ? new VideoChatParticipantsInvited($payload['video_chat_participants_invited']) : null;
+        $this->passport_data = Arr::exists($payload,
+            'passport_data') ? new SuccessfulPayment($payload['passport_data']) : null;
+        $this->proximity_alert_triggered = Arr::exists($payload,
+            'proximity_alert_triggered') ? new ProximityAlertTriggered($payload['proximity_alert_triggered']) : null;
+        $this->video_chat_scheduled = Arr::exists($payload,
+            'video_chat_scheduled') ? new VideoChatScheduled($payload['video_chat_scheduled']) : null;
+        $this->video_chat_started = Arr::exists($payload,
+            'video_chat_started') ? new VideoChatStarted($payload['video_chat_started']) : null;
+        $this->video_chat_ended = Arr::exists($payload,
+            'video_chat_ended') ? new VideoChatEnded($payload['video_chat_ended']) : null;
+        $this->video_chat_participants_invited = Arr::exists($payload,
+            'video_chat_participants_invited') ? new VideoChatParticipantsInvited($payload['video_chat_participants_invited']) : null;
         $this->web_app_data = Arr::exists($payload, 'web_app_data') ? new WebAppData($payload['web_app_data']) : null;
-        $this->reply_markup = Arr::exists($payload, 'reply_markup') ? new InlineKeyboardMarkup($payload['reply_markup']) : null;
 
+        if (!empty(Arr::get($payload, 'reply_markup'))) {
+            $this->setReplyMarkup($payload['reply_markup']);
+        }
+    }
+
+    /**
+     * @param  array  $payload
+     * @return void
+     */
+    protected function setReplyMarkup(array $payload): void
+    {
+        $items = [];
+        $this->extractInlineKeyboard($payload, $items);
+        $this->reply_markup = [];
+        foreach ($items as $item) {
+            $this->reply_markup[] = new InlineKeyboardMarkup($item);
+        }
+    }
+
+    /**
+     * @param  array  $payload
+     * @param  array  $items
+     * @return void
+     */
+    protected function extractInlineKeyboard(array $payload, array &$items): void
+    {
+        if (!empty($payload['text'])) {
+            $items[] = $payload;
+            return;
+        }
+        foreach ($payload as $item) {
+            if (!empty($item['text'])) {
+                $items[] = $item;
+            } elseif (is_array($item)) {
+                $this->extractInlineKeyboard($item,$items);
+            }
+        }
     }
 
     /**
@@ -1016,9 +1064,9 @@ class Message
     }
 
     /**
-     * @return InlineKeyboardMarkup|null
+     * @return InlineKeyboardMarkup[]|null
      */
-    public function getReplyMarkup(): ?InlineKeyboardMarkup
+    public function getReplyMarkup(): ?array
     {
         return $this->reply_markup;
     }
