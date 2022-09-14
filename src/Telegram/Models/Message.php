@@ -605,19 +605,18 @@ class Message
      */
     public function isCommandOf(string $command): bool
     {
-        $hasCommandEntity = false;
-        foreach ($this->entities as $entity) {
-            if ($entity->getType() === MessageEntityType::BOT_COMMAND) {
-                $hasCommandEntity = true;
-            }
-        }
-        if (!$hasCommandEntity) {
-            return false;
-        }
+        $commands = [];
         $command = str($command)->trim('/')->prepend('/')->toString();
         $messageText = str($this->text);
-        return $messageText->exactly($command) ||
-            $messageText->startsWith($command.' ');
+        foreach ($this->entities as $entity) {
+            if ($entity->getType() === MessageEntityType::BOT_COMMAND) {
+                $commands[] = $messageText->substr($entity->getOffset(), $entity->getLength())->toString();
+            }
+        }
+        if (empty($commands)) {
+            return false;
+        }
+        return in_array($command, $commands);
     }
 
     /**
