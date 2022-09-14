@@ -4,6 +4,7 @@ namespace Laravue\Telegram\Models;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Laravue\Telegram\Enum\MessageEntityType;
 
 /**
  * Class Message
@@ -596,6 +597,25 @@ class Message
                 $this->extractInlineKeyboard($item,$items);
             }
         }
+    }
+
+    /**
+     * @param  string  $command
+     * @return bool
+     */
+    public function isCommandOf(string $command): bool
+    {
+        $hasCommandEntity = false;
+        foreach ($this->entities as $entity) {
+            if ($entity->getType() === MessageEntityType::BOT_COMMAND) {
+                $hasCommandEntity = true;
+            }
+        }
+        if (!$hasCommandEntity) {
+            return false;
+        }
+        $command = str($command)->trim('/')->prepend('/')->toString();
+        return str($this->text)->startsWith($command);
     }
 
     /**
