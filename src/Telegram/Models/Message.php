@@ -615,7 +615,9 @@ class Message
             return false;
         }
         $command = str($command)->trim('/')->prepend('/')->toString();
-        return str($this->text)->startsWith($command);
+        $messageText = str($this->text);
+        return $messageText->exactly($command) ||
+            $messageText->startsWith($command.' ');
     }
 
     /**
