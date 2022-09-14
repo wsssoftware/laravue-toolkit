@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static string cpuLoad()
  *
- * @see \Laravue\Utility\ServerStatus
+ * @see \Laravue\Utility\ServerInfo
  */
-class ServerStatus extends Facade
+class ServerInfo extends Facade
 {
     /**
      * {@inheritDoc}
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'utility.server_status';
+        return 'utility.server_info';
     }
 }
