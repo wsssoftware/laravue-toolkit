@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class ChatLocation
 {
-
     /**
      * The location to which the supergroup is connected. Can't be a live location.
      *

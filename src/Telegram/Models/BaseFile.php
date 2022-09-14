@@ -95,5 +95,4 @@ abstract class BaseFile
     {
         return $this->file_size;
     }
-
 }

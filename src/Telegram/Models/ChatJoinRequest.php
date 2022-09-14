@@ -14,7 +14,6 @@ use Illuminate\Support\Arr;
  */
 class ChatJoinRequest
 {
-
     /**
      * Chat to which the request was sent
      *

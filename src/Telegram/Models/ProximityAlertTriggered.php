@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class ProximityAlertTriggered
 {
-
     /**
      * User that triggered the alert
      *
@@ -68,5 +67,4 @@ class ProximityAlertTriggered
     {
         return $this->distance;
     }
-
 }

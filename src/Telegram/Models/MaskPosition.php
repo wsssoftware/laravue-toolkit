@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\PointType;
  */
 class MaskPosition
 {
-
     /**
      * The part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”.
      *

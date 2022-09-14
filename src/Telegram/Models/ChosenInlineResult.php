@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class ChosenInlineResult
 {
-
     /**
      * The unique identifier for the result that was chosen
      *
@@ -101,5 +100,4 @@ class ChosenInlineResult
     {
         return $this->query;
     }
-
 }

@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\StickerType;
  */
 class Sticker
 {
-
     /**
      * Identifier for this file, which can be used to download or reuse the file
      *

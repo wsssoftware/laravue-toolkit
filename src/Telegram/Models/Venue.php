@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Venue
 {
-
     /**
      * Venue location. Can't be a live location
      *

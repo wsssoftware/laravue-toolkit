@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Game
 {
-
     /**
      * Title of the game
      *
@@ -128,5 +127,4 @@ class Game
     {
         return $this->animation;
     }
-
 }

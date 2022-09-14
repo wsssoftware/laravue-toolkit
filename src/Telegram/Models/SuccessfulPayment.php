@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class SuccessfulPayment
 {
-
     /**
      * Three-letter ISO 4217 currency code
      *

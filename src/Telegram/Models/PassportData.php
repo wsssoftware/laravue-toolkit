@@ -56,5 +56,4 @@ class PassportData
     {
         return $this->credentials;
     }
-
 }

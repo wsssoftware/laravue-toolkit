@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\UpdateType;
  */
 class Update
 {
-
     /**
      * The update's unique identifier. Update identifiers start from a certain positive number and increase
      * sequentially. This ID becomes especially handy if you're using webhooks, since it allows you to ignore repeated
@@ -167,19 +166,19 @@ class Update
     public function getUpdateType(): UpdateType
     {
         return match (true) {
-            !empty($this->message) => UpdateType::MESSAGE,
-            !empty($this->channel_post) => UpdateType::CHANNEL_POST,
-            !empty($this->edited_channel_post) => UpdateType::EDITED_CHANNEL_POST,
-            !empty($this->inline_query) => UpdateType::INLINE_QUERY,
-            !empty($this->chosen_inline_result) => UpdateType::CHOSEN_INLINE_RESULT,
-            !empty($this->callback_query) => UpdateType::CALLBACK_QUERY,
-            !empty($this->shipping_query) => UpdateType::SHIPPING_QUERY,
-            !empty($this->pre_checkout_query) => UpdateType::PRE_CHECKOUT_QUERY,
-            !empty($this->poll) => UpdateType::POLL,
-            !empty($this->poll_answer) => UpdateType::POLL_ANSWER,
-            !empty($this->my_chat_member) => UpdateType::MY_CHAT_MEMBER,
-            !empty($this->chat_member) => UpdateType::CHAT_MEMBER,
-            !empty($this->chat_join_request) => UpdateType::CHAT_JOIN_REQUEST,
+            ! empty($this->message) => UpdateType::MESSAGE,
+            ! empty($this->channel_post) => UpdateType::CHANNEL_POST,
+            ! empty($this->edited_channel_post) => UpdateType::EDITED_CHANNEL_POST,
+            ! empty($this->inline_query) => UpdateType::INLINE_QUERY,
+            ! empty($this->chosen_inline_result) => UpdateType::CHOSEN_INLINE_RESULT,
+            ! empty($this->callback_query) => UpdateType::CALLBACK_QUERY,
+            ! empty($this->shipping_query) => UpdateType::SHIPPING_QUERY,
+            ! empty($this->pre_checkout_query) => UpdateType::PRE_CHECKOUT_QUERY,
+            ! empty($this->poll) => UpdateType::POLL,
+            ! empty($this->poll_answer) => UpdateType::POLL_ANSWER,
+            ! empty($this->my_chat_member) => UpdateType::MY_CHAT_MEMBER,
+            ! empty($this->chat_member) => UpdateType::CHAT_MEMBER,
+            ! empty($this->chat_join_request) => UpdateType::CHAT_JOIN_REQUEST,
         };
     }
 
@@ -302,5 +301,4 @@ class Update
     {
         return $this->chat_join_request;
     }
-
 }

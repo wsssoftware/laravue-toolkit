@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class EncryptedCredentials
 {
-
     /**
      * Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for
      * EncryptedPassportElement decryption and authentication

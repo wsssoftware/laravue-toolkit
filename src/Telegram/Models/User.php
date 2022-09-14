@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class User
 {
-
     /**
      * Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming
      * languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a
@@ -104,15 +103,15 @@ class User
         $this->last_name = Arr::get($payload, 'last_name');
         $this->username = Arr::get($payload, 'username');
         $this->language_code = Arr::get($payload, 'language_code');
-        $this->is_premium = !empty(Arr::exists($payload, 'is_premium')) ?
+        $this->is_premium = ! empty(Arr::exists($payload, 'is_premium')) ?
             boolval(Arr::get($payload, 'is_premium')) : null;
-        $this->added_to_attachment_menu = !empty(Arr::exists($payload, 'added_to_attachment_menu')) ?
+        $this->added_to_attachment_menu = ! empty(Arr::exists($payload, 'added_to_attachment_menu')) ?
             boolval(Arr::get($payload, 'added_to_attachment_menu')) : null;
-        $this->can_join_groups = !empty(Arr::exists($payload, 'can_join_groups')) ?
+        $this->can_join_groups = ! empty(Arr::exists($payload, 'can_join_groups')) ?
             boolval(Arr::get($payload, 'can_join_groups')) : null;
-        $this->can_read_all_group_messages = !empty(Arr::exists($payload, 'can_read_all_group_messages')) ?
+        $this->can_read_all_group_messages = ! empty(Arr::exists($payload, 'can_read_all_group_messages')) ?
             boolval(Arr::get($payload, 'can_read_all_group_messages')) : null;
-        $this->supports_inline_queries = !empty(Arr::exists($payload, 'supports_inline_queries')) ?
+        $this->supports_inline_queries = ! empty(Arr::exists($payload, 'supports_inline_queries')) ?
             boolval(Arr::get($payload, 'supports_inline_queries')) : null;
     }
 

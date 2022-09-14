@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Audio extends BaseFile
 {
-
     /**
      * Duration of the audio in seconds as defined by sender
      *

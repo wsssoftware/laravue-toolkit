@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Animation extends BaseFile
 {
-
     /**
      * 	Video width as defined by sender
      *
@@ -86,5 +85,4 @@ class Animation extends BaseFile
     {
         return $this->thumb;
     }
-
 }

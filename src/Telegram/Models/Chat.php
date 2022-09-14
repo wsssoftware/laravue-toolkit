@@ -14,7 +14,6 @@ use Laravue\Telegram\Enum\ChatType;
  */
 class Chat
 {
-
     /**
      * Unique identifier for this chat. This number may have more than 32 significant bits and some programming
      * languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a
@@ -199,29 +198,29 @@ class Chat
         $this->last_name = Arr::get($payload, 'last_name');
         $this->photo = Arr::exists($payload, 'photo') ? new ChatPhoto(Arr::get($payload, 'photo', [])) : null;
         $this->bio = Arr::get($payload, 'bio');
-        $this->has_private_forwards = !empty(Arr::exists($payload, 'has_private_forwards')) ?
+        $this->has_private_forwards = ! empty(Arr::exists($payload, 'has_private_forwards')) ?
             boolval(Arr::get($payload, 'has_private_forwards')) : null;
-        $this->has_restricted_voice_and_video_messages = !empty(Arr::exists($payload, 'has_restricted_voice_and_video_messages')) ?
+        $this->has_restricted_voice_and_video_messages = ! empty(Arr::exists($payload, 'has_restricted_voice_and_video_messages')) ?
             boolval(Arr::get($payload, 'has_restricted_voice_and_video_messages')) : null;
-        $this->join_to_send_messages = !empty(Arr::exists($payload, 'join_to_send_messages')) ?
+        $this->join_to_send_messages = ! empty(Arr::exists($payload, 'join_to_send_messages')) ?
             boolval(Arr::get($payload, 'join_to_send_messages')) : null;
-        $this->join_by_request = !empty(Arr::exists($payload, 'join_by_request')) ?
+        $this->join_by_request = ! empty(Arr::exists($payload, 'join_by_request')) ?
             boolval(Arr::get($payload, 'join_by_request')) : null;
         $this->description = Arr::get($payload, 'description');
         $this->bio = Arr::get($payload, 'bio');
         $this->invite_link = Arr::get($payload, 'invite_link');
         $this->pinned_message = Arr::exists($payload, 'pinned_message') ? new Message(Arr::get($payload, 'pinned_message', [])) : null;
         $this->permissions = Arr::exists($payload, 'permissions') ? new ChatPermissions(Arr::get($payload, 'permissions', [])) : null;
-        $this->slow_mode_delay = !empty(Arr::exists($payload, 'slow_mode_delay')) ?
+        $this->slow_mode_delay = ! empty(Arr::exists($payload, 'slow_mode_delay')) ?
             intval(Arr::get($payload, 'slow_mode_delay')) : null;
-        $this->message_auto_delete_time = !empty(Arr::exists($payload, 'message_auto_delete_time')) ?
+        $this->message_auto_delete_time = ! empty(Arr::exists($payload, 'message_auto_delete_time')) ?
             intval(Arr::get($payload, 'message_auto_delete_time')) : null;
-        $this->has_protected_content = !empty(Arr::exists($payload, 'has_protected_content')) ?
+        $this->has_protected_content = ! empty(Arr::exists($payload, 'has_protected_content')) ?
             boolval(Arr::get($payload, 'has_protected_content')) : null;
         $this->sticker_set_name = Arr::get($payload, 'sticker_set_name');
-        $this->can_set_sticker_set = !empty(Arr::exists($payload, 'can_set_sticker_set')) ?
+        $this->can_set_sticker_set = ! empty(Arr::exists($payload, 'can_set_sticker_set')) ?
             boolval(Arr::get($payload, 'can_set_sticker_set')) : null;
-        $this->linked_chat_id = !empty(Arr::exists($payload, 'linked_chat_id')) ?
+        $this->linked_chat_id = ! empty(Arr::exists($payload, 'linked_chat_id')) ?
             intval(Arr::get($payload, 'linked_chat_id')) : null;
         $this->location = Arr::exists($payload, 'location') ? new ChatLocation(Arr::get($payload, 'location', [])) : null;
     }
@@ -409,5 +408,4 @@ class Chat
     {
         return $this->location;
     }
-
 }

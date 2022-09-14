@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Video extends BaseFile
 {
-
     /**
      * Video width as defined by sender
      *

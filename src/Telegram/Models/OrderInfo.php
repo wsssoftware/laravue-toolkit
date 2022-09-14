@@ -13,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class OrderInfo
 {
-
     /**
      * Optional. User name
      *
