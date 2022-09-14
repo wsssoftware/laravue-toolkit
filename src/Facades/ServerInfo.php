@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Facade;
  */
 class ServerInfo extends Facade
 {
-
     /**
      * {@inheritDoc}
      */

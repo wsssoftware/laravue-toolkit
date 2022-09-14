@@ -15,20 +15,15 @@ use Linfo\OS\Windows;
  */
 class ServerInfo
 {
-
     /**
      * @var Darwin|Linux|Windows
      */
     protected Darwin|Linux|Windows $parser;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $linfo = new \Linfo\Linfo();
         $this->parser = $linfo->getParser();
-
     }
 
     /**
@@ -113,11 +108,12 @@ class ServerInfo
         $counted = [];
         foreach ($this->parser->getMounts() as $mount) {
             $size = floatval(Arr::get($mount, 'size', 0));
-            if (!in_array($size, $counted)) {
+            if (! in_array($size, $counted)) {
                 $total += $size;
                 $counted[] = $size;
             }
         }
+
         return $total;
     }
 
@@ -130,11 +126,12 @@ class ServerInfo
         $counted = [];
         foreach ($this->parser->getMounts() as $mount) {
             $size = floatval(Arr::get($mount, 'used', 0));
-            if (!in_array($size, $counted)) {
+            if (! in_array($size, $counted)) {
                 $total += $size;
                 $counted[] = $size;
             }
         }
+
         return $total;
     }
 }
