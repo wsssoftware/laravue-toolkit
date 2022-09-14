@@ -611,11 +611,12 @@ class Message
                 $hasCommandEntity = true;
             }
         }
-        if (!$hasCommandEntity) {
+        if (! $hasCommandEntity) {
             return false;
         }
         $command = str($command)->trim('/')->prepend('/')->toString();
         $messageText = str($this->text);
+
         return $messageText->exactly($command) ||
             $messageText->startsWith($command.' ');
     }
