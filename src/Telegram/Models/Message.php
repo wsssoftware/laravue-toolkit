@@ -161,9 +161,9 @@ class Message
     /**
      * Optional. For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
      *
-     * @var MessageEntity[]|null
+     * @var MessageEntity[]
      */
-    protected ?array $entities;
+    protected array $entities = [];
 
     /**
      * Optional. Message is an animation, information about the animation. For backward compatibility, when this field
@@ -480,7 +480,6 @@ class Message
         $this->author_signature = Arr::get($payload, 'author_signature');
         $this->text = Arr::get($payload, 'text');
         if (Arr::exists($payload, 'entities')) {
-            $this->entities = [];
             foreach (Arr::get($payload, 'entities', []) as $entity) {
                 $this->entities[] = new MessageEntity($entity);
             }
