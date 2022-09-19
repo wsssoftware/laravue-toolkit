@@ -2,6 +2,10 @@
 
 namespace Laravue\Providers;
 
+use Laravue\Commands\Deploy\ComposerUpdateCommand;
+use Laravue\Commands\Deploy\GitPullCommand;
+use Laravue\Commands\Deploy\NpmUpdateCommand;
+use Laravue\Commands\Deploy\ViteBuildCommand;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
@@ -30,7 +34,13 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_laravue-toolkit_table')
-            ->hasCommand(LaravueToolkitCommand::class);
+            ->hasCommands([
+                LaravueToolkitCommand::class,
+                ComposerUpdateCommand::class,
+                GitPullCommand::class,
+                NpmUpdateCommand::class,
+                ViteBuildCommand::class,
+            ]);
     }
 
     /**
