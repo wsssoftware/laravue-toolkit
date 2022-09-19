@@ -53,5 +53,4 @@ class ComposerUpdateCommand extends Command
 
         return SymfonyCommand::SUCCESS;
     }
-
 }

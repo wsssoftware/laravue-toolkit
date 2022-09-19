@@ -2,12 +2,12 @@
 
 namespace Laravue\Providers;
 
+use const DIRECTORY_SEPARATOR;
+use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
 use Laravue\Commands\Deploy\NpmUpdateCommand;
 use Laravue\Commands\Deploy\ViteBuildCommand;
-use const DIRECTORY_SEPARATOR;
-use Illuminate\Foundation\Application;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
 use Laravue\Utility\Number;
