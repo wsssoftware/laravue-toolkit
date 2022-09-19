@@ -18,7 +18,7 @@ class NpmUpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'npm:update';
+    protected $signature = 'npm:update {--c|cwd= : Current work directory for command}';
 
     /**
      * The console command description.
@@ -36,12 +36,17 @@ class NpmUpdateCommand extends Command
     {
         $this->components->info('Updating npm packages');
 
-        $process = new Process(['npm', 'update'], dirname(__DIR__, 4));
+        $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
+        if (!is_dir($cwd)) {
+            $this->components->error("The directory $cwd does not exist");
+            return SymfonyCommand::FAILURE;
+        }
+        $process = new Process(['npm', 'update'], $cwd);
         $process->start();
         foreach ($process as $type => $data) {
             if ($process::OUT === $type) {
                 $this->getOutput()->write($data);
-            } else { // $process::ERR === $type
+            } else {
                 $this->getOutput()->warning($data);
             }
         }

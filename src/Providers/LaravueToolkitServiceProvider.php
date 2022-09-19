@@ -36,10 +36,6 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
             ->hasMigration('create_laravue-toolkit_table')
             ->hasCommands([
                 LaravueToolkitCommand::class,
-                ComposerUpdateCommand::class,
-                GitPullCommand::class,
-                NpmUpdateCommand::class,
-                ViteBuildCommand::class,
             ]);
     }
 
@@ -74,5 +70,13 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
         $this->publishes([
             $langPath => $this->app->langPath('vendor/laravue'),
         ], 'laravue-toolkit-lang');
+
+        $this->commands([
+            LaravueToolkitCommand::class,
+            ComposerUpdateCommand::class,
+            GitPullCommand::class,
+            NpmUpdateCommand::class,
+            ViteBuildCommand::class,
+        ]);
     }
 }

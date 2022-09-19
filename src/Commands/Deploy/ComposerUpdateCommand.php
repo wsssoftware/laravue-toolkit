@@ -8,6 +8,11 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 
+/**
+ * Class ComposerUpdateCommand
+ *
+ * Created by allancarvalho in setembro 19, 2022
+ */
 class ComposerUpdateCommand extends Command
 {
     /**
@@ -31,6 +36,7 @@ class ComposerUpdateCommand extends Command
      */
     public function handle(): int
     {
+        ini_set('memory_limit', '-1');
         $application = new Application();
         $application->setAutoExit(false);
         $application->setCatchExceptions(false);

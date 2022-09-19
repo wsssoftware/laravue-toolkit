@@ -18,7 +18,7 @@ class ViteBuildCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'vite:build';
+    protected $signature = 'vite:build {--c|cwd= : Current work directory for command}';
 
     /**
      * The console command description.
@@ -36,7 +36,13 @@ class ViteBuildCommand extends Command
     {
         $this->components->info('Building resources');
 
-        $process = new Process(['npm', 'run', 'build'], dirname(__DIR__, 4));
+        $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
+        if (!is_dir($cwd)) {
+            $this->components->error("The directory $cwd does not exist");
+            return SymfonyCommand::FAILURE;
+        }
+
+        $process = new Process(['npm', 'run', 'build'], $cwd);
         $process->start();
         foreach ($process as $type => $data) {
             if ($process::OUT === $type) {

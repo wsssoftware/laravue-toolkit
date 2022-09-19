@@ -19,7 +19,7 @@ class GitPullCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'git:pull';
+    protected $signature = 'git:pull {--c|cwd= : Current work directory for command}';
 
     /**
      * The console command description.
@@ -27,20 +27,6 @@ class GitPullCommand extends Command
      * @var string
      */
     protected $description = 'Run Git git pull to get all updates';
-
-    /**
-     * @var \CzProject\GitPhp\GitRepository
-     */
-    protected GitRepository $repository;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->repository = (new Git())->open(dirname(__DIR__, 4));
-    }
 
     /**
      * Execute the console command.
@@ -52,7 +38,14 @@ class GitPullCommand extends Command
     public function handle(): int
     {
         $this->components->info('Running GIT git pull');
-        if ($this->repository->hasChanges()) {
+        $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
+        if (!is_dir($cwd)) {
+            $this->components->error("The directory $cwd does not exist");
+            return SymfonyCommand::FAILURE;
+        }
+
+        $repository = (new Git())->open($cwd);
+        if ($repository->hasChanges()) {
             if (
                 ! app()->isProduction() &&
                 ! $this->components->confirm('There are changes in the repository and it will be lost. Do you want to continue?', false)
@@ -63,11 +56,11 @@ class GitPullCommand extends Command
             } else {
                 $this->components->warn('There are changes in the repository, cleaning it...');
             }
-            foreach ($this->repository->checkout('.') as $output) {
+            foreach ($repository->checkout('.') as $output) {
                 $this->components->info('GIT: '.$output);
             }
         }
-        foreach ($this->repository->execute('pull', 'origin', 'main') as $output) {
+        foreach ($repository->execute('pull', 'origin', 'main') as $output) {
             $this->components->info('GIT: '.$output);
         }
 
