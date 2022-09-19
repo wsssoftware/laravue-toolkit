@@ -37,8 +37,9 @@ class ViteBuildCommand extends Command
         $this->components->info('Building resources');
 
         $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
-        if (!is_dir($cwd)) {
+        if (! is_dir($cwd)) {
             $this->components->error("The directory $cwd does not exist");
+
             return SymfonyCommand::FAILURE;
         }
 

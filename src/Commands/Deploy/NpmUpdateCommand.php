@@ -37,8 +37,9 @@ class NpmUpdateCommand extends Command
         $this->components->info('Updating npm packages');
 
         $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
-        if (!is_dir($cwd)) {
+        if (! is_dir($cwd)) {
             $this->components->error("The directory $cwd does not exist");
+
             return SymfonyCommand::FAILURE;
         }
         $process = new Process(['npm', 'update'], $cwd);

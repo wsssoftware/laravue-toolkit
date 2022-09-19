@@ -3,7 +3,6 @@
 namespace Laravue\Commands\Deploy;
 
 use CzProject\GitPhp\Git;
-use CzProject\GitPhp\GitRepository;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
@@ -39,8 +38,9 @@ class GitPullCommand extends Command
     {
         $this->components->info('Running GIT git pull');
         $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
-        if (!is_dir($cwd)) {
+        if (! is_dir($cwd)) {
             $this->components->error("The directory $cwd does not exist");
+
             return SymfonyCommand::FAILURE;
         }
 
