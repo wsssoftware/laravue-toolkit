@@ -34,9 +34,12 @@ class ViteBuildCommand extends Command
      */
     public function handle(): int
     {
-        $this->components->info('Building resources');
-
         $cwd = $this->option('cwd') ?? dirname(__DIR__, 6);
+        $this->components->info(sprintf(
+            'Building resources on %s',
+            $cwd,
+        ));
+
         if (! is_dir($cwd)) {
             $this->components->error("The directory $cwd does not exist");
 
