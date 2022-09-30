@@ -1,5 +1,12 @@
 
 export default {
+    currency: function (value, currency = 'USD') {
+        let currencyFormatter = Intl.NumberFormat(navigator.language, {
+            style: "currency",
+            currency: currency,
+        });
+        return currencyFormatter.format(value);
+    },
     datetime: function (datetime) {
         if (datetime === null || datetime === undefined) {
             return '';
