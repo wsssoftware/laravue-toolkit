@@ -15,10 +15,10 @@ use UnitEnum;
  */
 class Enum
 {
-
     /**
      * @param  string|array  $enum
      * @return array
+     *
      * @throws \Exception
      */
     public function toArray(string|array $enum): array
@@ -34,11 +34,12 @@ class Enum
         }
         $values = [];
         foreach ($cases as $case) {
-            if (!$case instanceof UnitEnum) {
+            if (! $case instanceof UnitEnum) {
                 throw new Exception('Array must be an array of UnitEnum');
             }
             $values[] = $case->value;
         }
+
         return $values;
     }
 }

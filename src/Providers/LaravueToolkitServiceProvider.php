@@ -5,6 +5,7 @@
 
 namespace Laravue\Providers;
 
+use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
@@ -18,8 +19,6 @@ use Laravue\Utility\ServerInfo;
 use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-
-use const DIRECTORY_SEPARATOR;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
