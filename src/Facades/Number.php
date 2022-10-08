@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) Alô Cozinha 2022. All right reserved.
+ */
 
 namespace Laravue\Facades;
 
@@ -33,6 +36,6 @@ class Number extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return 'utility.number';
+        return \Laravue\Utility\Number::class;
     }
 }

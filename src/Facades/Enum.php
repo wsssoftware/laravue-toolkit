@@ -8,17 +8,17 @@ namespace Laravue\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static string toList(array $list, array $options = [])
+ * @method static array toArray(string|array $enum)
  *
  * @see \Laravue\Utility\Text
  */
-class Text extends Facade
+class Enum extends Facade
 {
     /**
      * {@inheritDoc}
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Laravue\Utility\Text::class;
+        return \Laravue\Utility\Enum::class;
     }
 }

@@ -1,8 +1,10 @@
 <?php
+/*
+ * Copyright (c) Alô Cozinha 2022. All right reserved.
+ */
 
 namespace Laravue\Providers;
 
-use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
@@ -10,11 +12,14 @@ use Laravue\Commands\Deploy\NpmUpdateCommand;
 use Laravue\Commands\Deploy\ViteBuildCommand;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
+use Laravue\Utility\Enum;
 use Laravue\Utility\Number;
 use Laravue\Utility\ServerInfo;
 use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+
+use const DIRECTORY_SEPARATOR;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
@@ -46,13 +51,16 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('utility.number', function (Application $app) {
+        $this->app->bind(Enum::class, function (Application $app) {
+            return new Enum();
+        });
+        $this->app->bind(Number::class, function (Application $app) {
             return new Number($app->currentLocale(), CurrencyFormat::DEFAULT, 'BRL');
         });
-        $this->app->bind('utility.server_info', function (Application $app) {
+        $this->app->bind(ServerInfo::class, function (Application $app) {
             return new ServerInfo();
         });
-        $this->app->bind('utility.text', function (Application $app) {
+        $this->app->bind(Text::class, function (Application $app) {
             return new Text();
         });
     }
