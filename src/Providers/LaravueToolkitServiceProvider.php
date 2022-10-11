@@ -5,7 +5,6 @@
 
 namespace Laravue\Providers;
 
-use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
@@ -13,12 +12,16 @@ use Laravue\Commands\Deploy\NpmUpdateCommand;
 use Laravue\Commands\Deploy\ViteBuildCommand;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
+use Laravue\Utility\Documents\CNPJ;
+use Laravue\Utility\Documents\CPF;
 use Laravue\Utility\Enum;
 use Laravue\Utility\Number;
 use Laravue\Utility\ServerInfo;
 use Laravue\Utility\Text;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+
+use const DIRECTORY_SEPARATOR;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
@@ -50,6 +53,12 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(CPF::class, function (Application $app) {
+            return new CPF();
+        });
+        $this->app->bind(CNPJ::class, function (Application $app) {
+            return new CNPJ();
+        });
         $this->app->bind(Enum::class, function (Application $app) {
             return new Enum();
         });
