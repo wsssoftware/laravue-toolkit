@@ -13,8 +13,10 @@ namespace Laravue\Utility\Documents;
 class CNPJ extends DocumentBase
 {
     const LIMIT = 14;
-    const DIGIT_ONE = [5,4,3,2,9,8,7,6,5,4,3,2];
-    const DIGIT_TWO = [6,5,4,3,2,9,8,7,6,5,4,3,2];
+
+    const DIGIT_ONE = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+    const DIGIT_TWO = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 
     /**
      * @param  string  $document

@@ -80,40 +80,8 @@ class CNPJTest extends BaseTest
     public function test_random_cpf(): void
     {
         $cnpj = new CNPJ();
-        for($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             $this->assertTrue($cnpj->validate($cnpj->random()));
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

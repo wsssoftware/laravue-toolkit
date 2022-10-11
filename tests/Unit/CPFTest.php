@@ -80,26 +80,8 @@ class CPFTest extends BaseTest
     public function test_random_cpf(): void
     {
         $cpf = new CPF();
-        for($i = 1; $i <= 30; $i++) {
+        for ($i = 1; $i <= 30; $i++) {
             $this->assertTrue($cpf->validate($cpf->random()));
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
