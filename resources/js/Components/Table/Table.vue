@@ -117,6 +117,11 @@ export default {
             page: this.payload.options.page,
         }
     },
+    updated() {
+        if (this.payload.data === undefined) {
+            this.updateTable();
+        }
+    },
     mounted() {
         if (this.payload.data === undefined) {
             this.updateTable();
