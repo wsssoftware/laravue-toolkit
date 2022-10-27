@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -21,6 +22,11 @@ class HtmlTableBuilder extends Builder
      * @var array
      */
     protected array $additionalColumns = [];
+
+    /**
+     * @var callable[]
+     */
+    protected array $customColumns = [];
 
     /**
      * @var array
@@ -137,6 +143,18 @@ class HtmlTableBuilder extends Builder
     public function setAdditionalColumn(string $column): self
     {
         $this->additionalColumns[$column] = $column;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $column
+     * @param  callable  $closure
+     * @return $this
+     */
+    public function setCustomColumn(string $column, callable $closure): self
+    {
+        $this->customColumns[$column] = $closure;
 
         return $this;
     }
@@ -370,6 +388,7 @@ class HtmlTableBuilder extends Builder
     protected function formatTableRows(array $tableRows, array $htmlColumns): array
     {
         foreach ($tableRows as $index => $tableRow) {
+            $tableRowModel = $tableRow;
             $tableRow = $tableRow->toArray();
             foreach ($htmlColumns as $column => $columnData) {
                 $value = $tableRow[$column] ?? null;
@@ -388,6 +407,11 @@ class HtmlTableBuilder extends Builder
             }
 
             $tableRow['primary_key'] = $tableRow[$this->model->getKeyName()];
+
+            foreach ($this->customColumns as $column => $closure) {
+                $tableRow[$column] = call_user_func($closure, $tableRowModel);
+            }
+
             $tableRows[$index] = $tableRow;
         }
 
