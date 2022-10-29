@@ -43,7 +43,7 @@
 
 <script>
 import FaIcon from "../FontAwesomeIcon.vue";
-import Formatter from "../../Formatter";
+import Formatter from "../../Utils/Formatter";
 import {defineAsyncComponent, markRaw} from "vue";
 
 export default {

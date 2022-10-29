@@ -1,0 +1,5 @@
+export {default as Alert} from './Alert.vue'
+export {default as Button} from './BButton.vue'
+export {default as ButtonBlock} from './ButtonBlock.vue'
+export {default as ButtonGroup} from './ButtonGroup.vue'
+export {default as Progress} from './Progress.vue'

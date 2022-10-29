@@ -1,6 +1,5 @@
-export { default as Alert, default as BootstrapAlert } from './Bootstrap5/Alert.vue'
+export { default as Date} from './Components/Date.vue'
 export { default as Datetime} from './Components/Datetime.vue'
 export { default as FaIcon, default as FontAwesomeIcon } from './Components/FontAwesomeIcon.vue'
 export { default as ShareLink } from './Components/ShareLink.vue'
 export { default as Table } from './Components/Table/Table.vue'
-export { default as Formatter } from './Formatter'

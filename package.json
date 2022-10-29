@@ -1,26 +1,35 @@
 {
-  "name": "laravue-toolkit",
-  "version": "0.2.0-alpha.10",
-  "description": "A Laravel and VueJs Toolkit",
-  "main": "resources/js/index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wsssoftware/laravue-toolkit.git"
-  },
-  "keywords": [
-    "VueJs",
-    "Laravel"
-  ],
-  "author": "Allan Carvalho",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wsssoftware/laravue-toolkit/issues"
-  },
-  "homepage": "https://github.com/wsssoftware/laravue-toolkit#readme"
+    "name": "laravue-toolkit",
+    "version": "0.2.0-alpha.11",
+    "description": "A Laravel and VueJs Toolkit",
+    "main": "resources/js/index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wsssoftware/laravue-toolkit.git"
+    },
+    "keywords": [
+        "VueJs",
+        "Laravel"
+    ],
+    "author": "Allan Carvalho",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wsssoftware/laravue-toolkit/issues"
+    },
+    "homepage": "https://github.com/wsssoftware/laravue-toolkit#readme",
+    "dependencies": {
+        "@inertiajs/inertia": "^0.11.0",
+        "@inertiajs/inertia-vue3": "^0.6.0",
+        "@inertiajs/progress": "^0.2.7",
+        "bootstrap": "^5.2.0",
+        "imask": "^6.4.2",
+        "sweetalert2": "^11.4.26",
+        "vue-sweetalert2": "^5.0.5"
+    }
 }

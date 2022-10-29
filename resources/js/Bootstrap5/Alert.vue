@@ -1,13 +1,13 @@
 <template>
-    <div :class="getClass"
-         role="alert">
-        <h4 v-if="$slots.header" class="alert-heading">
-            <slot name="header"/>
+    <div :class="divClass" role="alert">
+        <button v-if="dismissable" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <h4 v-if="title" class="alert-heading">
+            <i v-if="faIcon" :class="faIcon + ' ' + faType"></i>
+            {{ title }}
         </h4>
-        <slot/>
-
-
-        <button v-if="dismissible" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <i v-if="faIcon && title === false" :class="faIcon + ' ' + faType"></i> <slot/>
+        <hr v-if="footer">
+        <p v-if="footer" class="mb-0">{{ footer }}</p>
     </div>
 </template>
 
@@ -15,36 +15,31 @@
 export default {
     name: "Alert",
     props: {
+        dismissable: {
+            type: Boolean,
+            default: false,
+        },
+        faIcon: [String, Boolean],
+        faType: String,
+        title: [String, Boolean],
+        footer: [String, Boolean],
         type: {
             type: String,
-            default: 'primary'
-        },
-        dismissible: {
-            type: Boolean,
-            default: false
-        },
-    },
-    mounted() {
-
+            default: "primary",
+        }
     },
     computed: {
-        getClass() {
-            let type = this.type;
-            if (!type.includes('alert-')) {
-                type = 'alert-' + type;
+        divClass() {
+            let dismiss = '';
+            if (this.dismissable) {
+                dismiss = ' alert-dismissible fade show';
             }
-            return [
-                'alert',
-                type,
-                {'alert-dismissible': this.dismissible},
-                {fade: this.dismissible},
-                {show: this.dismissible},
-            ];
+            let type = this.type.includes('alert-') ? this.type : 'alert-' + this.type;
+            return 'alert ' + type + dismiss;
         }
     }
 }
 </script>
 
 <style scoped>
-
 </style>
