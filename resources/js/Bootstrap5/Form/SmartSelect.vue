@@ -1,12 +1,13 @@
 <template>
     <div v-bind="parentAttributes">
-        <select :id="id" :required="required" class="d-none" v-model="form[formDataName]">
+        <select ref="select" :id="id" :required="required" class="d-none" v-model="form[formDataName]" :multiple="multiple">
             <option v-if="placeholder" value>{{ placeholder }}</option>
             <option v-for="option in availableOptions" :value="option.keyField">{{ option.valueField }}</option>
         </select>
         <label v-if="label" class="form-label" :for="id" v-bind="labelAttributes">{{ label }}</label>
         <div ref="dropdown" class="dropdown" :data-bs-toggle="help ? 'tooltip' : null">
             <InputButton
+                @onSelectedChange="onSelectedChange"
                 :help="help"
                 :selected="form[formDataName]"
                 :clearable="clearable"
@@ -20,7 +21,7 @@
                 @onOptionsChange="onOptionsChange"
                 @onSelected="addSelected"
                 :addable="addable"
-                :clearable="clearable && (form[formDataName] !== '' && form[formDataName] !== [])"
+                :clearable="isClearable()"
                 :searchable="searchable"
                 :multiple="multiple"
                 :max-height="maxHeight"
@@ -65,6 +66,7 @@ export default {
         return {
             id: 'smart-select-' + Math.random().toString(16).slice(2),
             availableOptions: this.options,
+            hasRequiredError: false,
         };
     },
     computed: {
@@ -92,8 +94,10 @@ export default {
             this.tooltip = new Tooltip(this.$refs.dropdown);
         }
         this.dropdown = new Dropdown(this.$refs.dropdown);
+
+        this.$refs.select.addEventListener('invalid', this.onInvalidListener);
     },
-    unmounted() {
+    beforeUnmount() {
         if (this.tooltip) {
             this.tooltip.dispose();
             this.tooltip = null;
@@ -101,8 +105,25 @@ export default {
         if (this.dropdown) {
             this.dropdown.dispose();
         }
+        this.$refs.select.removeEventListener('invalid', this.onInvalidListener);
     },
     methods: {
+        isClearable() {
+            if (!this.clearable) {
+                return false;
+            }
+            if (Array.isArray(this.form[this.formDataName])) {
+                return this.form[this.formDataName].length > 0;
+            }
+
+            return !!this.form[this.formDataName];
+        },
+        onInvalidListener(event) {
+            if (this.$refs.select.validity.valueMissing) {
+                this.form.setError(this.formDataName, 'Selecione um item da lista');
+                this.hasRequiredError = true;
+            }
+        },
         onOptionsChange(newOptions) {
             this.availableOptions = newOptions;
         },
@@ -112,6 +133,11 @@ export default {
             } else {
                 this.form[this.formDataName] = value;
             }
+            if (this.hasRequiredError) {
+                this.form.clearErrors(this.formDataName);
+                this.hasRequiredError = false;
+                this.dropdown.hide();
+            }
         },
         clearSelected() {
             if (Array.isArray(this.form[this.formDataName])) {
@@ -120,6 +146,10 @@ export default {
                 this.form[this.formDataName] = '';
             }
         },
+        onSelectedChange(newSelected) {
+            this.dropdown.toggle();
+            this.form[this.formDataName] = newSelected
+        }
     },
 }
 </script>

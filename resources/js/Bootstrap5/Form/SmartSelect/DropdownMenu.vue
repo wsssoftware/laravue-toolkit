@@ -6,6 +6,7 @@
                 :addable="addable"
                 :options="options"
                 :searchable="searchable"
+                @newOptionCreated="onOptionClick"
                 @onOptionsChange="onOptionsChange"/>
 
             <div :style="{overflow: 'auto', 'max-height': `${maxHeight}px`}">

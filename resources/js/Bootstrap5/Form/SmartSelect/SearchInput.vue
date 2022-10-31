@@ -18,7 +18,7 @@ export default {
         options: {type: Array, required: true},
         searchable: {type: Boolean, required: true},
     },
-    emits: ['onOptionsChange'],
+    emits: ['onOptionsChange', 'newOptionCreated'],
     data() {
         return {
             search: '',
@@ -31,10 +31,12 @@ export default {
             if (this.mustCreate && !!this.search) {
                 let option = this.createdOptions.filter(option => option.valueField === this.search);
                 if (option.length === 0) {
-                    this.createdOptions.push({
+                    let newOption = {
                         keyField: this.search,
                         valueField: this.search,
-                    });
+                    };
+                    this.createdOptions.push(newOption);
+                    this.$emit('newOptionCreated', newOption);
                 }
                 this.mustCreate = false;
             }

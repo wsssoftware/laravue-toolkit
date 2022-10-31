@@ -5,13 +5,13 @@
         :class="['form-select', {'is-invalid': errors}, {clearable: clearable}]"
         data-bs-toggle="dropdown"
         :title="help">
-        <template v-if="Array.isArray(selected)">
-            <Tag v-for="option in getOptions()" :option="option" :key="option.keyField"/>
+        <template v-if="Array.isArray(selected) && selected.length > 0">
+            <Tag v-for="option in getOptions()" :option="option" :key="option.keyField" @onRemove="removeTag"/>
         </template>
-        <template v-else-if="!!selected">
+        <template v-else-if="!Array.isArray(selected) && !!selected">
             {{ getValue() }}
         </template>
-        <span v-else class="ss-placeholder">{{ placeholder }}</span>
+        <span v-else class="ss-placeholder" v-html="placeholder"></span>
     </button>
 </template>
 
@@ -26,12 +26,13 @@ export default {
     props: {
         ariaLabel: String,
         help: String,
-        placeholder: String,
+        placeholder: {type: String, default: '&nbsp;'},
         selected: String|Array,
         options: Array,
         clearable: {type: Boolean, required: true},
         errors: Array|String,
     },
+    emits: ['onSelectedChange'],
     methods: {
         getValue() {
             let labels = [];
@@ -54,6 +55,9 @@ export default {
                 }
             });
             return options;
+        },
+        removeTag(option) {
+            this.$emit('onSelectedChange', this.selected.filter(selected => selected !== option.keyField));
         }
     }
 }
