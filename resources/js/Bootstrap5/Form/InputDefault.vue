@@ -22,7 +22,7 @@
 
 <script>
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
-import MaskInput from "../../Utils/MaskInput";
+import Masker from "../../Utils/Masker/Masker";
 import InvalidFeedback from "./InvalidFeedback.vue";
 
 export default {
@@ -47,7 +47,8 @@ export default {
         mask: {
             type: String,
             validator(value) {
-                return Object.keys(MaskInput).includes(value)
+                let method = 'to'+value.charAt(0).toUpperCase() + value.slice(1);
+                return Object.keys(Masker).includes(method)
             },
         },
         parentAttributes: {
@@ -82,7 +83,6 @@ export default {
     data() {
         return {
             tooltip: null,
-            imask: null,
             id: 'input-' + Math.random().toString(16).slice(2),
         };
     },
@@ -96,15 +96,16 @@ export default {
             });
         }
         if (this.mask) {
-            this.imask = MaskInput[this.mask](this.$refs.input);
+            let method = 'mask'+this.mask.charAt(0).toUpperCase() + this.mask.slice(1);
+            this.masker = Masker(this.$refs.input)[method]();
         }
     },
-    unmounted() {
+    beforeUnmount() {
         if (this.tooltip) {
             this.tooltip.dispose();
         }
-        if (this.imask) {
-            this.imask.destroy();
+        if (this.masker) {
+           this.masker.unbindElementToMask();
         }
     },
 }
