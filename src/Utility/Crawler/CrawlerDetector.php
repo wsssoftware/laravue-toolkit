@@ -42,8 +42,7 @@ class CrawlerDetector
     /**
      * Compile the regex patterns into one regex string.
      *
-     * @param array  $patterns
-     *
+     * @param  array  $patterns
      * @return string
      */
     public function compileRegex(array $patterns): string
@@ -67,6 +66,7 @@ class CrawlerDetector
         }
 
         $matches = [];
+
         return (bool) preg_match("/{$this->compiledRegex}/i", $agent, $matches);
     }
 }

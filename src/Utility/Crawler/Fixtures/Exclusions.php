@@ -10,7 +10,7 @@ class Exclusions extends Fixture
      *
      * @var array
      */
-    protected array $data = array(
+    protected array $data = [
         'Safari.[\d\.]*',
         'Firefox.[\d\.]*',
         ' Chrome.[\d\.]*',
@@ -59,5 +59,5 @@ class Exclusions extends Fixture
         '; ID bot',
         '; POWER BOT',
         'OCTOPUS-CORE',
-    );
+    ];
 }
