@@ -5,9 +5,9 @@
 
 namespace Laravue\Providers;
 
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
+use Jaybizzle\CrawlerDetect\CrawlerDetect;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
 use Laravue\Commands\Deploy\NpmUpdateCommand;
