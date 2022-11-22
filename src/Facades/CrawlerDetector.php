@@ -5,9 +5,10 @@ namespace Laravue\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static bool isCrawler()
+ * @method static bool isCrawler(string $userAgent = null)
+ * @method static string|null getMatches()
  *
- * @see \Laravue\Utility\Crawler\CrawlerDetector
+ * @see \Jaybizzle\CrawlerDetect\CrawlerDetect
  */
 class CrawlerDetector extends Facade
 {
@@ -16,6 +17,6 @@ class CrawlerDetector extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Laravue\Utility\Crawler\CrawlerDetector::class;
+        return \Jaybizzle\CrawlerDetect\CrawlerDetect::class;
     }
 }
