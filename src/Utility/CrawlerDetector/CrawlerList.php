@@ -1414,6 +1414,6 @@ trait CrawlerList
      */
     protected function getCrawlerRegex(): string
     {
-        return '/(' . implode('|', $this->crawlers) . ')/i';
+        return '/('.implode('|', $this->crawlers).')/i';
     }
 }

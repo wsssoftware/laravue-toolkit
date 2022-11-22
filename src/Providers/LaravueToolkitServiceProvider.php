@@ -5,7 +5,6 @@
 
 namespace Laravue\Providers;
 
-use Laravue\Utility\CrawlerDetector\CrawlerDetector;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
@@ -14,6 +13,7 @@ use Laravue\Commands\Deploy\NpmUpdateCommand;
 use Laravue\Commands\Deploy\ViteBuildCommand;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
+use Laravue\Utility\CrawlerDetector\CrawlerDetector;
 use Laravue\Utility\Documents\CNPJ;
 use Laravue\Utility\Documents\CPF;
 use Laravue\Utility\Enum;

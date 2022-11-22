@@ -13,7 +13,7 @@ trait ExclusionList
      *
      * @var array
      */
-    protected array $exclusions = array(
+    protected array $exclusions = [
         'Safari.[\d\.]*',
         'Firefox.[\d\.]*',
         ' Chrome.[\d\.]*',
@@ -62,7 +62,7 @@ trait ExclusionList
         '; ID bot',
         '; POWER BOT',
         'OCTOPUS-CORE',
-    );
+    ];
 
     /**
      * @return string

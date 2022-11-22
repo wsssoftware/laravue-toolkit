@@ -29,7 +29,7 @@ class CrawlerDetector
         'HTTP_DEVICE_STOCK_UA',
         'HTTP_X_UCBROWSER_DEVICE_UA',
         'HTTP_FROM',
-        'HTTP_X_SCANNER'
+        'HTTP_X_SCANNER',
     ];
 
     /**
@@ -89,6 +89,7 @@ class CrawlerDetector
         if ($agent === '') {
             return false;
         }
+
         return (bool) preg_match($this->getCrawlerRegex(), $agent, $this->matches);
     }
 
