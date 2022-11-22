@@ -5,6 +5,7 @@
 
 namespace Laravue\Providers;
 
+use Laravue\Utility\Crawler\CrawlerDetector;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
@@ -52,6 +53,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(CrawlerDetector::class, function (Application $app) {
+            return new CrawlerDetector(request());
+        });
         $this->app->bind(CPF::class, function (Application $app) {
             return new CPF();
         });
