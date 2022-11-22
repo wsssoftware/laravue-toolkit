@@ -17,6 +17,6 @@ class CrawlerDetector extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Jaybizzle\CrawlerDetect\CrawlerDetect::class;
+        return \Laravue\Utility\CrawlerDetector\CrawlerDetector::class;
     }
 }
