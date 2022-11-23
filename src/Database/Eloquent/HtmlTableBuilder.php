@@ -58,9 +58,14 @@ class HtmlTableBuilder extends Builder
     protected array $tableFilters = [];
 
     /**
+     * @var string|null
+     */
+    protected ?string $tableFilter = null;
+
+    /**
      * @var string
      */
-    protected string $tableFilter = 'none';
+    protected string $tableFilterDefault = 'none';
 
     /**
      * @var string
@@ -103,7 +108,7 @@ class HtmlTableBuilder extends Builder
     {
         $this->tableKey = $key;
         $data = request()->get("table-$key", []);
-        $this->tableFilter = Arr::get($data, 'filter', $this->tableFilter);
+        $this->tableFilter = Arr::get($data, 'filter', $this->tableFilter ?? $this->tableFilterDefault);
         $this->tableSearch = Arr::get($data, 'search', $this->tableSearch);
         $this->searchFocus = Arr::get($data, 'search_focus', $this->searchFocus);
         $this->tableSort = Arr::get($data, 'sort', $this->tableSort);
@@ -238,6 +243,17 @@ class HtmlTableBuilder extends Builder
             'label' => $label,
             'callback' => $callback,
         ];
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $key
+     * @return $this
+     */
+    public function setDefaultFilter(string $key = 'none'): self
+    {
+        $this->tableFilterDefault = $key;
 
         return $this;
     }
@@ -448,9 +464,11 @@ class HtmlTableBuilder extends Builder
     {
         $filters = [];
         if (! empty($this->tableFilters)) {
-            $filters = [
-                ['key' => 'none', 'label' => __('laravue::table.filter_none')],
-            ];
+            if ($this->tableFilterDefault === 'none') {
+                $filters = [
+                    ['key' => 'none', 'label' => __('laravue::table.filter_none')],
+                ];
+            }
             foreach ($this->tableFilters as $tableFilter) {
                 $filters[] = [
                     'key' => $tableFilter['key'],
