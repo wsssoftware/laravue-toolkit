@@ -8,9 +8,10 @@ namespace Laravue\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
+ * @method static array pluck(string|array $enum, bool $sort = true)
  * @method static array toArray(string|array $enum)
  *
- * @see \Laravue\Utility\Text
+ * @see \Laravue\Utility\Enum
  */
 class Enum extends Facade
 {
