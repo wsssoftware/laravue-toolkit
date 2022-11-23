@@ -6,7 +6,6 @@
 namespace Laravue\Utility;
 
 use Exception;
-use Illuminate\Support\Collection;
 use UnitEnum;
 
 /**
@@ -16,11 +15,11 @@ use UnitEnum;
  */
 class Enum
 {
-
     /**
      * @param  string|array  $enum
      * @param  bool  $sort
      * @return array
+     *
      * @throws \Exception
      */
     public function pluck(string|array $enum, bool $sort = true): array
@@ -61,6 +60,7 @@ class Enum
                 return strcmp($at, $bt);
             });
         }
+
         return $values;
     }
 
