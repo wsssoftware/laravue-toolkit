@@ -49,6 +49,19 @@ Optionally, you can publish the views using
 php artisan vendor:publish --tag="laravue-toolkit-views"
 ```
 
+
+### Important
+You must configure the [maska](https://www.npmjs.com/package/maska) npm package to work with your vue application.
+
+```js
+const app = Vue.createApp({...})
+// use as plugin
+app.use(Maska);
+// or as directive
+// app.directive('maska', Maska.maska);
+app.mount('#app');
+```
+
 ## Usage
 
 ```php

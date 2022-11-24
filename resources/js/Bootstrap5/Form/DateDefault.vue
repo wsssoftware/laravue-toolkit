@@ -22,7 +22,6 @@
 
 <script>
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
-import Masker from "../../Utils/Masker/Masker";
 import InvalidFeedback from "./InvalidFeedback.vue";
 import {addInertiaFormEvent} from "./index";
 import DateComparator from "./DateComparator";
@@ -46,13 +45,6 @@ export default {
             required: true,
         },
         label: String,
-        mask: {
-            type: String,
-            validator(value) {
-                let method = 'to'+value.charAt(0).toUpperCase() + value.slice(1);
-                return Object.keys(Masker).includes(method)
-            },
-        },
         parentAttributes: {
             type: Object,
             default: {class: 'mb-3'},
@@ -105,19 +97,12 @@ export default {
                 this.tooltip = new Tooltip(this.$refs.input);
             });
         }
-        if (this.mask) {
-            let method = 'mask'+this.mask.charAt(0).toUpperCase() + this.mask.slice(1);
-            this.masker = Masker(this.$refs.input)[method]();
-        }
         addInertiaFormEvent(this.form);
         document.addEventListener('inertia-submit', this.validate);
     },
     beforeUnmount() {
         if (this.tooltip) {
             this.tooltip.dispose();
-        }
-        if (this.masker) {
-           this.masker.unbindElementToMask();
         }
         document.removeEventListener('inertia-submit', this.validate);
     },

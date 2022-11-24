@@ -11,6 +11,7 @@
             :id="id"
             :placeholder="placeholder"
             :required="required"
+            v-maska="chosenMask"
             :readonly="readonly"
             ref="input"
             :title="help"
@@ -22,8 +23,9 @@
 
 <script>
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
-import Masker from "../../Utils/Masker/Masker";
 import InvalidFeedback from "./InvalidFeedback.vue";
+import recipes from "../../Utils/Masker/recipes";
+import {inputGenericPhoneChooser} from "../../Utils/Masker/recipes";
 
 export default {
     inheritAttrs: false,
@@ -47,8 +49,7 @@ export default {
         mask: {
             type: String,
             validator(value) {
-                let method = 'to'+value.charAt(0).toUpperCase() + value.slice(1);
-                return Object.keys(Masker).includes(method)
+                return Object.keys(recipes).includes(value)
             },
         },
         parentAttributes: {
@@ -82,9 +83,14 @@ export default {
     },
     data() {
         return {
+            chosenMask: null,
             tooltip: null,
             id: 'input-' + Math.random().toString(16).slice(2),
         };
+    },
+    beforeMount() {
+        this.chosenMask = recipes[this.mask];
+        this.onInput();
     },
     mounted() {
         if (this.$refs.input.hasAttribute('autofocus') && this.$refs.input !== document.activeElement) {
@@ -95,19 +101,21 @@ export default {
                 this.tooltip = new Tooltip(this.$refs.input);
             });
         }
-        if (this.mask) {
-            let method = 'mask'+this.mask.charAt(0).toUpperCase() + this.mask.slice(1);
-            this.masker = Masker(this.$refs.input)[method]();
-        }
+        this.$refs.input.addEventListener('input', this.onInput);
     },
     beforeUnmount() {
         if (this.tooltip) {
             this.tooltip.dispose();
         }
-        if (this.masker) {
-           this.masker.unbindElementToMask();
-        }
+        this.$refs.input.removeEventListener('input', this.onInput);
     },
+    methods: {
+        onInput() {
+            if (this.mask && this.mask === 'generic_phone') {
+                this.chosenMask = inputGenericPhoneChooser(this.form[this.formDataName]);
+            }
+        }
+    }
 }
 </script>
 
