@@ -26,5 +26,4 @@ export const addInertiaFormEvent = function (form) {
         form.oldSubmit(method, url, options)
     }
     form.hasChanged = true;
-    console.log('changed');
 }
