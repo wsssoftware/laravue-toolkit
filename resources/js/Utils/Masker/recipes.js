@@ -38,7 +38,7 @@ export function genericPhoneChooser(value) {
     } else if (number.length === 10) {
         return phone;
     } else {
-        return cellphone;
+        return simple_cellphone;
     }
 }
 
