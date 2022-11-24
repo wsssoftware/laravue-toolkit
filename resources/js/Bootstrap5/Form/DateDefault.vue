@@ -24,6 +24,8 @@
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
 import Masker from "../../Utils/Masker/Masker";
 import InvalidFeedback from "./InvalidFeedback.vue";
+import {addInertiaFormEvent} from "./index";
+import DateComparator from "./DateComparator";
 
 export default {
     inheritAttrs: false,
@@ -62,6 +64,11 @@ export default {
             type: String,
             default: 'date',
         },
+        comparisonFieldLabel: String,
+        gt: String,
+        gte: String,
+        lt: String,
+        lte: String,
     },
     computed: {
         ariaLabel() {
@@ -102,6 +109,8 @@ export default {
             let method = 'mask'+this.mask.charAt(0).toUpperCase() + this.mask.slice(1);
             this.masker = Masker(this.$refs.input)[method]();
         }
+        addInertiaFormEvent(this.form);
+        document.addEventListener('inertia-submit', this.validate);
     },
     beforeUnmount() {
         if (this.tooltip) {
@@ -110,6 +119,7 @@ export default {
         if (this.masker) {
            this.masker.unbindElementToMask();
         }
+        document.removeEventListener('inertia-submit', this.validate);
     },
     methods: {
         formatDate(date) {
@@ -120,6 +130,9 @@ export default {
             let month = String('' + (date.getMonth() + 1)).padStart(2, '0');
             let day = String('' + (date.getDate())).padStart(2, '0');
             return `${date.getFullYear()}-${month}-${day}`;
+        },
+        validate(event) {
+            DateComparator.validate(this, event);
         }
     }
 }
