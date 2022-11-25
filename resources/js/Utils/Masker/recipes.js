@@ -44,6 +44,7 @@ export function genericPhoneChooser(value) {
 
 export function inputGenericPhoneChooser(value) {
     let recipe;
+    value = value === undefined || value === null ? '' : value;
     let number = value.replace(/\D/g, '');
     if (number.startsWith('0300') || number.startsWith('0500') || number.startsWith('0800') || number.startsWith('0900')) {
         recipe = recipes.simple_national_phone;
