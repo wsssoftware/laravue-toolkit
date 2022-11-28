@@ -12,6 +12,7 @@
             :placeholder="placeholder"
             :required="required"
             v-maska="chosenMask"
+            :inputmode="inputMode"
             :readonly="readonly"
             ref="input"
             :title="help"
@@ -24,8 +25,7 @@
 <script>
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
 import InvalidFeedback from "./InvalidFeedback.vue";
-import recipes from "../../Utils/Masker/recipes";
-import {inputGenericPhoneChooser} from "../../Utils/Masker/recipes";
+import recipes, {inputGenericPhoneChooser, numericInputMode} from "../../Utils/Masker/recipes";
 
 export default {
     inheritAttrs: false,
@@ -83,12 +83,16 @@ export default {
     },
     data() {
         return {
+            inputMode: null,
             chosenMask: null,
             tooltip: null,
             id: 'input-' + Math.random().toString(16).slice(2),
         };
     },
     beforeMount() {
+        if (numericInputMode.includes(this.mask)) {
+            this.inputMode = 'numeric';
+        }
         this.chosenMask = recipes[this.mask];
         this.onInput();
     },

@@ -27,6 +27,8 @@ const recipes = {
 
 export default recipes;
 
+export const numericInputMode = ['cpf', 'cnpj', 'document', 'phone', 'cellphone', 'national_phone', 'emergency_phone', 'utility_phone', 'generic_phone', 'cep'];
+
 export function genericPhoneChooser(value) {
     let number = value.replace(/\D/g, '');
     if (number.startsWith('0300') || number.startsWith('0500') || number.startsWith('0800') || number.startsWith('0900')) {
