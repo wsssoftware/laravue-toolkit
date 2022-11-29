@@ -10,22 +10,4 @@ export {default as SmartSelect} from './SmartSelect.vue'
 export {default as TextareaDefault} from './TextareaDefault.vue'
 export {default as TimeDefault} from './TimeDefault.vue'
 export {default as ToggleButton} from './ToggleButton.vue'
-
-
-export const addInertiaFormEvent = function (form) {
-    if (form.hasChanged) {
-        return
-    }
-    form.oldSubmit = form.submit;
-    form.submit = (method, url, options) => {
-        let event = new Event('inertia-submit', {
-            cancelable: true,
-            detail: { form: form }
-        });
-        if (!document.dispatchEvent(event)) {
-            return;
-        }
-        form.oldSubmit(method, url, options)
-    }
-    form.hasChanged = true;
-}
+export {default as addInertiaFormEvent} from './InertiaFormEvent'
