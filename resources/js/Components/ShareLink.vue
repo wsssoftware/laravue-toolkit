@@ -1,17 +1,27 @@
 <template>
 <a href="javascript:void(0)" @click="trigger" role="link">
-    <slot/>
+    <template v-if="hasSlot">
+        <slot/>
+    </template>
+    <template v-else>
+        <FaIcon :icon="icon" :type="iconType" fixed-width/> {{ name }}
+    </template>
 </a>
 </template>
 
 <script>
-import AvailableNetworks from './networks'
+import AvailableNetworks, {info} from './networks'
+import {FaIcon} from "../index";
+import {LightenDarkenColor} from "../Utils";
 
 const jsWindow = typeof window !== 'undefined' ? window : null;
 let popupWindow = undefined;
 
 export default {
     name: "ShareLink",
+    components: {
+        FaIcon,
+    },
     props: {
         network: {
             type: String,
@@ -48,6 +58,15 @@ export default {
         }
     },
     computed: {
+        name() {
+            return info[this.network].name;
+        },
+        icon() {
+            return info[this.network].icon;
+        },
+        iconType() {
+            return info[this.network].iconType === 'commom' ? 'solid' : 'brands';
+        },
         /**
          * Create the url for sharing.
          */
@@ -71,6 +90,13 @@ export default {
             }
             return this.hashtags
         }
+    },
+    setup (props, { slots}) {
+        const hasSlot = !!slots['default'];
+        return { hasSlot }
+    },
+    mounted() {
+        console.log(this.hasSlot);
     },
     methods: {
         resizePopup () {

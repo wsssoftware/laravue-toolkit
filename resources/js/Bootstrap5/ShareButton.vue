@@ -1,6 +1,6 @@
 <template>
     <ShareLink
-        class="btn share-button"
+        :class="['btn', 'share-button', 'share-button-' + network, {'auto-hide': hideStringOnSmallScreen}]"
         :network="network"
         :url="url"
         :title="title"
@@ -9,10 +9,12 @@
         :hashtags="hashtags"
         :twitterUser="twitterUser"
         :media="media">
-        <div class="share-icon">
-            <FaIcon :icon="icon" :type="iconType"/>
+        <div class="share-icon d-flex justify-content-center align-items-center" :class="[{'d-none d-md-flex': hideStringOnSmallScreen}]">
+            <FaIcon :icon="icon" :type="iconType" fixed-width/>
         </div>
-        {{ name }}
+        <span :class="[{'d-none d-md-inline-block': hideStringOnSmallScreen}]">{{ name }}</span>
+
+        <FaIcon v-if="hideStringOnSmallScreen" :class="[{'d-inline-block d-md-none': hideStringOnSmallScreen}]" :icon="icon" :type="iconType" fixed-width/>
     </ShareLink>
 </template>
 
@@ -20,9 +22,7 @@
 
 import ShareLink from '../Components/ShareLink.vue';
 import AvailableNetworks, {info} from "../Components/networks";
-import {LightenDarkenColor} from "../Utils";
 import {FaIcon} from "../index";
-import chroma from "chroma-js";
 
 export default {
     name: "ShareButton",
@@ -31,6 +31,10 @@ export default {
         FaIcon,
     },
     props: {
+        hideStringOnSmallScreen: {
+            type: Boolean,
+            default: true
+        },
         network: {
             type: String,
             required: true,
@@ -59,7 +63,6 @@ export default {
     },
     computed: {
         name() {
-            LightenDarkenColor('')
             return info[this.network].name;
         },
         icon() {
@@ -115,8 +118,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "bootstrap/scss/vendor/rfs";
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+
 
 .share-button {
     --#{$prefix}btn-color: v-bind(color);
@@ -133,9 +139,51 @@ export default {
     --#{$prefix}btn-disabled-color: v-bind(disabledColor);
     --#{$prefix}btn-disabled-bg: v-bind(disabledBackground);
     --#{$prefix}btn-disabled-border-color: v-bind(disabledBorder);
+    position: relative;
+    word-wrap: break-word;
+    padding-left: calc(var(--#{$prefix}btn-padding-x) * 3);
+
+    &.span {
+        word-wrap: break-word;
+    }
+
+    @include media-breakpoint-down(md) {
+        &.auto-hide {
+            padding-left: var(--#{$prefix}btn-padding-x);
+        }
+    }
+
 
     .share-icon {
-        float: left;
+        position: absolute;
+        margin-top: -$btn-border-width;
+        margin-bottom: -$btn-border-width;
+        margin-left: -$btn-border-width;
+        width: calc(var(--#{$prefix}btn-padding-x) * 2.5);
+        @include font-size(calc(var(--#{$prefix}btn-font-size) * 1.4));
+        line-height: var(--#{$prefix}btn-line-height);
+        color: v-bind(background);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+        border-top-left-radius: var(--#{$prefix}btn-border-radius);
+        border-bottom-left-radius: var(--#{$prefix}btn-border-radius);
+        background: rgba(0,0,0 ,0.3);
+    }
+
+    &.share-button-buffer {
+        .share-icon {
+            background: rgba(255,255,255 ,0.3);
+        }
+    }
+}
+
+
+.btn-group .share-button:not(:first-child) {
+    .share-icon {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
     }
 }
 </style>
