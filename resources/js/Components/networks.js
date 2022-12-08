@@ -1,25 +1,8 @@
-/**
- * We use shorter names to reduce the final bundle size
- *
- * Properties:
- * @u = url
- * @t = title
- * @d = description
- * @q = quote
- * @h = hashtags
- * @m = media
- * @tu = twitterUser
- */
+import chroma from "chroma-js";
 
 const ua = navigator.userAgent.toLowerCase();
 
 export default {
-    baidu(url, title, description, quote, hashtags, twitterUser, media) {
-        let shareUrl = new URL('http://cang.baidu.com/do/add');
-        shareUrl.searchParams.append("iu", url);
-        shareUrl.searchParams.append("it", title);
-        return shareUrl.toString();
-    },
     buffer(url, title, description, quote, hashtags, twitterUser, media) {
         let shareUrl = new URL('https://bufferapp.com/add');
         shareUrl.searchParams.append("url", url);
@@ -71,7 +54,7 @@ export default {
         return shareUrl.toString();
     },
     instapaper(url, title, description, quote, hashtags, twitterUser, media) {
-        let shareUrl = new URL('http://www.instapaper.com/edit');
+        let shareUrl = new URL('https://www.instapaper.com/edit');
         shareUrl.searchParams.append("url", url);
         shareUrl.searchParams.append("title", title);
         if (description) {
@@ -94,13 +77,6 @@ export default {
     messenger(url, title, description, quote, hashtags, twitterUser, media) {
         let shareUrl = new URL('fb-messenger://share/');
         shareUrl.searchParams.append("link", url);
-        return shareUrl.toString();
-    },
-    odnoklassniki(url, title, description, quote, hashtags, twitterUser, media) {
-        let shareUrl = new URL('https://connect.ok.ru/dk');
-        shareUrl.searchParams.append("st.cmd", 'WidgetSharePreview');
-        shareUrl.searchParams.append("st.shareUrl", url);
-        shareUrl.searchParams.append("st.comments", title);
         return shareUrl.toString();
     },
     pinterest(url, title, description, quote, hashtags, twitterUser, media) {
@@ -250,5 +226,196 @@ export default {
         shareUrl.searchParams.append("url", url);
         shareUrl.searchParams.append("status", body);
         return shareUrl.toString();
+    }
+}
+
+const buttonColors = function(baseColor) {
+    let blackContrast = chroma.contrast(baseColor, '#000000');
+    let color = blackContrast > 4.5 ? '#000000' : '#ffffff';
+    let hoverBackground = color === '#fff' ? chroma(baseColor).brighten(0.15) : chroma(baseColor).darken(0.15);
+    let hoverBlackContrast = chroma.contrast(hoverBackground, '#000000');
+    let hoverColor = hoverBlackContrast > 4.5 ? '#000000' : '#ffffff';
+    let activeBackground = color === '#fff' ? chroma(baseColor).brighten(0.20) : chroma(baseColor).darken(0.20);
+    let activeBlackContrast = chroma.contrast(activeBackground, '#000000');
+    let activeColor = activeBlackContrast > 4.5 ? '#000000' : '#ffffff';
+    return {
+        color: color,
+        background: baseColor,
+        border: baseColor,
+        hoverColor: hoverColor,
+        hoverBackground: hoverBackground,
+        hoverBorder: color === '#fff' ? chroma(baseColor).brighten(0.20) : chroma(baseColor).darken(0.10),
+        activeColor: activeColor,
+        activeBackground: activeBackground,
+        activeBorder: color === '#fff' ? chroma(baseColor).brighten(0.10) : chroma(baseColor).darken(0.25),
+        disabledColor: color,
+        disabledBackground: baseColor,
+        disabledBorder: baseColor,
+        borderShadowRgb: 'rgb('+chroma.mix(color, baseColor, 0.15, 'rgb').rgb().join(',')+')',
+    };
+}
+
+export const info = {
+    buffer: {
+        name: 'Buffer',
+        icon: 'buffer',
+        iconType: 'brand',
+        colors: buttonColors('#000000'),
+    },
+    email: {
+        name: 'Email',
+        icon: 'envelope',
+        iconType: 'commom',
+        colors: buttonColors('#909090'),
+    },
+    evernote: {
+        name: 'Evernote',
+        icon: 'evernote',
+        iconType: 'brand',
+        colors: buttonColors('#00A82D'),
+    },
+    facebook: {
+        name: 'Facebook',
+        icon: 'facebook',
+        iconType: 'brand',
+        colors: buttonColors('#3b5998'),
+    },
+    flipboard: {
+        name: 'Flipboard',
+        icon: 'flipboard',
+        iconType: 'brand',
+        colors: buttonColors('#e12828'),
+    },
+    hackernews: {
+        name: 'Hacker News',
+        icon: 'hacker-news',
+        iconType: 'brand',
+        colors: buttonColors('#ff4000'),
+    },
+    instapaper: {
+        name: 'Instapaper',
+        icon: 'share',
+        iconType: 'commom',
+        colors: buttonColors('#1877F2'),
+    },
+    line: {
+        name: 'Line',
+        icon: 'line',
+        iconType: 'brand',
+        colors: buttonColors('#06C755'),
+    },
+    linkedin: {
+        name: 'LinkedIn',
+        icon: 'linkedin',
+        iconType: 'brand',
+        colors: buttonColors('#0a66c2'),
+    },
+    messenger: {
+        name: 'Messenger',
+        icon: 'facebook-messenger',
+        iconType: 'brand',
+        colors: buttonColors('#006AFF'),
+    },
+    pinterest: {
+        name: 'Pinterest',
+        icon: 'pinterest',
+        iconType: 'brand',
+        colors: buttonColors('#bd081c'),
+    },
+    pocket: {
+        name: 'Pocket',
+        icon: 'get-pocket',
+        iconType: 'brand',
+        colors: buttonColors('#ee4056'),
+    },
+    quora: {
+        name: 'Quora',
+        icon: 'quora',
+        iconType: 'brand',
+        colors: buttonColors('#aa2200'),
+    },
+    reddit: {
+        name: 'Reddit',
+        icon: 'reddit',
+        iconType: 'brand',
+        colors: buttonColors('#ff5700'),
+    },
+    skype: {
+        name: 'Skype',
+        icon: 'skype',
+        iconType: 'brand',
+        colors: buttonColors('#00aff0'),
+    },
+    sms: {
+        name: 'SMS',
+        icon: 'comment',
+        iconType: 'commom',
+        colors: buttonColors('#9F2B68'),
+    },
+    stumbleupon: {
+        name: 'StumbleUpon',
+        icon: 'stumbleupon',
+        iconType: 'brand',
+        colors: buttonColors('#e94826'),
+    },
+    telegram: {
+        name: 'Telegram',
+        icon: 'telegram',
+        iconType: 'brand',
+        colors: buttonColors('#0088cc'),
+    },
+    tumblr: {
+        name: 'Tumblr',
+        icon: 'tumblr',
+        iconType: 'brand',
+        colors: buttonColors('#35465d'),
+    },
+    twitter: {
+        name: 'Twitter',
+        icon: 'twitter',
+        iconType: 'brand',
+        colors: buttonColors('#1da1f2'),
+    },
+    viber: {
+        name: 'Viber',
+        icon: 'viber',
+        iconType: 'brand',
+        colors: buttonColors('#7360f2'),
+    },
+    vk: {
+        name: 'VK',
+        icon: 'vk',
+        iconType: 'brand',
+        colors: buttonColors('#4a76a8'),
+    },
+    weibo: {
+        name: 'Weibo',
+        icon: 'weibo',
+        iconType: 'brand',
+        colors: buttonColors('#DF2029'),
+    },
+    whatsapp: {
+        name: 'WhatsApp',
+        icon: 'whatsapp',
+        iconType: 'brand',
+        colors: buttonColors('#25d366'),
+    },
+    wordpress: {
+        name: 'WordPress',
+        icon: 'wordpress',
+        iconType: 'brand',
+        colors: buttonColors('#21759b'),
+    },
+    xing: {
+        name: 'Xing',
+        icon: 'xing',
+        iconType: 'brand',
+        colors: buttonColors('#cfdc00'),
+    },
+    yammer: {
+        name: 'Yammer',
+        icon: 'yammer',
+        iconType: 'brand',
+        colors: buttonColors('#0358A7'),
     }
 }
