@@ -2,7 +2,7 @@ import chroma from "chroma-js";
 
 const ua = navigator.userAgent.toLowerCase();
 
-export default {
+export const socialLink = {
     buffer(url, title, description, quote, hashtags, twitterUser, media) {
         let shareUrl = new URL('https://bufferapp.com/add');
         shareUrl.searchParams.append("url", url);
@@ -255,7 +255,7 @@ const buttonColors = function(baseColor) {
     };
 }
 
-export const info = {
+export const socialInfo = {
     buffer: {
         name: 'Buffer',
         icon: 'buffer',

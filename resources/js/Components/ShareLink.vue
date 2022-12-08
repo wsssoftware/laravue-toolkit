@@ -10,9 +10,8 @@
 </template>
 
 <script>
-import AvailableNetworks, {info} from './networks'
+import {socialLink, socialInfo} from './SocialMedias'
 import {FaIcon} from "../index";
-import {LightenDarkenColor} from "../Utils";
 
 const jsWindow = typeof window !== 'undefined' ? window : null;
 let popupWindow = undefined;
@@ -27,7 +26,7 @@ export default {
             type: String,
             required: true,
             validate: (value) => {
-                return Object.keys(AvailableNetworks).includes(value)
+                return Object.keys(socialLink).includes(value)
             }
         },
         url: {
@@ -59,19 +58,19 @@ export default {
     },
     computed: {
         name() {
-            return info[this.network].name;
+            return socialInfo[this.network].name;
         },
         icon() {
-            return info[this.network].icon;
+            return socialInfo[this.network].icon;
         },
         iconType() {
-            return info[this.network].iconType === 'commom' ? 'solid' : 'brands';
+            return socialInfo[this.network].iconType === 'commom' ? 'solid' : 'brands';
         },
         /**
          * Create the url for sharing.
          */
         shareLink () {
-            return AvailableNetworks[this.network](
+            return socialLink[this.network](
                 this.url,
                 this.title,
                 this.description,

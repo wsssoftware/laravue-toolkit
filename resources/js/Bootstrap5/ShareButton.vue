@@ -21,7 +21,7 @@
 <script>
 
 import ShareLink from '../Components/ShareLink.vue';
-import AvailableNetworks, {info} from "../Components/networks";
+import {socialLink, socialInfo} from "../Components/SocialMedias";
 import {FaIcon} from "../index";
 
 export default {
@@ -39,7 +39,7 @@ export default {
             type: String,
             required: true,
             validate: (value) => {
-                return Object.keys(AvailableNetworks).includes(value)
+                return Object.keys(socialLink).includes(value)
             }
         },
         url: {
@@ -63,16 +63,16 @@ export default {
     },
     computed: {
         name() {
-            return info[this.network].name;
+            return socialInfo[this.network].name;
         },
         icon() {
-            return info[this.network].icon;
+            return socialInfo[this.network].icon;
         },
         iconType() {
-            return info[this.network].iconType === 'commom' ? 'solid' : 'brands';
+            return socialInfo[this.network].iconType === 'commom' ? 'solid' : 'brands';
         },
         colors() {
-            return info[this.network].colors;
+            return socialInfo[this.network].colors;
         },
         color() {
             return this.colors.color;
