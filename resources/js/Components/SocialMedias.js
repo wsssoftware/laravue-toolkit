@@ -1,4 +1,4 @@
-import chroma from "chroma-js/index";
+import chroma from "chroma-js/chroma";
 
 const ua = navigator.userAgent.toLowerCase();
 
