@@ -172,6 +172,13 @@ export default {
         background: rgba(0,0,0 ,0.3);
     }
 
+    &.btn-sm {
+        padding-left: calc(var(--#{$prefix}btn-padding-x) * 4);
+        .share-icon {
+            width: calc(var(--#{$prefix}btn-padding-x) * 3.5);
+        }
+    }
+
     &.share-button-buffer {
         .share-icon {
             background: rgba(255,255,255 ,0.3);

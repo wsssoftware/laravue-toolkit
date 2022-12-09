@@ -1,4 +1,4 @@
-import chroma from "chroma-js/chroma";
+import Color from '../Utils/Colors/Color';
 
 const ua = navigator.userAgent.toLowerCase();
 
@@ -229,29 +229,34 @@ export const socialLink = {
     }
 }
 
-const buttonColors = function(baseColor) {
-    let blackContrast = chroma.contrast(baseColor, '#000000');
-    let color = blackContrast > 4.5 ? '#000000' : '#ffffff';
-    let hoverBackground = color === '#fff' ? chroma(baseColor).brighten(0.15) : chroma(baseColor).darken(0.15);
-    let hoverBlackContrast = chroma.contrast(hoverBackground, '#000000');
-    let hoverColor = hoverBlackContrast > 4.5 ? '#000000' : '#ffffff';
-    let activeBackground = color === '#fff' ? chroma(baseColor).brighten(0.20) : chroma(baseColor).darken(0.20);
-    let activeBlackContrast = chroma.contrast(activeBackground, '#000000');
-    let activeColor = activeBlackContrast > 4.5 ? '#000000' : '#ffffff';
+const buttonColors = function(baseColor, forceWhite = false) {
+    baseColor = Color(baseColor);
+    let white = Color('#ffffff');
+    let black = Color('#000000');
+
+
+    let color = baseColor.isDark() ? white : black;
+    let hoverBackground = color === white ? baseColor.lighten(0.15) : baseColor.darken(0.15);
+    let hoverColor = hoverBackground.isDark() ? white :black;
+    let activeBackground = color === white ? baseColor.lighten(0.20) : baseColor.darken(0.20);
+    let activeColor = activeBackground.isDark() ? white :black;
+    let hoverBorder = color === white ? baseColor.lighten(0.20) : baseColor.darken(0.10);
+    let activeBorder = color === white ? baseColor.lighten(0.10) : baseColor.darken(0.25);
+    let borderShadowRgb = color.mix(baseColor, 0.15).rgb().array().join(',');
     return {
-        color: color,
-        background: baseColor,
-        border: baseColor,
-        hoverColor: hoverColor,
-        hoverBackground: hoverBackground,
-        hoverBorder: color === '#fff' ? chroma(baseColor).brighten(0.20) : chroma(baseColor).darken(0.10),
-        activeColor: activeColor,
-        activeBackground: activeBackground,
-        activeBorder: color === '#fff' ? chroma(baseColor).brighten(0.10) : chroma(baseColor).darken(0.25),
-        disabledColor: color,
-        disabledBackground: baseColor,
-        disabledBorder: baseColor,
-        borderShadowRgb: 'rgb('+chroma.mix(color, baseColor, 0.15, 'rgb').rgb().join(',')+')',
+        color: color === black && forceWhite ? white.hex() : color.hex(),
+        background: baseColor.hex(),
+        border: baseColor.hex(),
+        hoverColor: hoverColor === black && forceWhite ? white.hex() : hoverColor.hex(),
+        hoverBackground: hoverBackground.hex(),
+        hoverBorder: hoverBorder.hex(),
+        activeColor: activeColor.hex(),
+        activeBackground: activeBackground.hex(),
+        activeBorder: activeBorder.hex(),
+        disabledColor: color.hex(),
+        disabledBackground: baseColor.hex(),
+        disabledBorder: baseColor.hex(),
+        borderShadowRgb: `rgb(${borderShadowRgb})`,
     };
 }
 
@@ -266,7 +271,7 @@ export const socialInfo = {
         name: 'Email',
         icon: 'envelope',
         iconType: 'commom',
-        colors: buttonColors('#909090'),
+        colors: buttonColors('#909090', true),
     },
     evernote: {
         name: 'Evernote',
@@ -344,7 +349,7 @@ export const socialInfo = {
         name: 'Skype',
         icon: 'skype',
         iconType: 'brand',
-        colors: buttonColors('#00aff0'),
+        colors: buttonColors('#00aff0', true),
     },
     sms: {
         name: 'SMS',
@@ -362,7 +367,7 @@ export const socialInfo = {
         name: 'Telegram',
         icon: 'telegram',
         iconType: 'brand',
-        colors: buttonColors('#0088cc'),
+        colors: buttonColors('#0088cc', true),
     },
     tumblr: {
         name: 'Tumblr',
@@ -374,7 +379,7 @@ export const socialInfo = {
         name: 'Twitter',
         icon: 'twitter',
         iconType: 'brand',
-        colors: buttonColors('#1da1f2'),
+        colors: buttonColors('#1DA1F2', true),
     },
     viber: {
         name: 'Viber',
@@ -398,7 +403,7 @@ export const socialInfo = {
         name: 'WhatsApp',
         icon: 'whatsapp',
         iconType: 'brand',
-        colors: buttonColors('#25d366'),
+        colors: buttonColors('#25D366', true),
     },
     wordpress: {
         name: 'WordPress',

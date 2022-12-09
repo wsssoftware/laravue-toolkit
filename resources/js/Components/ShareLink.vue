@@ -94,9 +94,6 @@ export default {
         const hasSlot = !!slots['default'];
         return { hasSlot }
     },
-    mounted() {
-        console.log(this.hasSlot);
-    },
     methods: {
         resizePopup () {
             const width = jsWindow.innerWidth || (document.documentElement.clientWidth || jsWindow.screenX)
