@@ -147,12 +147,6 @@ export default {
         word-wrap: break-word;
     }
 
-    @include media-breakpoint-down(md) {
-        &.auto-hide {
-            padding-left: var(--#{$prefix}btn-padding-x);
-        }
-    }
-
 
     .share-icon {
         position: absolute;
@@ -182,6 +176,12 @@ export default {
     &.share-button-buffer {
         .share-icon {
             background: rgba(255,255,255 ,0.3);
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &.auto-hide {
+            padding-left: var(--#{$prefix}btn-padding-x);
         }
     }
 }
