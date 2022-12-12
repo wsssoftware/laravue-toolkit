@@ -188,7 +188,7 @@ export const socialLink = {
         return shareUrl.toString();
     },
     whatsapp(url, title, description, quote, hashtags, twitterUser, media) {
-        let body = title;
+        let body = title + "\n" + url;
         if (description) {
             body += "\n" + description;
         }
