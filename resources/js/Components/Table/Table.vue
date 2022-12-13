@@ -99,9 +99,9 @@ export default {
             }
 
             return string
-                .replace(':from', pageInfo.from)
-                .replace(':to', pageInfo.to)
-                .replace(':entries', pageInfo.filtered_total)
+                .replace(':from', Intl.NumberFormat().format(pageInfo.from))
+                .replace(':to', Intl.NumberFormat().format(pageInfo.to))
+                .replace(':entries', Intl.NumberFormat().format(pageInfo.filtered_total))
                 .concat(filtered);
         }
     },
