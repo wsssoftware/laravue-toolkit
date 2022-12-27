@@ -9,7 +9,6 @@ namespace Laravue\Utility;
  */
 class File
 {
-
     /**
      * @param  string  $content
      * @return string
@@ -25,12 +24,13 @@ class File
         if ($file === false) {
             throw new \RuntimeException('Unable to create temporary file');
         }
-        if (fputs($file, $content) === false) {
+        if (fwrite($file, $content) === false) {
             throw new \RuntimeException('Unable to write to temporary file');
         }
         if (fclose($file) === false) {
             throw new \RuntimeException('Unable to close temporary file');
         }
+
         return $path;
     }
 
@@ -44,6 +44,7 @@ class File
             $fileOrContent = file_get_contents($fileOrContent);
         }
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
         return finfo_buffer($finfo, $fileOrContent);
     }
 }
