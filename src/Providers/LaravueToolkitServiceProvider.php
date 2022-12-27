@@ -5,6 +5,7 @@
 
 namespace Laravue\Providers;
 
+use AppCore\Utility\File;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
@@ -64,6 +65,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
         });
         $this->app->bind(Enum::class, function (Application $app) {
             return new Enum();
+        });
+        $this->app->bind(File::class, function (Application $app) {
+            return new File();
         });
         $this->app->bind(Number::class, function (Application $app) {
             return new Number($app->currentLocale(), CurrencyFormat::DEFAULT, 'BRL');
