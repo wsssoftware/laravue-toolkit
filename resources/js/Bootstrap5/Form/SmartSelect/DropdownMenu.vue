@@ -2,6 +2,7 @@
     <div class="dropdown-menu" style="">
         <div class="d-flex flex-column">
             <SearchInput
+                :disabled="options.length === 0"
                 ref="searchInput"
                 :addable="addable"
                 :options="options"
@@ -20,6 +21,9 @@
                 </button>
             </div>
 
+            <div v-if="options.length === 0" class="ss-no-results">
+                Nenhuma opção disponível
+            </div>
             <div v-if="availableFilteredOptions.length === 0 && options.length > 0" class="ss-no-results">
                 <template v-if="addable">
                     Pressione <b>enter</b> para criar um novo
