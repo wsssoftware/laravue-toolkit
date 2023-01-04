@@ -2,7 +2,7 @@
     <div class="dropdown-menu" style="">
         <div class="d-flex flex-column">
             <SearchInput
-                :disabled="options.length === 0"
+                :disabled="options.length === 0 && addable === false"
                 ref="searchInput"
                 :addable="addable"
                 :options="options"
