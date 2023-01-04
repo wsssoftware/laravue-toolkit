@@ -7,6 +7,7 @@
                 :addable="addable"
                 :options="options"
                 :searchable="searchable"
+                @hasSearch="(value) => hasSearch = value"
                 @newOptionCreated="onOptionClick"
                 @onOptionsChange="onOptionsChange"/>
 
@@ -21,10 +22,10 @@
                 </button>
             </div>
 
-            <div v-if="options.length === 0" class="ss-no-results">
+            <div v-if="options.length === 0 && availableFilteredOptions.length === 0 && !hasSearch" class="ss-no-results">
                 Nenhuma opção disponível
             </div>
-            <div v-if="availableFilteredOptions.length === 0 && options.length > 0" class="ss-no-results">
+            <div v-if="(availableFilteredOptions.length === 0 && options.length > 0) || hasSearch" class="ss-no-results">
                 <template v-if="addable">
                     Pressione <b>enter</b> para criar um novo
                 </template>
@@ -61,6 +62,7 @@ export default {
     data() {
         return {
             availableFilteredOptions: this.options,
+            hasSearch: false,
         }
     },
     emits: ['onSelected', 'onOptionsChange', 'onClear'],

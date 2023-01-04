@@ -1,6 +1,6 @@
 {
     "name": "laravue-toolkit",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "A Laravel and VueJs Toolkit",
     "main": "resources/js/index.js",
     "directories": {

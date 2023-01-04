@@ -18,7 +18,7 @@ export default {
         options: {type: Array, required: true},
         searchable: {type: Boolean, required: true},
     },
-    emits: ['onOptionsChange', 'newOptionCreated'],
+    emits: ['onOptionsChange', 'newOptionCreated', 'hasSearch'],
     data() {
         return {
             search: '',
@@ -62,7 +62,8 @@ export default {
         }
     },
     watch: {
-        search() {
+        search(value) {
+            this.$emit('hasSearch', !!value);
             this.doSearch();
         },
     },
