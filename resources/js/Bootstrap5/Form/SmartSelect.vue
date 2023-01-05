@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {Tooltip, Dropdown} from 'bootstrap/dist/js/bootstrap.esm.min';
+import {Dropdown, Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
 import DropdownMenu from "./SmartSelect/DropdownMenu.vue";
 import InvalidFeedback from "./InvalidFeedback.vue";
 import InputButton from "./SmartSelect/InputButton.vue";
@@ -128,7 +128,7 @@ export default {
             this.availableOptions = newOptions;
         },
         addSelected(value) {
-            if (Array.isArray(this.form[this.formDataName])) {
+            if (Array.isArray(this.form[this.formDataName]) && !this.form[this.formDataName].includes(value)) {
                 this.form[this.formDataName].push(value);
             } else {
                 this.form[this.formDataName] = value;

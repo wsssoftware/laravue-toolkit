@@ -1,7 +1,7 @@
 <template>
     <div v-bind="parentAttributes">
         <label v-if="label" class="form-label" :for="id">{{ label }}</label>
-        <div class="input-group">
+        <div :class="['input-group', {'is-invalid': errors}]">
             <slot name="before"/>
             <IntlNumberInput
                 v-bind="$attrs"

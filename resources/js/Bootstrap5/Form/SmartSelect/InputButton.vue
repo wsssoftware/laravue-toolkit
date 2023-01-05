@@ -1,5 +1,6 @@
 <template>
     <button
+        type="button"
         v-bind="$attrs"
         :aria-label="ariaLabel"
         :class="['form-select', {'is-invalid': errors}, {clearable: clearable}]"
