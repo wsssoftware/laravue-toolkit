@@ -1,20 +1,24 @@
 <template>
     <div v-bind="parentAttributes">
         <label v-if="label" class="form-label" :for="id" v-bind="labelAttributes">{{ label }}</label>
-        <select
-            v-bind="$attrs"
-            :aria-label="ariaLabel"
-            :autofocus="autofocus"
-            :class="['form-select', {'is-invalid': errors}]"
-            :data-bs-toggle="help ? 'tooltip' : null"
-            :id="id"
-            :required="required"
-            ref="input"
-            :title="help"
-            v-model="form[formDataName]">
-            <option v-if="empty" value>{{ empty }}</option>
-            <option v-for="option in options" :value="option.keyField">{{ option.valueField }}</option>
-        </select>
+        <div class="input-group">
+            <slot name="before"/>
+            <select
+                v-bind="$attrs"
+                :aria-label="ariaLabel"
+                :autofocus="autofocus"
+                :class="['form-select', {'is-invalid': errors}]"
+                :data-bs-toggle="help ? 'tooltip' : null"
+                :id="id"
+                :required="required"
+                ref="input"
+                :title="help"
+                v-model="form[formDataName]">
+                <option v-if="empty" value>{{ empty }}</option>
+                <option v-for="option in options" :value="option.keyField">{{ option.valueField }}</option>
+            </select>
+            <slot name="after"/>
+        </div>
         <InvalidFeedback :errors="errors"/>
     </div>
 </template>

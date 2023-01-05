@@ -1,23 +1,27 @@
 <template>
     <div v-bind="parentAttributes">
         <label v-if="label" class="form-label" :for="id">{{ label }}</label>
-        <IntlNumberInput
-            v-bind="$attrs"
-            :aria-label="ariaLabel"
-            :autocomplete="autocomplete"
-            :autofocus="autofocus"
-            :class="['form-control', {'is-invalid': errors}]"
-            :data-bs-toggle="help ? 'tooltip' : null"
-            :id="id"
-            :placeholder="placeholder"
-            :required="required"
-            :readonly="readonly"
-            ref="input"
-            :title="help"
-            type="text"
-            inputmode="numeric"
-            :options="numberOptions"
-            v-model="form[formDataName]"/>
+        <div class="input-group">
+            <slot name="before"/>
+            <IntlNumberInput
+                v-bind="$attrs"
+                :aria-label="ariaLabel"
+                :autocomplete="autocomplete"
+                :autofocus="autofocus"
+                :class="['form-control', {'is-invalid': errors}]"
+                :data-bs-toggle="help ? 'tooltip' : null"
+                :id="id"
+                :placeholder="placeholder"
+                :required="required"
+                :readonly="readonly"
+                ref="input"
+                :title="help"
+                type="text"
+                inputmode="numeric"
+                :options="numberOptions"
+                v-model="form[formDataName]"/>
+            <slot name="after"/>
+        </div>
         <InvalidFeedback :errors="errors"/>
     </div>
 </template>
