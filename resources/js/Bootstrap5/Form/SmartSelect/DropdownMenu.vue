@@ -25,6 +25,9 @@
             <div v-if="options.length === 0 && availableFilteredOptions.length === 0 && !hasSearch" class="ss-no-results">
                 Nenhuma opção disponível
             </div>
+            <div v-if="options.length === 0 && availableFilteredOptions.length === 0 && hasSearch && addable" class="ss-no-results">
+                Pressione <b>enter</b> para criar um novo
+            </div>
             <div v-if="availableFilteredOptions.length === 0 && options.length > 0" class="ss-no-results">
                 <template v-if="addable">
                     Pressione <b>enter</b> para criar um novo
