@@ -192,8 +192,7 @@ export const socialLink = {
         if (description) {
             body += "\n" + description;
         }
-        let shareUrl = new URL('https://api.whatsapp.com/send?text=@t%0D%0A@u%0D%0A@d');
-        shareUrl.searchParams.append("url", url);
+        let shareUrl = new URL('https://api.whatsapp.com/send');
         shareUrl.searchParams.append("text", body);
         return shareUrl.toString();
     },
