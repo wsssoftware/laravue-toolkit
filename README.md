@@ -1,6 +1,6 @@
 # A laravel and vue toolkit
 
-[![Latest Version on NPM](https://img.shields.io/npm/v/laravue-toolkit/alpha)](https://npmjs.com/package/laravue-toolkit)
+[![Latest Version on NPM](https://img.shields.io/npm/v/laravue-toolkit)](https://npmjs.com/package/laravue-toolkit)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/wsssoftware/laravue-toolkit.svg?style=flat-square)](https://packagist.org/packages/wsssoftware/laravue-toolkit)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/wsssoftware/laravue-toolkit/run-tests?label=tests)](https://github.com/wsssoftware/laravue-toolkit/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/wsssoftware/laravue-toolkit/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/wsssoftware/laravue-toolkit/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
