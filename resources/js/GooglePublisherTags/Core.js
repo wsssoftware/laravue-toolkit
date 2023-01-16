@@ -1,5 +1,3 @@
-import {Inertia} from "@inertiajs/inertia";
-
 export default {
     init(options, Vue){
         window.gptAds = [];

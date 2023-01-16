@@ -25,7 +25,7 @@
             </li>
 
             <li class="page-item active">
-                <span class="page-link">{{ this.page }}</span>
+                <span class="page-link">{{ Intl.NumberFormat().format(this.page) }}</span>
             </li>
 
             <li class="page-item" v-for="page in nextItems()">
