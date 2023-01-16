@@ -55,7 +55,7 @@
 <script>
 import TableStructure from "./TableStructure.vue";
 import Paginator from "./Paginator.vue";
-import {Inertia} from "@inertiajs/inertia";
+import {router} from '@inertiajs/vue3'
 import FontAwesomeIcon from "../FontAwesomeIcon.vue";
 
 export default {
@@ -136,7 +136,7 @@ export default {
             this.$refs.tableStructure.setLoading();
             let params = route().params;
             delete params[this.id];
-            Inertia.get(
+            router.get(
                 route(route().current(), params),
                 this.getData(),
                 {

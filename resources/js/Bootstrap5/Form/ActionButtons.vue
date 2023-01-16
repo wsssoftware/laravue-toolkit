@@ -29,7 +29,7 @@
 <script>
 import ButtonGroup from "../ButtonGroup.vue";
 import Button from "../BButton.vue";
-import {Inertia} from "@inertiajs/inertia";
+import {router} from '@inertiajs/vue3'
 
 export default {
     name: "ActionButtons",
@@ -66,11 +66,11 @@ export default {
                     cancelButtonText: 'Não, vou ficar',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Inertia.visit(this.cancelButton);
+                        router.visit(this.cancelButton);
                     }
                 })
             } else {
-                Inertia.visit(this.cancelButton);
+                router.visit(this.cancelButton);
             }
 
         },
