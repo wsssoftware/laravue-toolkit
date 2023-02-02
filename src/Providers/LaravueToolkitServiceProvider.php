@@ -2,21 +2,21 @@
 
 namespace Laravue\Providers;
 
-use Illuminate\Session\SessionManager;
-use Laravue\Flash\Flash;
-use Laravue\Utility\File;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
+use Illuminate\Session\SessionManager;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
 use Laravue\Commands\Deploy\GitPullCommand;
 use Laravue\Commands\Deploy\NpmUpdateCommand;
 use Laravue\Commands\Deploy\ViteBuildCommand;
 use Laravue\Commands\LaravueToolkitCommand;
 use Laravue\Enums\CurrencyFormat;
+use Laravue\Flash\Flash;
 use Laravue\Utility\CrawlerDetector\CrawlerDetector;
 use Laravue\Utility\Documents\CNPJ;
 use Laravue\Utility\Documents\CPF;
 use Laravue\Utility\Enum;
+use Laravue\Utility\File;
 use Laravue\Utility\Number;
 use Laravue\Utility\ServerInfo;
 use Laravue\Utility\Text;

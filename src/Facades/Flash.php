@@ -2,8 +2,8 @@
 
 namespace Laravue\Facades;
 
-use Laravue\Enums\FlashTypes;
 use Illuminate\Support\Facades\Facade;
+use Laravue\Enums\FlashTypes;
 
 /**
  * @method static \Laravue\Flash\FlashMessage assertHasSuccess()

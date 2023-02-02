@@ -2,11 +2,11 @@
 
 namespace Laravue\Flash;
 
-use Inertia\Inertia;
-use Laravue\Enums\FlashTypes;
 use Illuminate\Session\SessionManager;
 use Illuminate\Session\Store;
 use Illuminate\Testing\Assert as PHPUnit;
+use Inertia\Inertia;
+use Laravue\Enums\FlashTypes;
 
 /**
  * Class Flash
@@ -121,7 +121,7 @@ class Flash
     public function toArray(bool $rememberMessages = false): array
     {
         $status = $this->session->pull('status');
-        if (!empty($status)) {
+        if (! empty($status)) {
             $this->default($status);
         }
 
@@ -184,7 +184,7 @@ class Flash
                 break;
             }
         }
-        if (!$hasFlashMessage) {
+        if (! $hasFlashMessage) {
             PHPUnit::fail(sprintf('Flash of type "%s" not found in flash messages', $flashTypes->value));
         }
 
@@ -206,7 +206,7 @@ class Flash
                 break;
             }
         }
-        if (!$hasFlashMessage) {
+        if (! $hasFlashMessage) {
             PHPUnit::fail(sprintf('Message "%s" not found in flash messages', $message));
         }
 
@@ -227,7 +227,7 @@ class Flash
                 break;
             }
         }
-        if (!$hasFlashMessage) {
+        if (! $hasFlashMessage) {
             PHPUnit::fail(sprintf('Message "%s" not found in flash messages', $message));
         }
 
