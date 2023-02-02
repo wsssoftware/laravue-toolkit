@@ -50,12 +50,14 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      * Register services.
      *
      * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register(): void
     {
         $this->app->singleton(Flash::class, function (Application $app) {
             return new Flash($app->make(SessionManager::class));
         });
+        $this->app->make(Flash::class);
         $this->app->bind(CrawlerDetector::class, function (Application $app) {
             return new CrawlerDetector(request());
         });
