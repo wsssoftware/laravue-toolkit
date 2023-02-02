@@ -1,11 +1,10 @@
 <?php
-/*
- * Copyright (c) Alô Cozinha 2022. All right reserved.
- */
 
 namespace Laravue\Providers;
 
-use AppCore\Utility\File;
+use Illuminate\Session\SessionManager;
+use Laravue\Flash\Flash;
+use Laravue\Utility\File;
 use const DIRECTORY_SEPARATOR;
 use Illuminate\Foundation\Application;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;
@@ -54,6 +53,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(Flash::class, function (Application $app) {
+            return new Flash($app->make(SessionManager::class));
+        });
         $this->app->bind(CrawlerDetector::class, function (Application $app) {
             return new CrawlerDetector(request());
         });
@@ -65,6 +67,9 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
         });
         $this->app->bind(Enum::class, function (Application $app) {
             return new Enum();
+        });
+        $this->app->bind(Flash::class, function (Application $app) {
+            return $app->make(Flash::class);
         });
         $this->app->bind(File::class, function (Application $app) {
             return new File();
