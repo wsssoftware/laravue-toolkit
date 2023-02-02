@@ -28,6 +28,9 @@ export default {
   methods: {
     flash() {
       let messages = usePage().props.flash_messages;
+      if (messages === undefined  || !Array.isArray(messages)) {
+          return;
+      }
       messages.forEach(message => {
         if (this.printed.includes(message.id)) {
           return;
