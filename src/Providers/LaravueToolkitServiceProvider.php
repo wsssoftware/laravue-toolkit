@@ -53,7 +53,7 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(Flash::class, function (Application $app) {
+        $this->app->singleton(Flash::class, function (Application $app) {
             return new Flash($app->make(SessionManager::class));
         });
         $this->app->bind(CrawlerDetector::class, function (Application $app) {
@@ -68,7 +68,7 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
         $this->app->bind(Enum::class, function (Application $app) {
             return new Enum();
         });
-        $this->app->bind(Flash::class, function (Application $app) {
+        $this->app->bind(\Laravue\Facades\Flash::class, function (Application $app) {
             return $app->make(Flash::class);
         });
         $this->app->bind(File::class, function (Application $app) {

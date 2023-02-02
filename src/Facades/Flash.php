@@ -30,6 +30,6 @@ class Flash extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Laravue\Flash\Flash::class;
+        return Flash::class;
     }
 }
