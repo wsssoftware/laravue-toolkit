@@ -50,6 +50,7 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
      * Register services.
      *
      * @return void
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function register(): void
