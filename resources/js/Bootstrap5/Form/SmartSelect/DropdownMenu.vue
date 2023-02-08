@@ -68,7 +68,7 @@ export default {
             hasSearch: false,
         }
     },
-    emits: ['onSelected', 'onOptionsChange', 'onClear'],
+    emits: ['onSelected', 'onOptionsChange', 'onClear', 'requestToggle'],
     methods: {
         isActive(option) {
             if (Array.isArray(this.selected)) {
@@ -82,6 +82,10 @@ export default {
         },
         onOptionClick(option) {
             this.$refs.searchInput.clearInput();
+            if (this.multiple && this.isActive(option)) {
+                this.$emit('requestToggle');
+                return;
+            }
             this.$emit('onSelected', option.keyField);
         },
     }

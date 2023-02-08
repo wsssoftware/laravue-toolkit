@@ -17,6 +17,7 @@
                 :aria-label="ariaLabel"/>
 
             <DropdownMenu
+                @requestToggle="toggleDropdown"
                 @onClear="clearSelected"
                 @onOptionsChange="onOptionsChange"
                 @onSelected="addSelected"
@@ -147,8 +148,11 @@ export default {
             }
         },
         onSelectedChange(newSelected) {
-            this.dropdown.toggle();
+            this.toggleDropdown();
             this.form[this.formDataName] = newSelected
+        },
+        toggleDropdown() {
+            this.dropdown.toggle();
         }
     },
 }
