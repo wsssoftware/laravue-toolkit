@@ -21,6 +21,6 @@ class LongitudeRule implements ValidationRule
             return;
         }
 
-        $fail(__('validation.longitude'));
+        $fail(__('laravue::validation.longitude'));
     }
 }

@@ -23,7 +23,7 @@ class DocumentRule implements ValidationRule
         } elseif (strlen($document) === 14) {
             (new CnpjRule())($attribute, $value, $fail);
         } else {
-            $fail(__('validation.document.generic'));
+            $fail(__('laravue::validation.document.generic'));
         }
     }
 }

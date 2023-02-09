@@ -21,6 +21,6 @@ class LatitudeRule implements ValidationRule
             return;
         }
 
-        $fail(__('validation.latitude'));
+        $fail(__('laravue::validation.latitude'));
     }
 }

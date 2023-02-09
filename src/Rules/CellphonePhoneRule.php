@@ -19,12 +19,12 @@ class CellphonePhoneRule implements ValidationRule
     {
         $value = preg_replace('/[^0-9]/is', '', $value);
         if (strlen($value) !== 11) {
-            $fail(__('validation.phone.cellphone'));
+            $fail(__('laravue::validation.phone.cellphone'));
 
             return;
         }
         if (substr($value, 2, 1) != 9) {
-            $fail(__('validation.phone.cellphone'));
+            $fail(__('laravue::validation.phone.cellphone'));
         }
     }
 }

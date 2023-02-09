@@ -20,7 +20,7 @@ class NationalPhoneRule implements ValidationRule
         $value = preg_replace('/[^0-9]/is', '', $value);
         $nationalPrefix = ['0300', '0500', '0800', '0900'];
         if (! in_array(substr($value, 0, 4), $nationalPrefix) || strlen($value) !== 11) {
-            $fail(__('validation.phone.national'));
+            $fail(__('laravue::validation.phone.national'));
         }
     }
 }

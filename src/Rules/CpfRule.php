@@ -19,10 +19,10 @@ class CpfRule implements ValidationRule
     {
         $cpf = preg_replace('/[^0-9]/is', '', $value);
         if (strlen($cpf) !== 11) {
-            $fail(__('validation.document.cpf'));
+            $fail(__('laravue::validation.document.cpf'));
         }
         if (preg_match('/(\d)\1{10}/', $cpf)) {
-            $fail(__('validation.document.cpf'));
+            $fail(__('laravue::validation.document.cpf'));
         }
         for ($t = 9; $t < 11; $t++) {
             for ($d = 0, $c = 0; $c < $t; $c++) {
@@ -30,7 +30,7 @@ class CpfRule implements ValidationRule
             }
             $d = ((10 * $d) % 11) % 10;
             if ($cpf[$c] != $d) {
-                $fail(__('validation.document.cpf'));
+                $fail(__('laravue::validation.document.cpf'));
             }
         }
     }

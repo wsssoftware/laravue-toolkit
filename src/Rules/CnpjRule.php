@@ -19,10 +19,10 @@ class CnpjRule implements ValidationRule
     {
         $cnpj = preg_replace('/[^0-9]/is', '', $value);
         if (strlen($cnpj) != 14) {
-            $fail(__('validation.document.cnpj'));
+            $fail(__('laravue::validation.document.cnpj'));
         }
         if (preg_match('/(\d)\1{10}/', $cnpj)) {
-            $fail(__('validation.document.cnpj'));
+            $fail(__('laravue::validation.document.cnpj'));
         }
 
         // Valida primeiro dígito verificador
@@ -34,7 +34,7 @@ class CnpjRule implements ValidationRule
         $rest = $sum % 11;
 
         if ($cnpj[12] != ($rest < 2 ? 0 : 11 - $rest)) {
-            $fail(__('validation.document.cnpj'));
+            $fail(__('laravue::validation.document.cnpj'));
         }
         for ($i = 0, $j = 6, $sum = 0; $i < 13; $i++) {
             $sum += $cnpj[$i] * $j;
@@ -44,7 +44,7 @@ class CnpjRule implements ValidationRule
         $rest = $sum % 11;
 
         if ($cnpj[13] != ($rest < 2 ? 0 : 11 - $rest)) {
-            $fail(__('validation.document.cnpj'));
+            $fail(__('laravue::validation.document.cnpj'));
         }
     }
 }

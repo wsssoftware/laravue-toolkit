@@ -41,9 +41,9 @@ class GenericPhoneRule implements ValidationRule
         }
 
         if ($this->mustShowNumber) {
-            $fail(__('validation.phone.generic_with_number', ['number' => $value]));
+            $fail(__('laravue::validation.phone.generic_with_number', ['number' => $value]));
         } else {
-            $fail(__('validation.phone.generic'));
+            $fail(__('laravue::validation.phone.generic'));
         }
     }
 }
