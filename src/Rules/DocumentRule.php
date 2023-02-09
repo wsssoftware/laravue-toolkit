@@ -19,9 +19,9 @@ class DocumentRule implements ValidationRule
     {
         $document = preg_replace('/[^0-9]/is', '', $value);
         if (strlen($document) === 11) {
-            (new CpfRule())($attribute, $value, $fail);
+            (new CpfRule())->validate($attribute, $value, $fail);
         } elseif (strlen($document) === 14) {
-            (new CnpjRule())($attribute, $value, $fail);
+            (new CnpjRule())->validate($attribute, $value, $fail);
         } else {
             $fail(__('laravue::validation.document.generic'));
         }

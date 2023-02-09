@@ -27,7 +27,7 @@ class GenericPhoneRule implements ValidationRule
         $value = preg_replace('/[^0-9]/is', '', $value);
         $nationalPrefix = ['0300', '0500', '0800', '0900'];
         if (in_array(substr($value, 0, 4), $nationalPrefix)) {
-            (new NationalPhoneRule())($attribute, $value, $fail);
+            (new NationalPhoneRule())->validate($attribute, $value, $fail);
 
             return;
         }
@@ -35,7 +35,7 @@ class GenericPhoneRule implements ValidationRule
             return;
         }
         if (strlen($value) === 11) {
-            (new CellphonePhoneRule())($attribute, $value, $fail);
+            (new CellphonePhoneRule())->validate($attribute, $value, $fail);
 
             return;
         }
