@@ -13,7 +13,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class NationalPhoneRule implements ValidationRule
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {

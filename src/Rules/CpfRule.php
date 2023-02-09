@@ -12,9 +12,8 @@ use Illuminate\Contracts\Validation\ValidationRule;
  */
 class CpfRule implements ValidationRule
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
