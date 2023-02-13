@@ -21,7 +21,7 @@ trait HasHtmlTable
 
         $builder = (new HtmlTableBuilder($model->newBaseQueryBuilder()))->setModel($model);
 
-        if (!empty(static::$globalScopes[self::class])) {
+        if (! empty(static::$globalScopes[self::class])) {
             foreach (static::$globalScopes[self::class] as $identifier => $scope) {
                 $builder->withGlobalScope($identifier, $scope);
             }
