@@ -19,6 +19,14 @@ trait HasHtmlTable
         /** @var \Illuminate\Database\Eloquent\Model $model */
         $model = (new static());
 
-        return (new HtmlTableBuilder($model->newBaseQueryBuilder()))->setModel($model);
+        $builder = (new HtmlTableBuilder($model->newBaseQueryBuilder()))->setModel($model);
+
+        if (static::$globalScopes[self::class]) {
+            foreach (static::$globalScopes[self::class] as $identifier => $scope) {
+                $builder->withGlobalScope($identifier, $scope);
+            }
+        }
+
+        return $builder;
     }
 }
