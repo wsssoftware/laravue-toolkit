@@ -4,8 +4,7 @@
         v-bind="$attrs"
         :aria-label="ariaLabel"
         :class="['form-select', {'is-invalid': errors}, {clearable: clearable}]"
-        data-bs-toggle="dropdown"
-        :title="help">
+        data-bs-toggle="dropdown">
         <template v-if="Array.isArray(selected) && selected.length > 0">
             <Tag v-for="option in getOptions()" :option="option" :key="option.keyField" @onRemove="removeTag"/>
         </template>
@@ -26,7 +25,6 @@ export default {
     },
     props: {
         ariaLabel: String,
-        help: String,
         placeholder: {type: String, default: '&nbsp;'},
         selected: String|Array,
         options: Array,

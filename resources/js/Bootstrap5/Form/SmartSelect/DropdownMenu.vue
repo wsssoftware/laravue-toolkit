@@ -88,6 +88,9 @@ export default {
             }
             this.$emit('onSelected', option.keyField);
         },
+        requestSearchFocus() {
+            this.$refs.searchInput.$el.focus();
+        }
     }
 }
 </script>

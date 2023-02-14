@@ -1,14 +1,17 @@
 <template>
-    <div v-bind="parentAttributes">
+    <div
+        ref="tooltip"
+        :title="help"
+        :data-bs-toggle="help ? 'tooltip' : null"
+        v-bind="parentAttributes">
         <select ref="select" :id="id" :required="required" class="d-none" v-model="form[formDataName]" :multiple="multiple">
             <option v-if="placeholder" value>{{ placeholder }}</option>
             <option v-for="option in availableOptions" :value="option.keyField">{{ option.valueField }}</option>
         </select>
         <label v-if="label" class="form-label" :for="id" v-bind="labelAttributes">{{ label }}</label>
-        <div ref="dropdown" class="dropdown" :data-bs-toggle="help ? 'tooltip' : null">
+        <div ref="dropdown" class="dropdown">
             <InputButton
                 @onSelectedChange="onSelectedChange"
-                :help="help"
                 :selected="form[formDataName]"
                 :clearable="clearable"
                 :errors="errors"
@@ -22,6 +25,7 @@
                 @onOptionsChange="onOptionsChange"
                 @onSelected="addSelected"
                 :addable="addable"
+                ref="dropdownMenu"
                 :clearable="isClearable()"
                 :searchable="searchable"
                 :multiple="multiple"
@@ -92,9 +96,11 @@ export default {
     },
     mounted() {
         if (typeof this.help === 'string') {
-            this.tooltip = new Tooltip(this.$refs.dropdown);
+            this.tooltip = new Tooltip(this.$refs.tooltip);
         }
         this.dropdown = new Dropdown(this.$refs.dropdown);
+
+        this.$refs.dropdown.addEventListener('shown.bs.dropdown', this.onShown);
 
         this.$refs.select.addEventListener('invalid', this.onInvalidListener);
     },
@@ -107,6 +113,7 @@ export default {
             this.dropdown.dispose();
         }
         this.$refs.select.removeEventListener('invalid', this.onInvalidListener);
+        this.$refs.dropdown.removeEventListener('shown.bs.dropdown', this.onShown);
     },
     methods: {
         isClearable() {
@@ -153,6 +160,12 @@ export default {
         },
         toggleDropdown() {
             this.dropdown.toggle();
+        },
+        onShown() {
+            if (this.searchable) {
+                this.$refs.dropdownMenu.requestSearchFocus();
+                console.log('ok');
+            }
         }
     },
 }
