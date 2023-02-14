@@ -11,9 +11,6 @@ use Laravue\Database\Eloquent\HtmlTableBuilder;
  */
 trait HasHtmlTable
 {
-    /**
-     * @return \Laravue\Database\Eloquent\HtmlTableBuilder
-     */
     public static function htmlTable(): HtmlTableBuilder
     {
         /** @var \Illuminate\Database\Eloquent\Model $model */

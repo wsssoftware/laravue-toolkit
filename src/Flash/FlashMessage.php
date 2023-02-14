@@ -13,81 +13,34 @@ use Laravue\Enums\FontAwesomeTypes;
  */
 class FlashMessage
 {
-    /**
-     * @var \Laravue\Enums\FlashTypes
-     */
     protected FlashTypes $type = FlashTypes::DEFAULT;
 
-    /**
-     * @var \Laravue\Enums\FlashPositions
-     */
     protected FlashPositions $position = FlashPositions::TOP_RIGHT;
 
-    /**
-     * @var string
-     */
     protected string $faIcon = 'fa-circle-info';
 
-    /**
-     * @var \Laravue\Enums\FontAwesomeTypes
-     */
     protected FontAwesomeTypes $faType = FontAwesomeTypes::SOLID;
 
-    /**
-     * @var int|false
-     */
     protected int|false $timeout = 5000;
 
-    /**
-     * @var bool
-     */
     protected bool $closeOnClick = true;
 
-    /**
-     * @var bool
-     */
     protected bool $closeOnDrag = true;
 
-    /**
-     * @var bool
-     */
     protected bool $pauseOnHover = true;
 
-    /**
-     * @var bool
-     */
     protected bool $pauseOnFocusLoss = true;
 
-    /**
-     * @var bool
-     */
     protected bool $closeButton = true;
 
-    /**
-     * @var bool
-     */
     protected bool $showCloseButtonOnlyOnHover = false;
 
-    /**
-     * @var bool
-     */
     protected bool $hideProgressBar = false;
 
-    /**
-     * @var bool
-     */
     protected bool $rtl = false;
 
-    /**
-     * @var string
-     */
     protected string $message;
 
-    /**
-     * @param  string  $message
-     * @param  \Laravue\Enums\FlashTypes  $type
-     * @param  string|null  $faIcon
-     */
     public function __construct(
         string $message,
         FlashTypes $type,
@@ -101,7 +54,6 @@ class FlashMessage
     }
 
     /**
-     * @param  \Laravue\Enums\FlashPositions  $position
      * @return \Laravue\Flash\FlashMessage
      */
     public function setPosition(FlashPositions $position): FlashMessage
@@ -112,7 +64,6 @@ class FlashMessage
     }
 
     /**
-     * @param  string  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function setFaIcon(string $faIcon): FlashMessage
@@ -123,7 +74,6 @@ class FlashMessage
     }
 
     /**
-     * @param  \Laravue\Enums\FontAwesomeTypes  $faType
      * @return \Laravue\Flash\FlashMessage
      */
     public function setFaType(FontAwesomeTypes $faType): FlashMessage
@@ -134,7 +84,6 @@ class FlashMessage
     }
 
     /**
-     * @param  int|false  $timeout
      * @return \Laravue\Flash\FlashMessage
      */
     public function setTimeout(int|false $timeout): FlashMessage
@@ -148,7 +97,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $closeOnClick
      * @return \Laravue\Flash\FlashMessage
      */
     public function setCloseOnClick(bool $closeOnClick): FlashMessage
@@ -159,7 +107,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $closeOnDrag
      * @return \Laravue\Flash\FlashMessage
      */
     public function setCloseOnDrag(bool $closeOnDrag): FlashMessage
@@ -170,7 +117,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $pauseOnHover
      * @return \Laravue\Flash\FlashMessage
      */
     public function setPauseOnHover(bool $pauseOnHover): FlashMessage
@@ -181,7 +127,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $pauseOnFocusLoss
      * @return \Laravue\Flash\FlashMessage
      */
     public function setPauseOnFocusLoss(bool $pauseOnFocusLoss): FlashMessage
@@ -192,7 +137,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $closeButton
      * @return \Laravue\Flash\FlashMessage
      */
     public function setCloseButton(bool $closeButton): FlashMessage
@@ -203,7 +147,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $showCloseButtonOnlyOnHover
      * @return \Laravue\Flash\FlashMessage
      */
     public function setShowCloseButtonOnlyOnHover(bool $showCloseButtonOnlyOnHover): FlashMessage
@@ -214,7 +157,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $hideProgressBar
      * @return \Laravue\Flash\FlashMessage
      */
     public function setHideProgressBar(bool $hideProgressBar): FlashMessage
@@ -225,7 +167,6 @@ class FlashMessage
     }
 
     /**
-     * @param  bool  $rtl
      * @return \Laravue\Flash\FlashMessage
      */
     public function setRtl(bool $rtl): FlashMessage
@@ -235,9 +176,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [

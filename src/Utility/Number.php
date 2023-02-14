@@ -16,28 +16,16 @@ class Number
 
     /**
      * Default currency used by Number::currency()
-     *
-     * @var string
      */
     protected string $_defaultCurrency = 'BRL';
 
     /**
      * Default currency format used by Number::currency()
-     *
-     * @var \Laravue\Enums\CurrencyFormat
      */
     protected CurrencyFormat $_defaultCurrencyFormat;
 
-    /**
-     * @var string
-     */
     protected string $locale;
 
-    /**
-     * @param  string  $locale
-     * @param  \Laravue\Enums\CurrencyFormat  $currencyFormat
-     * @param  string  $defaultCurrency
-     */
     public function __construct(string $locale, CurrencyFormat $currencyFormat, string $defaultCurrency)
     {
         $this->locale = $locale;
@@ -66,10 +54,6 @@ class Number
         return $formatter->format((float) $value);
     }
 
-    /**
-     * @param  int|float  $seconds
-     * @return string
-     */
     public function toReadableElapsedTime(int|float $seconds): string
     {
         $seconds = round($seconds);
@@ -291,7 +275,6 @@ class Number
      * @param  string  $currency Default currency string to be used by {@link currency()}
      * if $currency argument is not provided. If null is passed, it will clear the
      * currently stored value
-     * @return void
      */
     public function setDefaultCurrency(string $currency): void
     {
@@ -314,7 +297,6 @@ class Number
      * @param  \Laravue\Enums\CurrencyFormat  $currencyFormat  Default currency format to be used by currency()
      * if $currencyFormat argument is not provided. If null is passed, it will clear the
      * currently stored value
-     * @return void
      */
     public function setDefaultCurrencyFormat(CurrencyFormat $currencyFormat): void
     {
@@ -373,7 +355,6 @@ class Number
      *
      * @param  \NumberFormatter  $formatter Number formatter instance.
      * @param  array<string, mixed>  $options See Number::formatter() for possible options.
-     * @return \NumberFormatter
      */
     protected function _setAttributes(NumberFormatter $formatter, array $options = []): NumberFormatter
     {
@@ -413,7 +394,6 @@ class Number
      *
      * @param  float|int  $value An integer
      * @param  array<string, mixed>  $options An array with options.
-     * @return string
      */
     public function ordinal(float|int $value, array $options = []): string
     {
@@ -422,9 +402,6 @@ class Number
 
     /**
      * Remove all characters from string that is not a numeric character
-     *
-     * @param  string  $value
-     * @return string
      */
     public function onlyNumbers(string $value): string
     {

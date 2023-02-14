@@ -15,28 +15,19 @@ class Audio extends BaseFile
 {
     /**
      * Duration of the audio in seconds as defined by sender
-     *
-     * @var int
      */
     protected int $duration;
 
     /**
      * Optional. Performer of the audio as defined by sender or by audio tags
-     *
-     * @var string|null
      */
     protected ?string $performer;
 
     /**
      * Optional. Title of the audio as defined by sender or by audio tags
-     *
-     * @var string|null
      */
     protected ?string $title;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         parent::__construct($payload);
@@ -45,25 +36,16 @@ class Audio extends BaseFile
         $this->title = Arr::get($payload, 'title');
     }
 
-    /**
-     * @return int
-     */
     public function getDuration(): int
     {
         return $this->duration;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPerformer(): ?string
     {
         return $this->performer;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;

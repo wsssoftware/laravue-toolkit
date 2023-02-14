@@ -17,15 +17,11 @@ class Poll
 {
     /**
      * Unique poll identifier
-     *
-     * @var string
      */
     protected string $id;
 
     /**
      * Poll question, 1-300 characters
-     *
-     * @var string
      */
     protected string $question;
 
@@ -38,51 +34,37 @@ class Poll
 
     /**
      * Total number of users that voted in the poll
-     *
-     * @var int
      */
     protected int $total_voter_count;
 
     /**
      * True, if the poll is closed
-     *
-     * @var bool
      */
     protected bool $is_closed;
 
     /**
      * True, if the poll is anonymous
-     *
-     * @var bool
      */
     protected bool $is_anonymous;
 
     /**
      * Poll type, currently can be “regular” or “quiz”
-     *
-     * @var PollType
      */
     protected PollType $type;
 
     /**
      * True, if the poll allows multiple answers
-     *
-     * @var bool
      */
     protected bool $allows_multiple_answers;
 
     /**
      * Optional. 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are
      * closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
-     *
-     * @var int|null
      */
     protected ?int $correct_option_id;
 
     /**
      * Optional. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters
-     *
-     * @var string|null
      */
     protected ?string $explanation;
 
@@ -95,21 +77,14 @@ class Poll
 
     /**
      * Optional. Amount of time in seconds the poll will be active after creation
-     *
-     * @var int|null
      */
     protected ?int $open_period;
 
     /**
      * Optional. Point in time (Unix timestamp) when the poll will be automatically closed
-     *
-     * @var Carbon
      */
     protected Carbon $close_date;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->id = Arr::get($payload, 'id');
@@ -134,105 +109,66 @@ class Poll
         $this->close_date = Arr::exists($payload, 'close_date') ? Carbon::createFromTimestamp(Arr::get($payload, 'close_date')) : null;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getQuestion(): string
     {
         return $this->question;
     }
 
-    /**
-     * @return array
-     */
     public function getOptions(): array
     {
         return $this->options;
     }
 
-    /**
-     * @return int
-     */
     public function getTotalVoterCount(): int
     {
         return $this->total_voter_count;
     }
 
-    /**
-     * @return bool
-     */
     public function isIsClosed(): bool
     {
         return $this->is_closed;
     }
 
-    /**
-     * @return bool
-     */
     public function isIsAnonymous(): bool
     {
         return $this->is_anonymous;
     }
 
-    /**
-     * @return PollType
-     */
     public function getType(): PollType
     {
         return $this->type;
     }
 
-    /**
-     * @return bool
-     */
     public function isAllowsMultipleAnswers(): bool
     {
         return $this->allows_multiple_answers;
     }
 
-    /**
-     * @return int|null
-     */
     public function getCorrectOptionId(): ?int
     {
         return $this->correct_option_id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getExplanation(): ?string
     {
         return $this->explanation;
     }
 
-    /**
-     * @return array|null
-     */
     public function getExplanationEntities(): ?array
     {
         return $this->explanation_entities;
     }
 
-    /**
-     * @return int|null
-     */
     public function getOpenPeriod(): ?int
     {
         return $this->open_period;
     }
 
-    /**
-     * @return Carbon
-     */
     public function getCloseDate(): Carbon
     {
         return $this->close_date;

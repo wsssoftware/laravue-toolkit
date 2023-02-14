@@ -16,10 +16,6 @@ use UnitEnum;
 class Enum
 {
     /**
-     * @param  string|array  $enum
-     * @param  bool  $sort
-     * @return array
-     *
      * @throws \Exception
      */
     public function pluck(string|array $enum, bool $sort = true): array
@@ -65,9 +61,6 @@ class Enum
     }
 
     /**
-     * @param  string|array  $enum
-     * @return array
-     *
      * @throws \Exception
      */
     public function toArray(string|array $enum): array

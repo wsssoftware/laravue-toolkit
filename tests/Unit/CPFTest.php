@@ -15,9 +15,6 @@ use Laravue\Utility\Documents\CPF;
  */
 class CPFTest extends BaseTest
 {
-    /**
-     * @return void
-     */
     public function test_valid_cpf(): void
     {
         $cpf = new CPF();
@@ -43,9 +40,6 @@ class CPFTest extends BaseTest
         $this->assertTrue($cpf->validate('08308115160'));
     }
 
-    /**
-     * @return void
-     */
     public function test_invalid_cpf(): void
     {
         $cpf = new CPF();
@@ -74,9 +68,6 @@ class CPFTest extends BaseTest
         $this->assertFalse($cpf->validate('5786242846'));
     }
 
-    /**
-     * @return void
-     */
     public function test_random_cpf(): void
     {
         $cpf = new CPF();

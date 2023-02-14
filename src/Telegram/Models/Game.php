@@ -15,15 +15,11 @@ class Game
 {
     /**
      * Title of the game
-     *
-     * @var string
      */
     protected string $title;
 
     /**
      * Description of the game
-     *
-     * @var string
      */
     protected string $description;
 
@@ -38,8 +34,6 @@ class Game
      * Optional. Brief description of the game or high scores included in the game message. Can be automatically edited
      * to include current high scores for the game when the bot calls setGameScore, or manually edited using
      * editMessageText. 0-4096 characters.
-     *
-     * @var string|null
      */
     protected ?string $text;
 
@@ -52,14 +46,9 @@ class Game
 
     /**
      * Optional. Animation that will be displayed in the game message in chats. Upload via BotFather
-     *
-     * @var Animation|null
      */
     protected ?Animation $animation;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->title = Arr::get($payload, 'title');
@@ -80,49 +69,31 @@ class Game
         $this->animation = Arr::exists($payload, 'animation') ? new Animation(Arr::get($payload, 'animation')) : null;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return array
-     */
     public function getPhoto(): array
     {
         return $this->photo;
     }
 
-    /**
-     * @return string|null
-     */
     public function getText(): ?string
     {
         return $this->text;
     }
 
-    /**
-     * @return array|null
-     */
     public function getTextEntities(): ?array
     {
         return $this->text_entities;
     }
 
-    /**
-     * @return Animation|null
-     */
     public function getAnimation(): ?Animation
     {
         return $this->animation;

@@ -11,9 +11,6 @@ namespace Laravue\Telegram\Models;
  */
 class CallbackGame
 {
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
     }

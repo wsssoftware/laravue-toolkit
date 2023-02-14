@@ -15,35 +15,24 @@ class Animation extends BaseFile
 {
     /**
      * 	Video width as defined by sender
-     *
-     * @var int
      */
     protected int $width;
 
     /**
      * 	Video height as defined by sender
-     *
-     * @var int
      */
     protected int $height;
 
     /**
      * 	Duration of the video in seconds as defined by sender
-     *
-     * @var int
      */
     protected int $duration;
 
     /**
      * 	Optional. Animation thumbnail as defined by sender
-     *
-     * @var PhotoSize|null
      */
     protected ?PhotoSize $thumb;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         parent::__construct($payload);
@@ -54,33 +43,21 @@ class Animation extends BaseFile
         $this->thumb = Arr::exists($payload, 'thumb') ? new PhotoSize(Arr::get($payload, 'thumb')) : null;
     }
 
-    /**
-     * @return int
-     */
     public function getWidth(): int
     {
         return $this->width;
     }
 
-    /**
-     * @return int
-     */
     public function getHeight(): int
     {
         return $this->height;
     }
 
-    /**
-     * @return int
-     */
     public function getDuration(): int
     {
         return $this->duration;
     }
 
-    /**
-     * @return PhotoSize|null
-     */
     public function getThumb(): ?PhotoSize
     {
         return $this->thumb;

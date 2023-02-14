@@ -15,14 +15,9 @@ class VideoChatParticipantsInvited
 {
     /**
      * New members that were invited to the video chat
-     *
-     * @var array
      */
     protected array $users = [];
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         foreach (Arr::get($payload, 'users') as $user) {
@@ -30,9 +25,6 @@ class VideoChatParticipantsInvited
         }
     }
 
-    /**
-     * @return array
-     */
     public function getUsers(): array
     {
         return $this->users;

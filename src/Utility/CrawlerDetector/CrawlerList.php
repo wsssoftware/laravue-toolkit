@@ -9,8 +9,6 @@ trait CrawlerList
 {
     /**
      * Array of regular expressions to match against the user agent.
-     *
-     * @var array
      */
     protected array $crawlers = [
         ' YLT',
@@ -1409,9 +1407,6 @@ trait CrawlerList
         '[a-z0-9\-_]*(bot|crawl|archiver|transcoder|spider|uptime|validator|fetcher|cron|checker|reader|extractor|monitoring|analyzer|scraper)',
     ];
 
-    /**
-     * @return string
-     */
     protected function getCrawlerRegex(): string
     {
         return '/('.implode('|', $this->crawlers).')/i';

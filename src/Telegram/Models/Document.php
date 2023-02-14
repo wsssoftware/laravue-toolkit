@@ -15,23 +15,15 @@ class Document extends BaseFile
 {
     /**
      * Optional. Document thumbnail as defined by sender
-     *
-     * @var PhotoSize|null
      */
     protected ?PhotoSize $thumb;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         parent::__construct($payload);
         $this->thumb = Arr::exists($payload, 'thumb') ? new PhotoSize($payload['thumb']) : null;
     }
 
-    /**
-     * @return PhotoSize|null
-     */
     public function getThumb(): ?PhotoSize
     {
         return $this->thumb;

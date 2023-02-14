@@ -10,8 +10,6 @@ trait ExclusionList
     /**
      * List of strings to remove from the user agent before running the crawler regex
      * Over a large list of user agents, this gives us about a 55% speed increase!
-     *
-     * @var array
      */
     protected array $exclusions = [
         'Safari.[\d\.]*',
@@ -64,9 +62,6 @@ trait ExclusionList
         'OCTOPUS-CORE',
     ];
 
-    /**
-     * @return string
-     */
     protected function getExclusionRegex(): string
     {
         return '/('.implode('|', $this->exclusions).')/i';

@@ -9,10 +9,6 @@ namespace Laravue\Utility;
  */
 class File
 {
-    /**
-     * @param  string  $content
-     * @return string
-     */
     public function temporaryFile(string $content): string
     {
         $prefix = str(config('app.name', 'laravue'))
@@ -34,10 +30,6 @@ class File
         return $path;
     }
 
-    /**
-     * @param  string  $fileOrContent
-     * @return string
-     */
     public function mime(string $fileOrContent): string
     {
         if (is_file($fileOrContent)) {

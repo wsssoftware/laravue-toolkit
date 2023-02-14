@@ -16,8 +16,6 @@ class CrawlerDetector
 
     /**
      * All possible HTTP headers that represent the user agent string.
-     *
-     * @var array
      */
     protected array $headerNames = [
         'HTTP_USER_AGENT',
@@ -34,19 +32,11 @@ class CrawlerDetector
 
     /**
      * Store regex matches.
-     *
-     * @var array
      */
     protected array $matches = [];
 
-    /**
-     * @var string
-     */
     protected string $userAgent;
 
-    /**
-     * @var \Illuminate\Http\Request
-     */
     protected Request $request;
 
     /**
@@ -58,9 +48,6 @@ class CrawlerDetector
         $this->setUserAgent();
     }
 
-    /**
-     * @return void
-     */
     protected function setUserAgent(): void
     {
         $headers = [];
@@ -80,8 +67,6 @@ class CrawlerDetector
 
     /**
      * Check user agent string against the regex.
-     *
-     * @return bool
      */
     public function isCrawler(): bool
     {
@@ -95,8 +80,6 @@ class CrawlerDetector
 
     /**
      * Return the matches.
-     *
-     * @return string|null
      */
     public function getMatches(): ?string
     {

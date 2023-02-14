@@ -21,57 +21,40 @@ class MessageEntity
      * “strikethrough” (strikethrough text), “spoiler” (spoiler message), “code” (monowidth string), “pre”
      * (monowidth block), “text_link” (for clickable text URLs), “text_mention” (for users without usernames),
      * “custom_emoji” (for inline custom emoji stickers)
-     *
-     * @var MessageEntityType
      */
     protected MessageEntityType $type;
 
     /**
      * Offset in UTF-16 code units to the start of the entity
-     *
-     * @var int
      */
     protected int $offset;
 
     /**
      * Length of the entity in UTF-16 code units
-     *
-     * @var int
      */
     protected int $length;
 
     /**
      * Optional. For “text_link” only, URL that will be opened after user taps on the text
-     *
-     * @var string|null
      */
     protected ?string $url;
 
     /**
      * Optional. For “text_mention” only, the mentioned user
-     *
-     * @var User|null
      */
     protected ?User $user;
 
     /**
      * Optional. For “pre” only, the programming language of the entity text
-     *
-     * @var string|null
      */
     protected ?string $language;
 
     /**
      * Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use getCustomEmojiStickers to get full
      * information about the sticker
-     *
-     * @var string|null
      */
     protected ?string $custom_emoji_id;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->type = MessageEntityType::from(Arr::get($payload, 'type'));
@@ -83,57 +66,36 @@ class MessageEntity
         $this->custom_emoji_id = Arr::get($payload, 'custom_emoji_id');
     }
 
-    /**
-     * @return MessageEntityType
-     */
     public function getType(): MessageEntityType
     {
         return $this->type;
     }
 
-    /**
-     * @return int
-     */
     public function getOffset(): int
     {
         return $this->offset;
     }
 
-    /**
-     * @return int
-     */
     public function getLength(): int
     {
         return $this->length;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUrl(): ?string
     {
         return $this->url;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLanguage(): ?string
     {
         return $this->language;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCustomEmojiId(): ?string
     {
         return $this->custom_emoji_id;

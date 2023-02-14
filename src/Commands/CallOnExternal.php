@@ -12,10 +12,6 @@ trait CallOnExternal
     /**
      * Call another console command from other laravel application.
      *
-     * @param  string  $appBootstrap
-     * @param  string  $command
-     * @param  array  $arguments
-     * @return int
      *
      * @throws \Throwable
      */
@@ -27,11 +23,6 @@ trait CallOnExternal
     /**
      * Run the given the console command.
      *
-     * @param  string  $appBootstrap
-     * @param  string  $command
-     * @param  array  $arguments
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
-     * @return int
      *
      * @throws \Symfony\Component\Console\Exception\ExceptionInterface
      * @throws \Throwable
@@ -65,10 +56,6 @@ trait CallOnExternal
 
     /**
      * Resolve the console command instance for the given command.
-     *
-     * @param  \AppCore\Application  $app
-     * @param  string  $command
-     * @return \Illuminate\Console\Command|\Symfony\Component\Console\Command\Command
      */
     protected function resolveExternalCommand(Application $app, string $command): Command|SynfonyCommand
     {

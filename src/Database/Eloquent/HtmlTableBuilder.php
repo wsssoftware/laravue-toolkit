@@ -17,9 +17,6 @@ use Inertia\Inertia;
  */
 class HtmlTableBuilder extends Builder
 {
-    /**
-     * @var array
-     */
     protected array $additionalColumns = [];
 
     /**
@@ -27,19 +24,10 @@ class HtmlTableBuilder extends Builder
      */
     protected array $customColumns = [];
 
-    /**
-     * @var array
-     */
     protected array $htmlColumns = [];
 
-    /**
-     * @var int
-     */
     protected int $pageSize = 25;
 
-    /**
-     * @var int
-     */
     protected int $pageSizeDefault = 25;
 
     /**
@@ -52,55 +40,25 @@ class HtmlTableBuilder extends Builder
      */
     protected ?bool $searchFocus = null;
 
-    /**
-     * @var array
-     */
     protected array $tableFilters = [];
 
-    /**
-     * @var string|null
-     */
     protected ?string $tableFilter = null;
 
-    /**
-     * @var string
-     */
     protected string $tableFilterDefault = 'none';
 
-    /**
-     * @var string
-     */
     protected string $tableKey;
 
-    /**
-     * @var int
-     */
     protected int $tablePage = 1;
 
-    /**
-     * @var string|null
-     */
     protected ?string $tableSearch = null;
 
-    /**
-     * @var array|null
-     */
     protected ?array $tableSort = null;
 
-    /**
-     * @var array
-     */
     protected array $valuesCallback = [];
 
-    /**
-     * @var array
-     */
     protected array $valuesCallbackNewCast = [];
 
     /**
-     * @param  string  $key
-     * @return array
-     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
@@ -141,7 +99,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @param  string  $column
      * @return $this
      */
     public function setAdditionalColumn(string $column): self
@@ -152,8 +109,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @param  string  $column
-     * @param  callable  $closure
      * @return $this
      */
     public function setCustomColumn(string $column, callable $closure): self
@@ -166,12 +121,6 @@ class HtmlTableBuilder extends Builder
     /**
      * Add a new column for a html table
      *
-     * @param  string  $column
-     * @param  string|null  $label
-     * @param  bool  $searchable
-     * @param  bool  $orderable
-     * @param  bool  $database
-     * @param  array  $customAttributes
      * @return $this
      */
     public function setHtmlColumn(
@@ -201,9 +150,6 @@ class HtmlTableBuilder extends Builder
     /**
      * Add a new non-database column for a html table
      *
-     * @param  string  $column
-     * @param  string|null  $label
-     * @param  array  $customAttributes
      * @return $this
      */
     public function setHtmlColumnNonDatabase(string $column, string $label = null, array $customAttributes = []): self
@@ -212,9 +158,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @param  string  $column
-     * @param  string|null  $newCast
-     * @param  callable  $callback
      * @return $this
      */
     public function setHtmlValueCallback(string $column, ?string $newCast, callable $callback): self
@@ -226,9 +169,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @param  string  $key
-     * @param  string  $label
-     * @param  callable  $callback
      * @return $this
      *
      * @throws \Exception
@@ -248,7 +188,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @param  string  $key
      * @return $this
      */
     public function setDefaultFilter(string $key = 'none'): self
@@ -260,7 +199,6 @@ class HtmlTableBuilder extends Builder
 
     /**
      * @param  int[]  $pageSizeOptions
-     * @param  int  $default
      * @return $this
      *
      * @throws \Exception
@@ -286,9 +224,6 @@ class HtmlTableBuilder extends Builder
         return $this;
     }
 
-    /**
-     * @return void
-     */
     protected function doOrder(): void
     {
         if (! empty($this->tableSort)) {
@@ -314,10 +249,6 @@ class HtmlTableBuilder extends Builder
         }
     }
 
-    /**
-     * @param  array  $htmlColumns
-     * @return void
-     */
     protected function doSearch(array $htmlColumns): void
     {
         if (empty($this->tableSearch)) {
@@ -342,10 +273,6 @@ class HtmlTableBuilder extends Builder
         });
     }
 
-    /**
-     * @param  array  $htmlColumns
-     * @return void
-     */
     protected function doSelectAndRelationships(array $htmlColumns): void
     {
         $relationships = [];
@@ -395,11 +322,6 @@ class HtmlTableBuilder extends Builder
         $this->select($columns);
     }
 
-    /**
-     * @param  array  $tableRows
-     * @param  array  $htmlColumns
-     * @return array
-     */
     protected function formatTableRows(array $tableRows, array $htmlColumns): array
     {
         foreach ($tableRows as $index => $tableRow) {
@@ -433,9 +355,6 @@ class HtmlTableBuilder extends Builder
         return $tableRows;
     }
 
-    /**
-     * @return array
-     */
     protected function getHtmlColumns(): array
     {
         if (empty($this->htmlColumns)) {
@@ -457,8 +376,6 @@ class HtmlTableBuilder extends Builder
 
     /**
      * Get table options
-     *
-     * @return array
      */
     protected function getOptions(): array
     {
@@ -491,8 +408,6 @@ class HtmlTableBuilder extends Builder
     }
 
     /**
-     * @return array
-     *
      * @throws \Exception
      */
     protected function getPageData(): array
@@ -536,8 +451,6 @@ class HtmlTableBuilder extends Builder
 
     /**
      * Get the translations for the table.
-     *
-     * @return array
      */
     protected function getTrans(): array
     {

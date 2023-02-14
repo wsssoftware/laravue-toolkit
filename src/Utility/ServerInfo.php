@@ -15,9 +15,6 @@ use Linfo\OS\Windows;
  */
 class ServerInfo
 {
-    /**
-     * @var Darwin|Linux|Windows
-     */
     protected Darwin|Linux|Windows $parser;
 
     public function __construct()
@@ -26,9 +23,6 @@ class ServerInfo
         $this->parser = $linfo->getParser();
     }
 
-    /**
-     * @return float
-     */
     public function cpuLoad(): float
     {
         $loadNow = floatval(Arr::get($this->parser->getLoad(), 'now', 0));
@@ -37,9 +31,6 @@ class ServerInfo
         return round(($loadNow / $coreCount) * 100, 2);
     }
 
-    /**
-     * @return float
-     */
     public function cpuLoad5min(): float
     {
         $loadNow = floatval(Arr::get($this->parser->getLoad(), '5min', 0));
@@ -48,9 +39,6 @@ class ServerInfo
         return round(($loadNow / $coreCount) * 100, 2);
     }
 
-    /**
-     * @return float
-     */
     public function cpuLoad15min(): float
     {
         $loadNow = floatval(Arr::get($this->parser->getLoad(), '15min', 0));
@@ -59,49 +47,31 @@ class ServerInfo
         return round(($loadNow / $coreCount) * 100, 2);
     }
 
-    /**
-     * @return Carbon
-     */
     public function booted(): Carbon
     {
         return Carbon::createFromTimestamp(intval(Arr::get($this->parser->getUpTime(), 'bootedTimestamp', 0)));
     }
 
-    /**
-     * @return float
-     */
     public function memoryTotal(): float
     {
         return floatval(Arr::get($this->parser->getRam(), 'total', 0));
     }
 
-    /**
-     * @return float
-     */
     public function memoryUsage(): float
     {
         return $this->memoryTotal() - floatval(Arr::get($this->parser->getRam(), 'free', 0));
     }
 
-    /**
-     * @return float
-     */
     public function swapTotal(): float
     {
         return floatval(Arr::get($this->parser->getRam(), 'swapTotal', 0));
     }
 
-    /**
-     * @return float
-     */
     public function swapUsage(): float
     {
         return $this->swapTotal() - floatval(Arr::get($this->parser->getRam(), 'swapFree', 0));
     }
 
-    /**
-     * @return float
-     */
     public function storageTotal(): float
     {
         $total = 0;
@@ -117,9 +87,6 @@ class ServerInfo
         return $total;
     }
 
-    /**
-     * @return float
-     */
     public function storageUsage(): float
     {
         $total = 0;

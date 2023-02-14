@@ -11,9 +11,6 @@ namespace Laravue\Telegram\Models;
  */
 class VideoChatStarted
 {
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
     }

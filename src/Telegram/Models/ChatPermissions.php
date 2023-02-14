@@ -15,67 +15,48 @@ class ChatPermissions
 {
     /**
      * Optional. True, if the user is allowed to send text messages, contacts, locations and venues
-     *
-     * @var bool|null
      */
     protected ?bool $can_send_messages;
 
     /**
      * Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes,
      * implies can_send_messages
-     *
-     * @var bool|null
      */
     protected ?bool $can_send_media_messages;
 
     /**
      * Optional. True, if the user is allowed to send polls, implies can_send_messages
-     *
-     * @var bool|null
      */
     protected ?bool $can_send_polls;
 
     /**
      * Optional. True, if the user is allowed to send animations, games, stickers and use inline bots, implies
      * can_send_media_messages
-     *
-     * @var bool|null
      */
     protected ?bool $can_send_other_messages;
 
     /**
      * Optional. True, if the user is allowed to add web page previews to their messages, implies
      * can_send_media_messages
-     *
-     * @var bool|null
      */
     protected ?bool $can_add_web_page_previews;
 
     /**
      * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public
      * supergroups
-     *
-     * @var bool|null
      */
     protected ?bool $can_change_info;
 
     /**
      * Optional. True, if the user is allowed to invite new users to the chat
-     *
-     * @var bool|null
      */
     protected ?bool $can_invite_users;
 
     /**
      * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
-     *
-     * @var bool|null
      */
     protected ?bool $can_pin_messages;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->can_send_messages = ! empty(Arr::exists($payload, 'can_send_messages')) ?
@@ -96,65 +77,41 @@ class ChatPermissions
             boolval(Arr::get($payload, 'can_pin_messages')) : null;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanSendMessages(): ?bool
     {
         return $this->can_send_messages;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanSendMediaMessages(): ?bool
     {
         return $this->can_send_media_messages;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanSendPolls(): ?bool
     {
         return $this->can_send_polls;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanSendOtherMessages(): ?bool
     {
         return $this->can_send_other_messages;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanAddWebPagePreviews(): ?bool
     {
         return $this->can_add_web_page_previews;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanChangeInfo(): ?bool
     {
         return $this->can_change_info;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanInviteUsers(): ?bool
     {
         return $this->can_invite_users;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getCanPinMessages(): ?bool
     {
         return $this->can_pin_messages;

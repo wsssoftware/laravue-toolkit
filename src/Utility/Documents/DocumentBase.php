@@ -12,25 +12,12 @@ namespace Laravue\Utility\Documents;
  */
 abstract class DocumentBase
 {
-    /**
-     * @param  string  $document
-     * @return bool
-     */
     abstract protected function validate(string $document): bool;
 
-    /**
-     * @return string
-     */
     abstract protected function random(): string;
 
     /**
      * Authenticate a document
-     *
-     * @param  string  $document
-     * @param  int  $limit
-     * @param  array  $digitOne
-     * @param  array  $digitTwo
-     * @return bool
      */
     protected function authenticate(string $document, int $limit, array $digitOne, array $digitTwo): bool
     {
@@ -41,32 +28,16 @@ abstract class DocumentBase
         return $myDoc == $authDoc && ! $this->isAllValueEqual($myDoc);
     }
 
-    /**
-     * @param  string  $document
-     * @return string
-     */
     protected function sanitize(string $document): string
     {
         return preg_replace('/[^0-9]/', '', $document);
     }
 
-    /**
-     * @param  string  $document
-     * @param  int  $limit
-     * @return array
-     */
     protected function mountArray(string $document, int $limit): array
     {
         return  strlen($document) == $limit && is_numeric($document) ? str_split($document) : [];
     }
 
-    /**
-     * @param  string  $document
-     * @param  int  $limit
-     * @param  array  $digitOne
-     * @param  array  $digitTwo
-     * @return array
-     */
     protected function verify(string $document, int $limit, array $digitOne, array $digitTwo): array
     {
         $myDoc = $this->mountArray($document, $limit);
@@ -80,11 +51,6 @@ abstract class DocumentBase
 
     /**
      * Calculate first digit
-     *
-     * @param  string  $document
-     * @param  int  $limit
-     * @param  array  $digitOne
-     * @return int
      */
     protected function computerOne(string $document, int $limit, array $digitOne): int
     {
@@ -108,12 +74,6 @@ abstract class DocumentBase
 
     /**
      * Calculate seconds digit
-     *
-     * @param  string  $document
-     * @param  int  $limit
-     * @param  array  $digitOne
-     * @param  array  $digitTwo
-     * @return int
      */
     protected function computerTwo(string $document, int $limit, array $digitOne, array $digitTwo): int
     {
@@ -137,10 +97,6 @@ abstract class DocumentBase
         return $total;
     }
 
-    /**
-     * @param  array  $data
-     * @return bool
-     */
     protected function isAllValueEqual(array $data): bool
     {
         $value = count(array_unique($data));
@@ -148,12 +104,6 @@ abstract class DocumentBase
         return $value <= 1;
     }
 
-    /**
-     * @param  int  $limit
-     * @param  array  $digitOne
-     * @param  array  $digitTwo
-     * @return string
-     */
     protected function make(int $limit, array $digitOne, array $digitTwo): string
     {
         $document = '';

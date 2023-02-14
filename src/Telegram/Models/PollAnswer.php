@@ -15,15 +15,11 @@ class PollAnswer
 {
     /**
      * Unique poll identifier
-     *
-     * @var string
      */
     protected string $poll_id;
 
     /**
      * The user, who changed the answer to the poll
-     *
-     * @var User
      */
     protected User $user;
 
@@ -34,9 +30,6 @@ class PollAnswer
      */
     protected array $option_ids;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->poll_id = Arr::get($payload, 'poll_id');
@@ -44,25 +37,16 @@ class PollAnswer
         $this->option_ids = Arr::get($payload, 'option_ids');
     }
 
-    /**
-     * @return string
-     */
     public function getPollId(): string
     {
         return $this->poll_id;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @return array
-     */
     public function getOptionIds(): array
     {
         return $this->option_ids;

@@ -18,15 +18,8 @@ use UnitEnum;
  */
 class SelectResource extends JsonResource
 {
-    /**
-     * @var bool
-     */
     public static bool $simpleEnumOnNext = false;
 
-    /**
-     * @param  array  $resource
-     * @return array
-     */
     protected static function normalizeEnumItems(array $resource): array
     {
         $data = [];
@@ -54,10 +47,6 @@ class SelectResource extends JsonResource
         return $data;
     }
 
-    /**
-     * @param $resource
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-     */
     public static function collectionWithSimpleEnum($resource): AnonymousResourceCollection
     {
         self::$simpleEnumOnNext = true;
@@ -91,9 +80,6 @@ class SelectResource extends JsonResource
 
     /**
      * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray(Request $request): array|Arrayable|\JsonSerializable
     {

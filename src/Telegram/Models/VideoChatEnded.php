@@ -15,14 +15,9 @@ class VideoChatEnded
 {
     /**
      * Video chat duration in seconds
-     *
-     * @var int
      */
     protected int $duration;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->duration = Arr::get($payload, 'duration');

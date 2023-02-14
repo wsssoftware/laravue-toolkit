@@ -17,19 +17,10 @@ class Flash
 {
     protected const SESSION_KEY = 'sessionFlash';
 
-    /**
-     * @var array
-     */
     protected array $messages = [];
 
-    /**
-     * @var \Illuminate\Session\SessionManager|\Illuminate\Session\Store
-     */
     protected SessionManager|Store $session;
 
-    /**
-     * @param  \Illuminate\Session\SessionManager|\Illuminate\Session\Store  $session
-     */
     public function __construct(SessionManager|Store $session)
     {
         $this->session = $session;
@@ -42,8 +33,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
-     * @param  string|null  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function default(string $message, ?string $faIcon = null): FlashMessage
@@ -55,8 +44,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
-     * @param  string  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function success(string $message, string $faIcon = 'circle-check'): FlashMessage
@@ -68,8 +55,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
-     * @param  string  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function info(string $message, string $faIcon = 'circle-info'): FlashMessage
@@ -81,8 +66,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
-     * @param  string  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function warning(string $message, string $faIcon = 'triangle-exclamation'): FlashMessage
@@ -94,8 +77,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
-     * @param  string  $faIcon
      * @return \Laravue\Flash\FlashMessage
      */
     public function error(string $message, string $faIcon = 'diamond-exclamation'): FlashMessage
@@ -106,18 +87,11 @@ class Flash
         return $message;
     }
 
-    /**
-     * @return void
-     */
     public function restoreFlashes(): void
     {
         $this->session->put(self::SESSION_KEY, $this->messages);
     }
 
-    /**
-     * @param  bool  $rememberMessages
-     * @return array
-     */
     public function toArray(bool $rememberMessages = false): array
     {
         $status = $this->session->pull('status');
@@ -171,7 +145,6 @@ class Flash
     }
 
     /**
-     * @param  \Laravue\Enums\FlashTypes  $flashTypes
      * @return $this
      */
     public function assertHasFlashType(FlashTypes $flashTypes): static
@@ -192,7 +165,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
      * @return \Laravue\Flash\Flash
      */
     public function assertMessageContain(string $message): static
@@ -214,7 +186,6 @@ class Flash
     }
 
     /**
-     * @param  string  $message
      * @return \Laravue\Flash\Flash
      */
     public function assertMessageEqual(string $message): static

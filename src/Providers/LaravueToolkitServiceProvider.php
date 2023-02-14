@@ -25,10 +25,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravueToolkitServiceProvider extends PackageServiceProvider
 {
-    /**
-     * @param  \Spatie\LaravelPackageTools\Package  $package
-     * @return void
-     */
     public function configurePackage(Package $package): void
     {
         /*
@@ -49,7 +45,6 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
     /**
      * Register services.
      *
-     * @return void
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -90,8 +85,6 @@ class LaravueToolkitServiceProvider extends PackageServiceProvider
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
     public function boot(): void
     {

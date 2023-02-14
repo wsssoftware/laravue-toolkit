@@ -15,9 +15,6 @@ use Laravue\Utility\Documents\CNPJ;
  */
 class CNPJTest extends BaseTest
 {
-    /**
-     * @return void
-     */
     public function test_valid_cpf(): void
     {
         $cnpj = new CNPJ();
@@ -43,9 +40,6 @@ class CNPJTest extends BaseTest
         $this->assertTrue($cnpj->validate('80.058.381/0001-07'));
     }
 
-    /**
-     * @return void
-     */
     public function test_invalid_cpf(): void
     {
         $cnpj = new CNPJ();
@@ -74,9 +68,6 @@ class CNPJTest extends BaseTest
         $this->assertFalse($cnpj->validate('874831380001772'));
     }
 
-    /**
-     * @return void
-     */
     public function test_random_cpf(): void
     {
         $cnpj = new CNPJ();

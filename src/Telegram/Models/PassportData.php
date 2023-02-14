@@ -22,14 +22,9 @@ class PassportData
 
     /**
      * Encrypted credentials required to decrypt the data
-     *
-     * @var EncryptedCredentials
      */
     protected EncryptedCredentials $credentials;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         if (Arr::exists($payload, 'data')) {
@@ -41,17 +36,11 @@ class PassportData
         $this->credentials = new EncryptedCredentials(Arr::get($payload, 'credentials', []));
     }
 
-    /**
-     * @return array
-     */
     public function getData(): array
     {
         return $this->data;
     }
 
-    /**
-     * @return EncryptedCredentials
-     */
     public function getCredentials(): EncryptedCredentials
     {
         return $this->credentials;

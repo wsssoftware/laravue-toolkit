@@ -19,116 +19,83 @@ class Update
      * sequentially. This ID becomes especially handy if you're using webhooks, since it allows you to ignore repeated
      * updates or to restore the correct update sequence, should they get out of order. If there are no new updates for
      * at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
-     *
-     * @var int
      */
     protected int $update_id;
 
     /**
      * Optional. New incoming message of any kind - text, photo, sticker, etc.
-     *
-     * @var Message|null
      */
     protected ?Message $message;
 
     /**
      * Optional. New version of a message that is known to the bot and was edited
-     *
-     * @var Message|null
      */
     protected ?Message $edited_message;
 
     /**
      * Optional. New incoming channel post of any kind - text, photo, sticker, etc.
-     *
-     * @var Message|null
      */
     protected ?Message $channel_post;
 
     /**
      * Optional. New version of a channel post that is known to the bot and was edited
-     *
-     * @var Message|null
      */
     protected ?Message $edited_channel_post;
 
     /**
      * Optional. New incoming inline query
-     *
-     * @var InlineQuery|null
      */
     protected ?InlineQuery $inline_query;
 
     /**
      * Optional. The result of an inline query that was chosen by a user and sent to their chat partner. Please see our
      * documentation on the feedback collecting for details on how to enable these updates for your bot.
-     *
-     * @var ChosenInlineResult|null
      */
     protected ?ChosenInlineResult $chosen_inline_result;
 
     /**
      * Optional. New incoming callback query
-     *
-     * @var CallbackQuery|null
      */
     protected ?CallbackQuery $callback_query;
 
     /**
      * Optional. New incoming shipping query. Only for invoices with flexible price
-     *
-     * @var ShippingQuery|null
      */
     protected ?ShippingQuery $shipping_query;
 
     /**
      * Optional. New incoming pre-checkout query. Contains full information about checkout
-     *
-     * @var PreCheckoutQuery|null
      */
     protected ?PreCheckoutQuery $pre_checkout_query;
 
     /**
      * Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
-     *
-     * @var Poll|null
      */
     protected ?Poll $poll;
 
     /**
      * Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were
      * sent by the bot itself.
-     *
-     * @var PollAnswer|null
      */
     protected ?PollAnswer $poll_answer;
 
     /**
      * Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only
      * when the bot is blocked or unblocked by the user.
-     *
-     * @var ChatMemberUpdated|null
      */
     protected ?ChatMemberUpdated $my_chat_member;
 
     /**
      * Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must
      * explicitly specify “chat_member” in the list of allowed_updates to receive these updates.
-     *
-     * @var ChatMemberUpdated|null
      */
     protected ?ChatMemberUpdated $chat_member;
 
     /**
      * Optional. A request to join the chat has been sent. The bot must have the can_invite_users administrator right in the chat to receive these updates.
-     *
-     * @var ChatJoinRequest|null
      */
     protected ?ChatJoinRequest $chat_join_request;
 
-    /**
-     * @param  array  $payload
-     */
     public function __construct(array $payload)
     {
         $this->update_id = (int) Arr::get($payload, 'update_id');
@@ -160,9 +127,6 @@ class Update
             'chat_join_request')) : null;
     }
 
-    /**
-     * @return UpdateType
-     */
     public function getUpdateType(): UpdateType
     {
         return match (true) {
@@ -182,121 +146,76 @@ class Update
         };
     }
 
-    /**
-     * @return int
-     */
     public function getUpdateId(): int
     {
         return $this->update_id;
     }
 
-    /**
-     * @return Message|null
-     */
     public function getMessage(): ?Message
     {
         return $this->message;
     }
 
-    /**
-     * @return Message|null
-     */
     public function getEditedMessage(): ?Message
     {
         return $this->edited_message;
     }
 
-    /**
-     * @return Message|null
-     */
     public function getChannelPost(): ?Message
     {
         return $this->channel_post;
     }
 
-    /**
-     * @return Message|null
-     */
     public function getEditedChannelPost(): ?Message
     {
         return $this->edited_channel_post;
     }
 
-    /**
-     * @return InlineQuery|null
-     */
     public function getInlineQuery(): ?InlineQuery
     {
         return $this->inline_query;
     }
 
-    /**
-     * @return ChosenInlineResult|null
-     */
     public function getChosenInlineResult(): ?ChosenInlineResult
     {
         return $this->chosen_inline_result;
     }
 
-    /**
-     * @return CallbackQuery|null
-     */
     public function getCallbackQuery(): ?CallbackQuery
     {
         return $this->callback_query;
     }
 
-    /**
-     * @return ShippingQuery|null
-     */
     public function getShippingQuery(): ?ShippingQuery
     {
         return $this->shipping_query;
     }
 
-    /**
-     * @return PreCheckoutQuery|null
-     */
     public function getPreCheckoutQuery(): ?PreCheckoutQuery
     {
         return $this->pre_checkout_query;
     }
 
-    /**
-     * @return Poll|null
-     */
     public function getPoll(): ?Poll
     {
         return $this->poll;
     }
 
-    /**
-     * @return PollAnswer|null
-     */
     public function getPollAnswer(): ?PollAnswer
     {
         return $this->poll_answer;
     }
 
-    /**
-     * @return ChatMemberUpdated|null
-     */
     public function getMyChatMember(): ?ChatMemberUpdated
     {
         return $this->my_chat_member;
     }
 
-    /**
-     * @return ChatMemberUpdated|null
-     */
     public function getChatMember(): ?ChatMemberUpdated
     {
         return $this->chat_member;
     }
 
-    /**
-     * @return ChatJoinRequest|null
-     */
     public function getChatJoinRequest(): ?ChatJoinRequest
     {
         return $this->chat_join_request;
