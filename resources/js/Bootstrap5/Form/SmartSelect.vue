@@ -164,7 +164,6 @@ export default {
         onShown() {
             if (this.searchable) {
                 this.$refs.dropdownMenu.requestSearchFocus();
-                console.log('ok');
             }
         }
     },
