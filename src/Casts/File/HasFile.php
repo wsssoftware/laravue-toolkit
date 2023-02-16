@@ -13,22 +13,15 @@ use Illuminate\Support\Collection;
  */
 trait HasFile
 {
-
-    /**
-     * @return void
-     */
     public static function bootHasFile(): void
     {
         static::deleting(static::fileDeleting());
         static::saving(static::fileSaving());
     }
 
-    /**
-     * @return \Closure
-     */
     private static function fileDeleting(): \Closure
     {
-        return function(Model $model) {
+        return function (Model $model) {
             foreach ((new static)->getCasts() as $cast) {
                 if (is_subclass_of($cast, File::class)) {
                     $resut = $cast::deleteFile($model);
@@ -37,16 +30,14 @@ trait HasFile
                     }
                 }
             }
+
             return true;
         };
     }
 
-    /**
-     * @return \Closure
-     */
     private static function fileSaving(): \Closure
     {
-        return function(Model $model) {
+        return function (Model $model) {
             foreach ((new static)->getCasts() as $key => $cast) {
                 if (is_subclass_of($cast, File::class)) {
                     $files = static::getUploadedFile($model->getAttribute($key));
@@ -60,14 +51,11 @@ trait HasFile
                     $model->setAttribute($key, $resut);
                 }
             }
+
             return true;
         };
     }
 
-    /**
-     * @param  mixed  $value
-     * @return \Illuminate\Support\Collection|\Illuminate\Http\UploadedFile|null
-     */
     protected static function getUploadedFile(mixed $value): Collection|UploadedFile|null
     {
         if ($value instanceof UploadedFile) {
@@ -77,11 +65,12 @@ trait HasFile
             $value = collect($value);
         }
         if ($value instanceof Collection) {
-            $value = $value->filter(fn($file) => $file instanceof UploadedFile);
+            $value = $value->filter(fn ($file) => $file instanceof UploadedFile);
             if ($value->count() > 0) {
                 return $value;
             }
         }
+
         return null;
     }
 }
