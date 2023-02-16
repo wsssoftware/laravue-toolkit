@@ -127,8 +127,8 @@ export default {
         },
         destroyFilePond() {
             if (this.pond) {
-               document.getElementById(this.id).removeEventListener('FilePond:addfile', this.updateFiles);
-               document.getElementById(this.id).removeEventListener('FilePond:removefile', this.updateFiles);
+                document.getElementById(this.id).removeEventListener('FilePond:addfile', this.updateFiles);
+                document.getElementById(this.id).removeEventListener('FilePond:removefile', this.updateFiles);
                 this.pond.destroy();
             }
         },
@@ -160,15 +160,36 @@ export default {
             let files = this.pond.getFiles().filter((file) => {
                 return file.origin === 1;
             });
+
+            this.form.processing = true;
+            let prepare = this.pond.prepareFiles();
+
+            this.form[this.formDataName] = null;
             if (this.finalOptions?.allowMultiple ?? false) {
                 this.form[this.formDataName] = [];
-                files.forEach((file) => {
-                    this.form[this.formDataName].push(file.file);
-                });
-            } else {
-                this.form[this.formDataName] = files[0]?.file ?? null;
             }
 
+            prepare
+                .then((preparedFiles) => {
+                    if (this.finalOptions?.allowMultiple ?? false) {
+                        this.form[this.formDataName] = [];
+                        preparedFiles.forEach((file) => {
+                            this.form[this.formDataName].push(this.prepareFile(file));
+                        });
+                    } else {
+                        this.form[this.formDataName] = this.prepareFile(preparedFiles[0]);
+                    }
+                })
+                .finally(() => {
+                    this.form.processing = false;
+                });
+        },
+        prepareFile(file) {
+            if (file?.output === null) {
+                return null;
+            }
+
+            return file.output;
         }
     },
 }
