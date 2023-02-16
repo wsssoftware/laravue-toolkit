@@ -1,5 +1,10 @@
 <template>
-    <div v-bind="parentAttributes" :class="[{'is-invalid': errors}]">
+    <div
+        v-bind="parentAttributes"
+        :title="help"
+        :data-bs-toggle="help ? 'tooltip' : null"
+        ref="parent"
+        :class="[{'is-invalid': errors}]">
         <label v-if="label" class="form-label" :for="id">{{ label }}</label>
         <input
             type="file"
@@ -16,6 +21,7 @@ import * as FilePond from "filepond";
 import 'filepond/dist/filepond.min.css';
 import pt_BR from 'filepond/locale/pt-br';
 import InvalidFeedback from "./InvalidFeedback.vue";
+import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
 
 export default {
     inheritAttrs: false,
@@ -32,6 +38,7 @@ export default {
             type: String,
             required: true,
         },
+        help: String,
         label: String,
         lang: {
             type: Object,
@@ -89,8 +96,19 @@ export default {
     },
     mounted() {
         this.createFilePond();
+        if (typeof this.help === 'string' || this.help instanceof String) {
+            this.$nextTick(() => {
+                this.tooltip = new Tooltip(this.$refs.parent);
+            });
+        }
+    },
+    updated() {
+        this.createFilePond();
     },
     beforeUnmount() {
+        if (this.tooltip) {
+            this.tooltip.dispose();
+        }
         this.destroyFilePond();
     },
     methods: {
