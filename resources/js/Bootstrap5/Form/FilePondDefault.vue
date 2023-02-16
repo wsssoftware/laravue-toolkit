@@ -30,6 +30,10 @@ export default {
         InvalidFeedback,
     },
     props: {
+        canRemoveUploaded: {
+            type: [Boolean, String],
+            default: 'Esse arquivo não pode ser removido.',
+        },
         form: {
             type: Object,
             required: true,
@@ -154,7 +158,17 @@ export default {
             return this.pond;
         },
         remove(source, load, error) {
-            this.$emit('remove', source, load, error);
+            if (this.canRemoveUploaded === true) {
+                this.$emit('remove', source, load, error);
+                return;
+            }
+            this.$swal({
+                title: 'Não permitido!',
+                text: this.canRemoveUploaded,
+                icon: 'warning',
+            }).then(() => {
+                error();
+            })
         },
         updateFiles() {
             let files = this.pond.getFiles().filter((file) => {
@@ -176,7 +190,7 @@ export default {
                         preparedFiles.forEach((file) => {
                             this.form[this.formDataName].push(this.prepareFile(file));
                         });
-                    } else {
+                    } else if(preparedFiles.length > 0) {
                         this.form[this.formDataName] = this.prepareFile(preparedFiles[0]);
                     }
                 })
