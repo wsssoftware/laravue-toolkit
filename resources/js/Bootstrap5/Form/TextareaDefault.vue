@@ -3,6 +3,7 @@
         <label v-if="label" class="form-label" :for="id">{{ label }}</label>
         <textarea
             v-bind="$attrs"
+            :maxlength="maxLength"
             :aria-label="ariaLabel"
             :autocomplete="autocomplete"
             :autofocus="autofocus"
@@ -15,6 +16,14 @@
             ref="input"
             :title="help"
             v-model="form[formDataName]"/>
+        <div v-if="maxLength" class="form-text">
+            <span class="float-end fw-bold">
+                 {{ Intl.NumberFormat().format(form[formDataName].length) }}
+                /
+                {{ Intl.NumberFormat().format(maxLength) }}
+            </span>
+        </div>
+
         <InvalidFeedback :errors="errors"/>
     </div>
 </template>
@@ -42,6 +51,12 @@ export default {
             required: true,
         },
         label: String,
+        maxLength: {
+            type: Number,
+            validator(value) {
+                return value > 0
+            },
+        },
         parentAttributes: {
             type: Object,
             default: {class: 'mb-3'},
