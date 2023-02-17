@@ -17,7 +17,7 @@
             :title="help"
             v-model="form[formDataName]"/>
         <div v-if="maxLength" class="form-text">
-            <span class="float-end fw-bold">
+            <span :class="['float-end', 'fw-bold', {'glow': leghtGreaterOrEqualThan(maxLength * .9)}, getLeghtTextClass()]">
                  {{ Intl.NumberFormat().format(form[formDataName].length) }}
                 /
                 {{ Intl.NumberFormat().format(maxLength) }}
@@ -104,6 +104,22 @@ export default {
             this.tooltip = null;
         }
     },
+    methods: {
+        getLeghtTextClass() {
+            if (this.maxLength !== undefined) {
+                if (this.leghtGreaterOrEqualThan(this.maxLength)) {
+                    return 'text-danger';
+                }
+                if (this.leghtGreaterOrEqualThan(this.maxLength * 0.9)) {
+                    return 'text-warning';
+                }
+            }
+            return null;
+        },
+        leghtGreaterOrEqualThan(value) {
+            return this.form[this.formDataName].length >= value;
+        }
+    }
 }
 </script>
 
@@ -111,6 +127,18 @@ export default {
 .invalid-feedback {
     ul {
         color: inherit;
+    }
+}
+.glow {
+    animation: glow 1s ease infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        opacity: 1.5;
+    }
+    to {
+        opacity: 0.6;
     }
 }
 </style>
