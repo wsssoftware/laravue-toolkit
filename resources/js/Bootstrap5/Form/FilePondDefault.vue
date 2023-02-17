@@ -171,10 +171,6 @@ export default {
             })
         },
         updateFiles() {
-            let files = this.pond.getFiles().filter((file) => {
-                return file.origin === 1;
-            });
-
             this.form.processing = true;
             let prepare = this.pond.prepareFiles();
 
@@ -185,6 +181,9 @@ export default {
 
             prepare
                 .then((preparedFiles) => {
+                    preparedFiles = preparedFiles.filter((prepared) => {
+                        return prepared.file.origin === 1;
+                    });
                     if (this.finalOptions?.allowMultiple ?? false) {
                         this.form[this.formDataName] = [];
                         preparedFiles.forEach((file) => {
