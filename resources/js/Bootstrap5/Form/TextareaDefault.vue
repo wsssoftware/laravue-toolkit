@@ -18,7 +18,7 @@
             v-model="form[formDataName]"/>
         <div v-if="maxLength" class="form-text">
             <span :class="['float-end', 'fw-bold', {'glow': leghtGreaterOrEqualThan(maxLength * .9)}, getLeghtTextClass()]">
-                 {{ Intl.NumberFormat().format(form[formDataName].length) }}
+                 {{ Intl.NumberFormat().format(form[formDataName]?.length ?? 0) }}
                 /
                 {{ Intl.NumberFormat().format(maxLength) }}
             </span>
@@ -117,7 +117,7 @@ export default {
             return null;
         },
         leghtGreaterOrEqualThan(value) {
-            return this.form[this.formDataName].length >= value;
+            return this.form[this.formDataName]?.length ?? 0 >= value;
         }
     }
 }
