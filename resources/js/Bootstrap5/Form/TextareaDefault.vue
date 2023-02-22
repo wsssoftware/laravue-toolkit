@@ -117,7 +117,7 @@ export default {
             return null;
         },
         leghtGreaterOrEqualThan(value) {
-            return this.form[this.formDataName]?.length ?? 0 >= value;
+            return (this.form[this.formDataName]?.length ?? 0) >= value;
         }
     }
 }
