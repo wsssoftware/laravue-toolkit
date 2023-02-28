@@ -24,7 +24,7 @@
 import {Tooltip} from 'bootstrap/dist/js/bootstrap.esm.min';
 import InvalidFeedback from "./InvalidFeedback.vue";
 import DateComparator from "./DateComparator";
-import {addInertiaFormEvent} from "./index";
+import addInertiaFormEvent from "./InertiaFormEvent";
 
 export default {
     inheritAttrs: false,
