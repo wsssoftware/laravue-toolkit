@@ -54,7 +54,7 @@ class Number
         return $formatter->format((float) $value);
     }
 
-    public function toReadableElapsedTime(int|float $seconds): string
+    public function toReadableElapsedTime(int|float $seconds, bool $short = false): string
     {
         $seconds = round($seconds);
         $minutes = 0;
@@ -77,13 +77,25 @@ class Number
             $items[] = trans_choice(':value dia|:value dias', $days, ['value' => $this->format($days, ['precision' => 0])]);
         }
         if ($hours > 0) {
-            $items[] = trans_choice(':value hora|:value horas', $hours, ['value' => $this->format($hours, ['precision' => 0])]);
+            if ($short) {
+                $items[] = trans_choice(':value h|:value h', $hours, ['value' => $this->format($hours, ['precision' => 0])]);
+            } else {
+                $items[] = trans_choice(':value hora|:value horas', $hours, ['value' => $this->format($hours, ['precision' => 0])]);
+            }
         }
         if ($minutes > 0) {
-            $items[] = trans_choice(':value minuto|:value minutos', $minutes, ['value' => $this->format($minutes, ['precision' => 0])]);
+            if ($short) {
+                $items[] = trans_choice(':value min|:value min', $minutes, ['value' => $this->format($minutes, ['precision' => 0])]);
+            } else {
+                $items[] = trans_choice(':value minuto|:value minutos', $minutes, ['value' => $this->format($minutes, ['precision' => 0])]);
+            }
         }
         if ($seconds > 0) {
-            $items[] = trans_choice(':value segundo|:value segundos', $seconds, ['value' => $this->format($seconds, ['precision' => 0])]);
+            if ($short) {
+                $items[] = trans_choice(':value seg|:value seg', $seconds, ['value' => $this->format($seconds, ['precision' => 0])]);
+            } else {
+                $items[] = trans_choice(':value segundo|:value segundos', $seconds, ['value' => $this->format($seconds, ['precision' => 0])]);
+            }
         }
 
         return \Laravue\Facades\Text::toList($items);
