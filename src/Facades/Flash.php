@@ -13,6 +13,7 @@ use Laravue\Enums\FlashTypes;
  * @method static \Laravue\Flash\FlashMessage assertHasFlashType(FlashTypes $flashTypes)
  * @method static \Laravue\Flash\FlashMessage assertMessageContain(string $message)
  * @method static \Laravue\Flash\FlashMessage assertMessageEqual(string $message)
+ * @method static \Laravue\Flash\Flash withTitle(string $title)
  * @method static \Laravue\Flash\FlashMessage default(string $message, string|false $faIcon = false)
  * @method static \Laravue\Flash\FlashMessage success(string $message, string $faIcon = 'circle-check')
  * @method static \Laravue\Flash\FlashMessage info(string $message, string $faIcon = 'circle-info')

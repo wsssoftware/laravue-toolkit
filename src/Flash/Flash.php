@@ -21,15 +21,33 @@ class Flash
 
     protected SessionManager|Store $session;
 
+    protected string|false $title;
+
     public function __construct(SessionManager|Store $session)
     {
         $this->session = $session;
         if ($this->session->get(self::SESSION_KEY) === null) {
             $this->session->put(self::SESSION_KEY, []);
         }
+        $this->title = false;
         Inertia::share('flash_messages', function () {
             return \Laravue\Facades\Flash::toArray();
         });
+    }
+
+    public function withTitle(string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    protected function consumeTitle(): string|false
+    {
+        $title = $this->title;
+        $this->title = false;
+
+        return $title;
     }
 
     /**
@@ -37,7 +55,7 @@ class Flash
      */
     public function default(string $message, ?string $faIcon = null): FlashMessage
     {
-        $message = new FlashMessage($message, FlashTypes::DEFAULT, $faIcon);
+        $message = new FlashMessage($message, FlashTypes::DEFAULT, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);
 
         return $message;
@@ -48,7 +66,7 @@ class Flash
      */
     public function success(string $message, string $faIcon = 'circle-check'): FlashMessage
     {
-        $message = new FlashMessage($message, FlashTypes::SUCCESS, $faIcon);
+        $message = new FlashMessage($message, FlashTypes::SUCCESS, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);
 
         return $message;
@@ -59,7 +77,7 @@ class Flash
      */
     public function info(string $message, string $faIcon = 'circle-info'): FlashMessage
     {
-        $message = new FlashMessage($message, FlashTypes::INFO, $faIcon);
+        $message = new FlashMessage($message, FlashTypes::INFO, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);
 
         return $message;
@@ -70,7 +88,7 @@ class Flash
      */
     public function warning(string $message, string $faIcon = 'triangle-exclamation'): FlashMessage
     {
-        $message = new FlashMessage($message, FlashTypes::WARNING, $faIcon);
+        $message = new FlashMessage($message, FlashTypes::WARNING, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);
 
         return $message;
@@ -81,7 +99,7 @@ class Flash
      */
     public function error(string $message, string $faIcon = 'diamond-exclamation'): FlashMessage
     {
-        $message = new FlashMessage($message, FlashTypes::ERROR, $faIcon);
+        $message = new FlashMessage($message, FlashTypes::ERROR, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);
 
         return $message;

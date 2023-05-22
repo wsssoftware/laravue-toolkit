@@ -39,7 +39,7 @@ class FlashMessage
 
     protected bool $rtl = false;
 
-    protected string|false $title = false;
+    protected string|false $title;
 
     protected string $message;
 
@@ -47,12 +47,14 @@ class FlashMessage
         string $message,
         FlashTypes $type,
         ?string $faIcon,
+        string|false $title = false
     ) {
         $this->message = $message;
         $this->type = $type;
         if (! empty($faIcon)) {
             $this->setFaIcon($faIcon);
         }
+        $this->title = $title;
     }
 
     /**
