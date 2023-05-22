@@ -39,6 +39,8 @@ class FlashMessage
 
     protected bool $rtl = false;
 
+    protected string|false $title = false;
+
     protected string $message;
 
     public function __construct(
@@ -176,12 +178,20 @@ class FlashMessage
         return $this;
     }
 
+    public function setTitle(string|false $title): FlashMessage
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [
             'id' => uniqid('message_', true),
             'type' => $this->type->value,
             'position' => $this->position->value,
+            'title' => $this->title,
             'message' => $this->message,
             'timeout' => $this->timeout,
             'closeOnClick' => $this->closeOnClick,
