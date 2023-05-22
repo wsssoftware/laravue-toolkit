@@ -15,7 +15,6 @@ enum FontAwesomeTypes: string
     case THIN = 'fa-thin';
     case DUOTONE = 'fa-duotone';
 
-
     public function getType(): string
     {
         return match ($this) {

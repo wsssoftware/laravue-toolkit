@@ -35,7 +35,7 @@ abstract class DocumentBase
 
     protected function mountArray(string $document, int $limit): array
     {
-        return  strlen($document) == $limit && is_numeric($document) ? str_split($document) : [];
+        return strlen($document) == $limit && is_numeric($document) ? str_split($document) : [];
     }
 
     protected function verify(string $document, int $limit, array $digitOne, array $digitTwo): array

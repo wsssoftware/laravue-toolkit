@@ -12,11 +12,11 @@ namespace Laravue\Utility\Documents;
  */
 class CPF extends DocumentBase
 {
-    const  LIMIT = 11;
+    const LIMIT = 11;
 
-    const  DIGIT_ONE = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+    const DIGIT_ONE = [10, 9, 8, 7, 6, 5, 4, 3, 2];
 
-    const  DIGIT_TWO = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+    const DIGIT_TWO = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
 
     public function validate(string $document): bool
     {
