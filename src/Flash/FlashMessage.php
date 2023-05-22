@@ -192,6 +192,11 @@ class FlashMessage
             'hideProgressBar' => $this->hideProgressBar,
             'closeButton' => $this->closeButton ? 'button' : false,
             'icon' => sprintf('fa-2x %s %s', $this->faType->value, $this->faIcon),
+            'icon_array' => [
+                'size' => '2x',
+                'type' => $this->faType->getType(),
+                'icon' => str($this->faIcon)->after('fa-')->toString(),
+            ],
             'rtl' => $this->rtl,
         ];
     }
