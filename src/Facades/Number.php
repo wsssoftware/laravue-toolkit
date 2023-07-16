@@ -10,7 +10,8 @@ use Laravue\Enums\CurrencyFormat;
 use NumberFormatter;
 
 /**
- * @method static string (int|float $value, int $precision = 3, array $options = []): string
+ * @method static \Laravue\Utility\Number setLocale(string $locale)
+ * @method static string (int|float $value, int $precision = 3, array $options = [])
  * @method static string toReadableElapsedTime(int|float $seconds, bool $short = false)
  * @method static string toReadableSize(int $value)
  * @method static string toPercentage(int|float $value, int $precision = 2, array $options = [])
