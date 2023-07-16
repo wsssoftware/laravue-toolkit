@@ -33,6 +33,12 @@ class Number
         $this->_defaultCurrencyFormat = $currencyFormat;
     }
 
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+        return $this;
+    }
+
     /**
      * Formats a number with a level of precision.
      *
