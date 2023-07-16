@@ -36,6 +36,7 @@ class Number
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -243,7 +244,7 @@ class Number
      * @param  array<string, mixed>  $options  Options list.
      * @return string Number formatted as a currency.
      */
-    public function currency(int|float $value, ?string $currency = null, array $options = []): string
+    public function currency(int|float $value, string $currency = null, array $options = []): string
     {
         $value = (float) $value;
         $currency = $currency ?: $this->getDefaultCurrency();
