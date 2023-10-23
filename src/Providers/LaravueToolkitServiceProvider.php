@@ -3,6 +3,7 @@
 namespace Laravue\Providers;
 
 use const DIRECTORY_SEPARATOR;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Session\SessionManager;
 use Laravue\Commands\Deploy\ComposerUpdateCommand;

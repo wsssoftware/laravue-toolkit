@@ -57,9 +57,6 @@ class FlashMessage
         $this->title = $title;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setPosition(FlashPositions $position): FlashMessage
     {
         $this->position = $position;
@@ -67,9 +64,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setFaIcon(string $faIcon): FlashMessage
     {
         $this->faIcon = str_starts_with($faIcon, 'fa-') ? $faIcon : 'fa-'.$faIcon;
@@ -77,9 +71,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setFaType(FontAwesomeTypes $faType): FlashMessage
     {
         $this->faType = $faType;
@@ -87,9 +78,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setTimeout(int|false $timeout): FlashMessage
     {
         if ($timeout !== false && $timeout < 1000) {
@@ -100,9 +88,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setCloseOnClick(bool $closeOnClick): FlashMessage
     {
         $this->closeOnClick = $closeOnClick;
@@ -110,9 +95,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setCloseOnDrag(bool $closeOnDrag): FlashMessage
     {
         $this->closeOnDrag = $closeOnDrag;
@@ -120,9 +102,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setPauseOnHover(bool $pauseOnHover): FlashMessage
     {
         $this->pauseOnHover = $pauseOnHover;
@@ -130,9 +109,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setPauseOnFocusLoss(bool $pauseOnFocusLoss): FlashMessage
     {
         $this->pauseOnFocusLoss = $pauseOnFocusLoss;
@@ -140,9 +116,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setCloseButton(bool $closeButton): FlashMessage
     {
         $this->closeButton = $closeButton;
@@ -150,9 +123,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setShowCloseButtonOnlyOnHover(bool $showCloseButtonOnlyOnHover): FlashMessage
     {
         $this->showCloseButtonOnlyOnHover = $showCloseButtonOnlyOnHover;
@@ -160,9 +130,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setHideProgressBar(bool $hideProgressBar): FlashMessage
     {
         $this->hideProgressBar = $hideProgressBar;
@@ -170,9 +137,6 @@ class FlashMessage
         return $this;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function setRtl(bool $rtl): FlashMessage
     {
         $this->rtl = $rtl;

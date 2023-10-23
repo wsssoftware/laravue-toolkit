@@ -50,9 +50,6 @@ class Flash
         return $title;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function default(string $message, string $faIcon = null): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::DEFAULT, $faIcon, $this->consumeTitle());
@@ -61,9 +58,6 @@ class Flash
         return $message;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function success(string $message, string $faIcon = 'circle-check'): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::SUCCESS, $faIcon, $this->consumeTitle());
@@ -72,9 +66,6 @@ class Flash
         return $message;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function info(string $message, string $faIcon = 'circle-info'): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::INFO, $faIcon, $this->consumeTitle());
@@ -83,9 +74,6 @@ class Flash
         return $message;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function warning(string $message, string $faIcon = 'triangle-exclamation'): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::WARNING, $faIcon, $this->consumeTitle());
@@ -94,9 +82,6 @@ class Flash
         return $message;
     }
 
-    /**
-     * @return \Laravue\Flash\FlashMessage
-     */
     public function error(string $message, string $faIcon = 'diamond-exclamation'): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::ERROR, $faIcon, $this->consumeTitle());
