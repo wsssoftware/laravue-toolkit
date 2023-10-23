@@ -28,7 +28,7 @@ class User
     /**
      * User's or bot's first name
      */
-    protected string $first_name;
+    protected ?string $first_name;
 
     /**
      * Optional. User's or bot's last name
