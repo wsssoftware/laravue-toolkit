@@ -347,7 +347,7 @@ class Message
     {
         $this->message_id = intval(Arr::get($payload, 'message_id'));
         $this->from = Arr::exists($payload, 'from') ? new User($payload['from']) : null;
-        $this->sender_chat = Arr::exists($payload, 'sender_chat') ? new User($payload['sender_chat']) : null;
+        $this->sender_chat = Arr::exists($payload, 'sender_chat') ? new Chat($payload['sender_chat']) : null;
         $this->date = Carbon::createFromTimestamp(Arr::get($payload, 'date'));
         $this->chat = new Chat(Arr::get($payload, 'chat', []));
         $this->forward_from = Arr::exists($payload, 'forward_from') ? new User($payload['forward_from']) : null;
