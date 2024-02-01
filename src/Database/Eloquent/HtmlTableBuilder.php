@@ -125,7 +125,7 @@ class HtmlTableBuilder extends Builder
      */
     public function setHtmlColumn(
         string $column,
-        string $label = null,
+        ?string $label = null,
         bool $searchable = true,
         bool $orderable = true,
         bool $database = true,
@@ -152,7 +152,7 @@ class HtmlTableBuilder extends Builder
      *
      * @return $this
      */
-    public function setHtmlColumnNonDatabase(string $column, string $label = null, array $customAttributes = []): self
+    public function setHtmlColumnNonDatabase(string $column, ?string $label = null, array $customAttributes = []): self
     {
         return $this->setHtmlColumn($column, $label, false, false, false, $customAttributes);
     }

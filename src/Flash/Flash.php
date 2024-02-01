@@ -50,7 +50,7 @@ class Flash
         return $title;
     }
 
-    public function default(string $message, string $faIcon = null): FlashMessage
+    public function default(string $message, ?string $faIcon = null): FlashMessage
     {
         $message = new FlashMessage($message, FlashTypes::DEFAULT, $faIcon, $this->consumeTitle());
         $this->session->push(self::SESSION_KEY, $message);

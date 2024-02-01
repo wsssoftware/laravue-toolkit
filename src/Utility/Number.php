@@ -47,9 +47,9 @@ class Number
      *
      * - `locale`: The locale name to use for formatting the number, e.g. fr_FR
      *
-     * @param  int|float  $value A floating point number.
-     * @param  int  $precision The precision of the returned number.
-     * @param  array<string, mixed>  $options Additional options
+     * @param  int|float  $value  A floating point number.
+     * @param  int  $precision  The precision of the returned number.
+     * @param  array<string, mixed>  $options  Additional options
      * @return string Formatted float.
      *
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#formatting-floating-point-numbers
@@ -111,7 +111,7 @@ class Number
     /**
      * Returns a formatted-for-humans file size.
      *
-     * @param  int  $size Size in bytes
+     * @param  int  $size  Size in bytes
      * @return string Human-readable size
      *
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#interacting-with-human-readable-values
@@ -164,8 +164,8 @@ class Number
      * - `before` - The string to place before whole numbers, e.g. '['
      * - `after` - The string to place after decimal numbers, e.g. ']'
      *
-     * @param  string|int|float  $value A floating point number.
-     * @param  array<string, mixed>  $options An array with options.
+     * @param  string|int|float  $value  A floating point number.
+     * @param  array<string, mixed>  $options  An array with options.
      * @return string Formatted number
      */
     public function format(string|int|float $value, array $options = []): string
@@ -185,8 +185,8 @@ class Number
      * - `type` - The formatter type to construct, set it to `currency` if you need to parse
      *    numbers representing money.
      *
-     * @param  string  $value A numeric string.
-     * @param  array<string, mixed>  $options An array with options.
+     * @param  string  $value  A numeric string.
+     * @param  array<string, mixed>  $options  An array with options.
      * @return float point number
      */
     public function parseFloat(string $value, array $options = []): float
@@ -244,7 +244,7 @@ class Number
      * @param  array<string, mixed>  $options  Options list.
      * @return string Number formatted as a currency.
      */
-    public function currency(int|float $value, string $currency = null, array $options = []): string
+    public function currency(int|float $value, ?string $currency = null, array $options = []): string
     {
         $value = (float) $value;
         $currency = $currency ?: $this->getDefaultCurrency();
@@ -291,9 +291,9 @@ class Number
     /**
      * Setter for default currency
      *
-     * @param  string  $currency Default currency string to be used by {@link currency()}
-     * if $currency argument is not provided. If null is passed, it will clear the
-     * currently stored value
+     * @param  string  $currency  Default currency string to be used by {@link currency()}
+     *                            if $currency argument is not provided. If null is passed, it will clear the
+     *                            currently stored value
      */
     public function setDefaultCurrency(string $currency): void
     {
@@ -314,8 +314,8 @@ class Number
      * Setter for default currency format
      *
      * @param  \Laravue\Enums\CurrencyFormat  $currencyFormat  Default currency format to be used by currency()
-     * if $currencyFormat argument is not provided. If null is passed, it will clear the
-     * currently stored value
+     *                                                         if $currencyFormat argument is not provided. If null is passed, it will clear the
+     *                                                         currently stored value
      */
     public function setDefaultCurrencyFormat(CurrencyFormat $currencyFormat): void
     {
@@ -339,7 +339,7 @@ class Number
      * - `useIntlCode` - Whether to replace the currency symbol with the international
      *   currency code.
      *
-     * @param  array<string, mixed>  $options An array with options.
+     * @param  array<string, mixed>  $options  An array with options.
      * @return \NumberFormatter The configured formatter instance
      */
     public function formatter(array $options = []): NumberFormatter
@@ -372,8 +372,8 @@ class Number
     /**
      * Set formatter attributes
      *
-     * @param  \NumberFormatter  $formatter Number formatter instance.
-     * @param  array<string, mixed>  $options See Number::formatter() for possible options.
+     * @param  \NumberFormatter  $formatter  Number formatter instance.
+     * @param  array<string, mixed>  $options  See Number::formatter() for possible options.
      */
     protected function _setAttributes(NumberFormatter $formatter, array $options = []): NumberFormatter
     {
@@ -411,8 +411,8 @@ class Number
      *
      * For all other options see formatter().
      *
-     * @param  float|int  $value An integer
-     * @param  array<string, mixed>  $options An array with options.
+     * @param  float|int  $value  An integer
+     * @param  array<string, mixed>  $options  An array with options.
      */
     public function ordinal(float|int $value, array $options = []): string
     {
