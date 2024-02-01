@@ -4,7 +4,7 @@
         :title="help"
         :data-bs-toggle="help ? 'tooltip' : null"
         v-bind="parentAttributes">
-        <select ref="select" :id="id" :required="required" class="d-none" v-model="form[formDataName]" :multiple="multiple">
+        <select ref="select" :id="id" class="d-none" v-model="form[formDataName]" :multiple="multiple">
             <option v-if="placeholder" value>{{ placeholder }}</option>
             <option v-for="option in availableOptions" :value="option.keyField">{{ option.valueField }}</option>
         </select>
@@ -101,8 +101,6 @@ export default {
         this.dropdown = new Dropdown(this.$refs.dropdown);
 
         this.$refs.dropdown.addEventListener('shown.bs.dropdown', this.onShown);
-
-        this.$refs.select.addEventListener('invalid', this.onInvalidListener);
     },
     beforeUnmount() {
         if (this.tooltip) {
@@ -112,7 +110,6 @@ export default {
         if (this.dropdown) {
             this.dropdown.dispose();
         }
-        this.$refs.select.removeEventListener('invalid', this.onInvalidListener);
         this.$refs.dropdown.removeEventListener('shown.bs.dropdown', this.onShown);
     },
     methods: {
@@ -125,12 +122,6 @@ export default {
             }
 
             return !!this.form[this.formDataName];
-        },
-        onInvalidListener(event) {
-            if (this.$refs.select.validity.valueMissing) {
-                this.form.setError(this.formDataName, 'Selecione um item da lista');
-                this.hasRequiredError = true;
-            }
         },
         onOptionsChange(newOptions) {
             this.availableOptions = newOptions;
